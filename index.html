@@ -322,11 +322,14 @@ section {
   font-weight: 600;
   color: var(--muted-fg);
   letter-spacing: 0.02em;
+  min-width: 5.5em;
+  text-align: right;
 }
 .header-cta {
   display: none;
   padding: 0.5rem 1.25rem;
   font-size: 0.8125rem;
+  white-space: nowrap;
 }
 .header-cta-app {
   padding: 0.5rem 1rem;
@@ -334,6 +337,10 @@ section {
 @media (min-width: 768px) {
   .header-cta { display: inline-flex; }
 }
+@media (max-width: 1279px) {
+  .header-cta-app { display: none !important; }
+}
+.header-nav a { white-space: nowrap; }
 .lang-switcher {
   font-size: 0.8125rem;
   font-weight: 500;
@@ -1631,7 +1638,7 @@ body { top: 0 !important; }
       <a href="#faq">FAQ</a>
     </nav>
 
-    <div class="header-status" id="headerStatus">
+    <div class="header-status notranslate" translate="no" id="headerStatus">
       <span class="badge badge-live" style="font-size:0.6875rem; padding:0.25rem 0.625rem;">
         <span class="pulse-dot" style="width:6px;height:6px;"></span> LIVE
       </span>
@@ -1853,7 +1860,7 @@ body { top: 0 !important; }
 </section>
 
 <!-- ==================== LIVE TICKERS STRIP ==================== -->
-<div class="tickers-strip">
+<div class="tickers-strip notranslate" translate="no">
   <div class="tickers-track" id="tickersTrack">
     <!-- Set 1 -->
     <div class="ticker-item"><span class="ticker-logo">A</span><span class="ticker-symbol">AAPL</span><span class="ticker-price">$234.56</span><span class="ticker-change up">+1.42%</span></div>
@@ -2513,7 +2520,7 @@ body { top: 0 !important; }
     <div class="modal-body">
       <input type="text" class="tickers-search" id="tickerSearch" placeholder="Search by ticker or company name&hellip;" oninput="filterTickers()">
       <div class="tickers-count" id="tickersCount"></div>
-      <div class="ticker-list" id="tickerList"></div>
+      <div class="ticker-list notranslate" translate="no" id="tickerList"></div>
       <p class="modal-disclaimer">Live market data is informational only. Does not constitute investment advice.</p>
     </div>
   </div>
@@ -2970,8 +2977,8 @@ function switchLang(code) {
   document.querySelectorAll('#langDropdown a').forEach(a => {
     a.classList.toggle('active', a.dataset.lang === code);
   });
+  document.cookie = 'pb_lang_manual=' + code + '; path=/; max-age=31536000';
   if (code === 'en') {
-    // Reset to original
     const frame = document.querySelector('.goog-te-banner-frame');
     if (frame) {
       const btn = frame.contentDocument.querySelector('.goog-close-link');
@@ -3012,8 +3019,24 @@ function googleTranslateElementInit() {
 
 buildLangDropdown();
 
-// Auto-detect on first visit
-if (!document.cookie.includes('googtrans')) {
+function getManualLang() {
+  const m = document.cookie.match(/pb_lang_manual=([^;]+)/);
+  return m ? m[1] : null;
+}
+function updateLangUI(code) {
+  currentLang = code;
+  const label = LANGS.find(l => l.code === code);
+  document.getElementById('langBtn').innerHTML = (label ? label.label.slice(0,2).toUpperCase() : 'EN') +
+    ' <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>';
+  document.querySelectorAll('#langDropdown a').forEach(a => {
+    a.classList.toggle('active', a.dataset.lang === code);
+  });
+}
+
+const manualChoice = getManualLang();
+if (manualChoice) {
+  updateLangUI(manualChoice);
+} else if (!document.cookie.includes('googtrans')) {
   const detected = detectBrowserLang();
   if (detected !== 'en') {
     setTimeout(function() { switchLang(detected); }, 1000);
@@ -3021,15 +3044,7 @@ if (!document.cookie.includes('googtrans')) {
 } else {
   const match = document.cookie.match(/googtrans=\/en\/([^;]+)/);
   if (match) {
-    currentLang = match[1];
-    const label = LANGS.find(l => l.code === currentLang);
-    if (label) {
-      document.getElementById('langBtn').innerHTML = label.label.slice(0,2).toUpperCase() +
-        ' <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>';
-      document.querySelectorAll('#langDropdown a').forEach(a => {
-        a.classList.toggle('active', a.dataset.lang === currentLang);
-      });
-    }
+    updateLangUI(match[1]);
   }
 }
 </script>
