@@ -2936,36 +2936,39 @@ document.addEventListener('keydown', function(e) {
 
 // ==================== GOOGLE TRANSLATE ====================
 const LANGS = [
-  {code:'da',short:'DA',flag:'🇩🇰',label:'Dansk'},
-  {code:'de',short:'DE',flag:'🇩🇪',label:'Deutsch'},
-  {code:'et',short:'ET',flag:'🇪🇪',label:'Eesti'},
-  {code:'en',short:'ENG',flag:'🇬🇧',label:'English'},
-  {code:'es',short:'ES',flag:'🇪🇸',label:'Español'},
-  {code:'fr',short:'FR',flag:'🇫🇷',label:'Français'},
-  {code:'it',short:'IT',flag:'🇮🇹',label:'Italiano'},
-  {code:'lt',short:'LT',flag:'🇱🇹',label:'Lietuvių'},
-  {code:'nl',short:'NL',flag:'🇳🇱',label:'Nederlands'},
-  {code:'pl',short:'PL',flag:'🇵🇱',label:'Polski'},
-  {code:'pt',short:'PT',flag:'🇵🇹',label:'Português'},
-  {code:'ro',short:'RO',flag:'🇷🇴',label:'Română'},
-  {code:'tr',short:'TR',flag:'🇹🇷',label:'Türkçe'},
-  {code:'cs',short:'CZ',flag:'🇨🇿',label:'Čeština'},
-  {code:'el',short:'GR',flag:'🇬🇷',label:'Ελληνικά'},
-  {code:'bg',short:'BG',flag:'🇧🇬',label:'Български'},
-  {code:'kk',short:'KZ',flag:'🇰🇿',label:'Казақша'},
-  {code:'ru',short:'RU',flag:'🇷🇺',label:'Русский'},
-  {code:'tg',short:'TJ',flag:'🇹🇯',label:'Тоҷикӣ'},
-  {code:'uk',short:'UA',flag:'🇺🇦',label:'Українська'},
-  {code:'hy',short:'AM',flag:'🇦🇲',label:'Հայերեն'},
-  {code:'ar',short:'AR',flag:'🇸🇦',label:'العربية'},
-  {code:'zh-CN',short:'CN',flag:'🇨🇳',label:'中文'}
+  {code:'da',short:'DA',cc:'dk',label:'Dansk'},
+  {code:'de',short:'DE',cc:'de',label:'Deutsch'},
+  {code:'et',short:'ET',cc:'ee',label:'Eesti'},
+  {code:'en',short:'ENG',cc:'gb',label:'English'},
+  {code:'es',short:'ES',cc:'es',label:'Español'},
+  {code:'fr',short:'FR',cc:'fr',label:'Français'},
+  {code:'it',short:'IT',cc:'it',label:'Italiano'},
+  {code:'lt',short:'LT',cc:'lt',label:'Lietuvių'},
+  {code:'nl',short:'NL',cc:'nl',label:'Nederlands'},
+  {code:'pl',short:'PL',cc:'pl',label:'Polski'},
+  {code:'pt',short:'PT',cc:'pt',label:'Português'},
+  {code:'ro',short:'RO',cc:'ro',label:'Română'},
+  {code:'tr',short:'TR',cc:'tr',label:'Türkçe'},
+  {code:'cs',short:'CZ',cc:'cz',label:'Čeština'},
+  {code:'el',short:'GR',cc:'gr',label:'Ελληνικά'},
+  {code:'bg',short:'BG',cc:'bg',label:'Български'},
+  {code:'kk',short:'KZ',cc:'kz',label:'Казақша'},
+  {code:'ru',short:'RU',cc:'ru',label:'Русский'},
+  {code:'tg',short:'TJ',cc:'tj',label:'Тоҷикӣ'},
+  {code:'uk',short:'UA',cc:'ua',label:'Українська'},
+  {code:'hy',short:'AM',cc:'am',label:'Հայերեն'},
+  {code:'ar',short:'AR',cc:'sa',label:'العربية'},
+  {code:'zh-CN',short:'CN',cc:'cn',label:'中文'}
 ];
+function flagImg(cc, size) {
+  return '<img src="https://flagcdn.com/w40/' + cc + '.png" width="' + (size||16) + '" height="' + (size||12) + '" style="vertical-align:middle;border-radius:2px;" alt="">';
+}
 let currentLang = 'en';
 
 function buildLangDropdown() {
   const dd = document.getElementById('langDropdown');
   dd.innerHTML = LANGS.map(l =>
-    '<a href="#" data-lang="' + l.code + '"' + (l.code === currentLang ? ' class="active"' : '') + '>' + l.flag + ' ' + l.short + '</a>'
+    '<a href="#" data-lang="' + l.code + '"' + (l.code === currentLang ? ' class="active"' : '') + '>' + flagImg(l.cc) + ' ' + l.short + '</a>'
   ).join('');
   dd.addEventListener('click', function(e) {
     e.preventDefault();
@@ -2988,7 +2991,7 @@ document.addEventListener('click', function(e) {
 function switchLang(code) {
   currentLang = code;
   const label = LANGS.find(l => l.code === code);
-  document.getElementById('langBtn').innerHTML = (label ? label.flag + ' ' + label.short : '🇬🇧 ENG') +
+  document.getElementById('langBtn').innerHTML = (label ? flagImg(label.cc) + ' ' + label.short : flagImg('gb') + ' ENG') +
     ' <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>';
   document.querySelectorAll('#langDropdown a').forEach(a => {
     a.classList.toggle('active', a.dataset.lang === code);
@@ -3042,7 +3045,7 @@ function getManualLang() {
 function updateLangUI(code) {
   currentLang = code;
   const label = LANGS.find(l => l.code === code);
-  document.getElementById('langBtn').innerHTML = (label ? label.flag + ' ' + label.short : '🇬🇧 ENG') +
+  document.getElementById('langBtn').innerHTML = (label ? flagImg(label.cc) + ' ' + label.short : flagImg('gb') + ' ENG') +
     ' <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>';
   document.querySelectorAll('#langDropdown a').forEach(a => {
     a.classList.toggle('active', a.dataset.lang === code);
