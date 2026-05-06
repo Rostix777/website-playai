@@ -344,11 +344,46 @@ section {
   transition: all 0.2s;
   cursor: pointer;
   background: transparent;
+  position: relative;
 }
 .lang-switcher:hover {
   color: var(--fg);
   border-color: var(--border);
   background: rgba(255,255,255,0.04);
+}
+.lang-switcher svg { vertical-align: -1px; margin-left: 2px; }
+.lang-dropdown {
+  display: none;
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  right: 0;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0.375rem 0;
+  min-width: 160px;
+  max-height: 340px;
+  overflow-y: auto;
+  z-index: 1100;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+}
+.lang-dropdown.open { display: block; }
+.lang-dropdown a {
+  display: block;
+  padding: 0.5rem 1rem;
+  color: var(--muted-fg);
+  font-size: 0.8125rem;
+  text-decoration: none;
+  transition: background 0.15s, color 0.15s;
+  white-space: nowrap;
+}
+.lang-dropdown a:hover { background: rgba(255,255,255,0.06); color: var(--fg); }
+.lang-dropdown a.active { color: var(--primary); font-weight: 600; }
+#google_translate_element { display: none !important; }
+.goog-te-banner-frame, .skiptranslate, .goog-te-spinner-pos { display: none !important; }
+body { top: 0 !important; }
 }
 
 /* Mobile menu */
@@ -1604,7 +1639,10 @@ section {
     </div>
 
     <div class="header-actions">
-      <button class="lang-switcher" id="langBtn">EN</button>
+      <div style="position:relative;display:inline-block;">
+        <button class="lang-switcher" id="langBtn" onclick="toggleLangDropdown()">EN <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button>
+        <div class="lang-dropdown" id="langDropdown"></div>
+      </div>
       <a href="https://freedom24.com/apps/?utm_campaign=product_rostix&utm_source=ai_game_site&utm_medium=web&utm_content=header" target="_blank" rel="noopener" class="btn btn-secondary header-cta header-cta-app">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
         Get App
@@ -2887,6 +2925,115 @@ document.addEventListener('keydown', function(e) {
     closeMobileMenu();
   }
 });
+
+// ==================== GOOGLE TRANSLATE ====================
+const LANGS = [
+  {code:'da',label:'Dansk'},{code:'de',label:'Deutsch'},{code:'et',label:'Eesti'},
+  {code:'en',label:'English'},{code:'es',label:'Español'},{code:'fr',label:'Français'},
+  {code:'it',label:'Italiano'},{code:'lt',label:'Lietuvių'},{code:'nl',label:'Nederlands'},
+  {code:'pl',label:'Polski'},{code:'pt',label:'Português'},{code:'ro',label:'Română'},
+  {code:'tr',label:'Türkçe'},{code:'cs',label:'Čeština'},{code:'el',label:'Ελληνικά'},
+  {code:'bg',label:'Български'},{code:'kk',label:'Казақша'},{code:'ru',label:'Русский'},
+  {code:'tg',label:'Тоҷикӣ'},{code:'uk',label:'Українська'},{code:'hy',label:'Հայերեն'},
+  {code:'ar',label:'اَلْعَرَبِيَّةُ'},{code:'zh-CN',label:'中文'}
+];
+let currentLang = 'en';
+
+function buildLangDropdown() {
+  const dd = document.getElementById('langDropdown');
+  dd.innerHTML = LANGS.map(l =>
+    '<a href="#" data-lang="' + l.code + '"' + (l.code === currentLang ? ' class="active"' : '') + '>' + l.label + '</a>'
+  ).join('');
+  dd.addEventListener('click', function(e) {
+    e.preventDefault();
+    const a = e.target.closest('a[data-lang]');
+    if (!a) return;
+    switchLang(a.dataset.lang);
+    dd.classList.remove('open');
+  });
+}
+
+function toggleLangDropdown() {
+  document.getElementById('langDropdown').classList.toggle('open');
+}
+document.addEventListener('click', function(e) {
+  if (!e.target.closest('#langBtn') && !e.target.closest('#langDropdown')) {
+    document.getElementById('langDropdown').classList.remove('open');
+  }
+});
+
+function switchLang(code) {
+  currentLang = code;
+  const label = LANGS.find(l => l.code === code);
+  document.getElementById('langBtn').innerHTML = (label ? label.label.slice(0,2).toUpperCase() : 'EN') +
+    ' <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>';
+  document.querySelectorAll('#langDropdown a').forEach(a => {
+    a.classList.toggle('active', a.dataset.lang === code);
+  });
+  if (code === 'en') {
+    // Reset to original
+    const frame = document.querySelector('.goog-te-banner-frame');
+    if (frame) {
+      const btn = frame.contentDocument.querySelector('.goog-close-link');
+      if (btn) btn.click();
+    }
+    document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/';
+    document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=.' + location.hostname;
+    location.reload();
+    return;
+  }
+  document.cookie = 'googtrans=/en/' + code + '; path=/';
+  document.cookie = 'googtrans=/en/' + code + '; path=/; domain=.' + location.hostname;
+  const sel = document.querySelector('.goog-te-combo');
+  if (sel) {
+    sel.value = code;
+    sel.dispatchEvent(new Event('change'));
+  } else {
+    location.reload();
+  }
+}
+
+function detectBrowserLang() {
+  const nav = (navigator.language || navigator.userLanguage || 'en').toLowerCase();
+  const exact = LANGS.find(l => nav === l.code.toLowerCase());
+  if (exact) return exact.code;
+  const prefix = nav.split('-')[0];
+  const partial = LANGS.find(l => l.code.toLowerCase().split('-')[0] === prefix);
+  return partial ? partial.code : 'en';
+}
+
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({
+    pageLanguage: 'en',
+    includedLanguages: LANGS.map(l => l.code).join(','),
+    autoDisplay: false
+  }, 'google_translate_element');
+}
+
+buildLangDropdown();
+
+// Auto-detect on first visit
+if (!document.cookie.includes('googtrans')) {
+  const detected = detectBrowserLang();
+  if (detected !== 'en') {
+    setTimeout(function() { switchLang(detected); }, 1000);
+  }
+} else {
+  const match = document.cookie.match(/googtrans=\/en\/([^;]+)/);
+  if (match) {
+    currentLang = match[1];
+    const label = LANGS.find(l => l.code === currentLang);
+    if (label) {
+      document.getElementById('langBtn').innerHTML = label.label.slice(0,2).toUpperCase() +
+        ' <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>';
+      document.querySelectorAll('#langDropdown a').forEach(a => {
+        a.classList.toggle('active', a.dataset.lang === currentLang);
+      });
+    }
+  }
+}
 </script>
+<div id="google_translate_element"></div>
+<script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>
