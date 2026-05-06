@@ -269,9 +269,7 @@ section {
   transition: background 0.3s, border-color 0.3s;
 }
 .site-header.scrolled {
-  background: color-mix(in srgb, var(--bg) 85%, transparent);
-  backdrop-filter: blur(16px) saturate(140%);
-  -webkit-backdrop-filter: blur(16px) saturate(140%);
+  background: var(--bg);
   border-bottom: 1px solid var(--border);
 }
 .header-inner {
@@ -279,6 +277,8 @@ section {
   align-items: center;
   justify-content: space-between;
   height: 100%;
+  flex-wrap: nowrap;
+  overflow: hidden;
 }
 .header-logo {
   display: flex;
@@ -413,8 +413,7 @@ body { top: 0 !important; }
   position: fixed;
   top: var(--header-h);
   left: 0; right: 0; bottom: 0;
-  background: color-mix(in srgb, var(--bg) 97%, transparent);
-  backdrop-filter: blur(20px);
+  background: var(--bg);
   z-index: 99;
   padding: 1.5rem;
   flex-direction: column;
@@ -1762,7 +1761,7 @@ body { top: 0 !important; }
       </div>
 
       <!-- LIVE LEADERBOARD WIDGET IN HERO -->
-      <div class="hero-leaderboard glass">
+      <div class="hero-leaderboard glass notranslate" translate="no">
         <div class="lb-header">
           <h3>&#127942; Live Leaderboard</h3>
           <span class="total">4,823 players</span>
@@ -2127,7 +2126,7 @@ body { top: 0 !important; }
 </section>
 
 <!-- ==================== LEADERBOARD PREVIEW ==================== -->
-<section id="leaderboard" class="leaderboard-section">
+<section id="leaderboard" class="leaderboard-section notranslate" translate="no">
   <div class="container">
     <div class="section-header animate-in">
       <p class="section-eyebrow">Rankings</p>
