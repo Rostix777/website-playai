@@ -10,6 +10,7 @@
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
 
+<link rel="icon" type="image/svg+xml" href="assets/logo-ffeu-ai-game.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Outfit:wght@500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -171,6 +172,13 @@ section {
   font-weight: 600;
   letter-spacing: 0.03em;
 }
+.badge-season {
+  background: linear-gradient(135deg, color-mix(in srgb, var(--gold) 20%, transparent), color-mix(in srgb, var(--gold) 10%, transparent));
+  border: 1px solid color-mix(in srgb, var(--gold) 40%, transparent);
+  color: var(--gold);
+  font-weight: 800;
+  letter-spacing: 0.05em;
+}
 .badge-primary {
   background: color-mix(in srgb, var(--primary) 15%, transparent);
   border: 1px solid color-mix(in srgb, var(--primary) 30%, transparent);
@@ -301,10 +309,27 @@ section {
   align-items: center;
   gap: 0.75rem;
 }
+.header-status {
+  display: none;
+  align-items: center;
+  gap: 0.625rem;
+}
+@media (min-width: 1024px) {
+  .header-status { display: flex; }
+}
+.header-countdown {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--muted-fg);
+  letter-spacing: 0.02em;
+}
 .header-cta {
   display: none;
   padding: 0.5rem 1.25rem;
   font-size: 0.8125rem;
+}
+.header-cta-app {
+  padding: 0.5rem 1rem;
 }
 @media (min-width: 768px) {
   .header-cta { display: inline-flex; }
@@ -395,14 +420,17 @@ section {
   width: 100%;
 }
 @media (min-width: 1024px) {
-  .hero-content { grid-template-columns: 1fr 1fr; gap: 4rem; }
+  .hero-content { grid-template-columns: 1.3fr 1fr; gap: 3rem; }
 }
-.hero-text { max-width: 580px; }
+@media (min-width: 1280px) {
+  .hero-content { grid-template-columns: 1.4fr 1fr; gap: 4rem; }
+}
+.hero-text { }
 .hero-text .badge { margin-bottom: 1.5rem; }
 .hero-title {
-  font-size: clamp(2.25rem, 5.5vw, 3.75rem);
+  font-size: clamp(2.25rem, 4.5vw, 3.25rem);
   font-weight: 900;
-  line-height: 1.05;
+  line-height: 1.1;
   letter-spacing: -0.03em;
   margin-bottom: 1.25rem;
 }
@@ -473,6 +501,60 @@ section {
   margin-top: 0.5rem;
 }
 
+/* Hero state visibility */
+[data-hero-state] { display: none; }
+[data-hero-state].active { display: grid; }
+@media (max-width: 1023px) {
+  [data-hero-state].active { display: block; }
+}
+#heroClosed.active { display: block; }
+
+/* Hero leaderboard widget (participant state) */
+.hero-leaderboard {
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  min-height: 360px;
+  display: flex;
+  flex-direction: column;
+}
+.hero-leaderboard .leaderboard-table { font-size: 0.875rem; }
+.hero-leaderboard .lb-header {
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.hero-leaderboard .lb-header h3 {
+  font-size: 1rem;
+  font-weight: 700;
+}
+.hero-leaderboard .lb-header .total {
+  font-size: 0.75rem;
+  color: var(--muted-fg);
+}
+
+/* Hero closed state */
+.hero-closed-title {
+  font-size: clamp(2rem, 5vw, 3.25rem);
+  font-weight: 900;
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+.hero-closed-sub {
+  font-size: 1.125rem;
+  color: var(--muted-fg);
+  text-align: center;
+  margin-bottom: 2rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Conditional sections visibility */
+.state-hide { display: none !important; }
+
 /* Hero Stats */
 .hero-stats {
   display: grid;
@@ -491,7 +573,7 @@ section {
   font-family: 'JetBrains Mono', monospace;
   font-size: clamp(1.5rem, 3vw, 2rem);
   font-weight: 700;
-  background: linear-gradient(135deg, var(--primary), var(--accent));
+  background: linear-gradient(135deg, var(--primary), #7bf1a8);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -508,7 +590,7 @@ section {
 .countdown {
   display: flex;
   gap: 0.5rem;
-  justify-content: center;
+  justify-content: flex-start;
   margin: 1rem 0;
 }
 .countdown-unit {
@@ -685,6 +767,29 @@ section {
   font-family: 'JetBrains Mono', monospace;
   letter-spacing: 0.05em;
 }
+.step-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--primary);
+  border: 1px solid color-mix(in srgb, var(--primary) 25%, transparent);
+  border-radius: var(--radius);
+  background: color-mix(in srgb, var(--primary) 5%, transparent);
+  transition: all 0.2s;
+  text-decoration: none;
+}
+.step-cta:hover {
+  background: color-mix(in srgb, var(--primary) 12%, transparent);
+  border-color: color-mix(in srgb, var(--primary) 40%, transparent);
+}
+.step-cta svg {
+  width: 14px;
+  height: 14px;
+}
 
 /* =========================================================
    6. PRIZES PODIUM
@@ -736,6 +841,32 @@ section {
   font-size: 2.5rem;
   margin-bottom: 0.5rem;
   line-height: 1;
+}
+.prize-creative {
+  width: 100px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 2px;
+  background: rgba(255,255,255,0.03);
+  border: 1px dashed var(--border);
+  border-radius: var(--radius);
+  margin: 0 auto 0.75rem;
+}
+.prize-creative .prize-rank {
+  margin-bottom: 0;
+  font-size: 2rem;
+}
+.prize-creative .cp-size {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.5625rem;
+  color: var(--muted-fg);
+  opacity: 0.5;
+}
+@media (max-width: 640px) {
+  .prize-creative { width: 80px; height: 80px; }
 }
 .prize-place {
   font-weight: 700;
@@ -1002,7 +1133,7 @@ section {
   margin: 0 auto 1.5rem;
   line-height: 1.6;
 }
-.fomo-text strong { color: var(--accent); }
+.fomo-text strong { color: var(--gold); font-weight: 800; text-shadow: 0 0 20px color-mix(in srgb, var(--gold) 40%, transparent); }
 
 /* =========================================================
    12. FAQ ACCORDION
@@ -1055,6 +1186,43 @@ section {
 }
 
 /* =========================================================
+   12b. ASK AI WIDGET
+   ========================================================= */
+.ask-ai-section { padding: 2rem 0; }
+.ask-ai-button {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 1.5rem 2rem;
+  background: linear-gradient(135deg, color-mix(in srgb, var(--primary) 12%, transparent), color-mix(in srgb, var(--ring) 8%, transparent));
+  border: 1px solid color-mix(in srgb, var(--primary) 25%, transparent);
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  text-align: left;
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+.ask-ai-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 40px color-mix(in srgb, var(--primary) 25%, transparent);
+}
+.ask-ai-icon {
+  background: color-mix(in srgb, var(--primary) 15%, transparent);
+  border-radius: 12px;
+  padding: 14px;
+  color: var(--primary);
+  flex-shrink: 0;
+  display: flex;
+}
+.ask-ai-text { flex: 1; }
+.ask-ai-text h3 { font-size: 1.125rem; font-weight: 700; margin-bottom: 0.25rem; }
+.ask-ai-text p { font-size: 0.875rem; color: var(--muted-fg); }
+.ask-ai-arrow { color: var(--muted-fg); flex-shrink: 0; }
+
+/* =========================================================
    13. FINAL CTA
    ========================================================= */
 .final-cta {
@@ -1086,8 +1254,9 @@ section {
 }
 
 /* =========================================================
-   14. FUN FACT
+   14. FUN FACT CAROUSEL
    ========================================================= */
+.fun-facts-section { padding: 3rem 0; }
 .fun-fact-card {
   max-width: 640px;
   margin: 0 auto;
@@ -1095,6 +1264,8 @@ section {
   display: flex;
   gap: 1rem;
   align-items: flex-start;
+  min-height: 140px;
+  transition: opacity 0.4s, transform 0.4s;
 }
 .fun-fact-icon {
   font-size: 1.5rem;
@@ -1113,6 +1284,42 @@ section {
 .fun-fact-text em {
   color: var(--fg);
   font-style: italic;
+}
+.fact-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+.fact-controls button {
+  color: var(--muted-fg);
+  font-size: 1.25rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--radius);
+  transition: color 0.2s, background 0.2s;
+}
+.fact-controls button:hover {
+  color: var(--fg);
+  background: rgba(255,255,255,0.06);
+}
+.fact-dots {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+.fact-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--muted);
+  transition: all 0.3s;
+  padding: 0;
+}
+.fact-dot.active {
+  background: var(--primary);
+  width: 24px;
+  border-radius: 4px;
 }
 
 /* =========================================================
@@ -1174,6 +1381,141 @@ section {
   margin-top: 1rem;
   font-size: 0.75rem;
   color: var(--muted-fg);
+}
+
+/* =========================================================
+   TERMS MODAL
+   ========================================================= */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: rgba(0,0,0,0.7);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+.modal-overlay.open { display: flex; }
+.modal-content {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  max-width: 800px;
+  width: 100%;
+  max-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+.modal-header h2 {
+  font-size: 1.125rem;
+  font-weight: 700;
+}
+.modal-close {
+  width: 32px; height: 32px;
+  border-radius: var(--radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted-fg);
+  transition: all 0.2s;
+}
+.modal-close:hover { background: rgba(255,255,255,0.08); color: var(--fg); }
+.modal-body {
+  overflow-y: auto;
+  padding: 1.5rem;
+  font-size: 0.875rem;
+  color: var(--muted-fg);
+  line-height: 1.75;
+  flex: 1;
+}
+.modal-body h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--fg);
+  margin: 1.5rem 0 0.75rem;
+}
+.modal-body h3:first-child { margin-top: 0; }
+.modal-body p { margin-bottom: 0.75rem; }
+.modal-body ul { margin: 0.5rem 0 0.75rem 1.25rem; list-style: disc; }
+.modal-body li { margin-bottom: 0.25rem; }
+.modal-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.5rem;
+  border-top: 1px solid var(--border);
+  flex-shrink: 0;
+}
+.modal-footer a {
+  font-size: 0.8125rem;
+  color: var(--primary);
+  font-weight: 500;
+}
+
+/* =========================================================
+   TICKERS MODAL
+   ========================================================= */
+.tickers-search {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background: var(--muted);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--fg);
+  font-size: 0.9375rem;
+  outline: none;
+  transition: border-color 0.2s;
+  margin-bottom: 1rem;
+}
+.tickers-search:focus { border-color: var(--primary); }
+.tickers-search::placeholder { color: var(--muted-fg); }
+.ticker-list { max-height: 55vh; overflow-y: auto; }
+.ticker-row {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  gap: 1rem;
+  align-items: center;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.875rem;
+}
+.ticker-row:last-child { border-bottom: none; }
+.ticker-info strong { color: var(--fg); margin-right: 0.5rem; }
+.ticker-info span { color: var(--muted-fg); font-size: 0.8125rem; }
+.ticker-buy {
+  padding: 0.375rem 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  background: var(--primary);
+  color: var(--primary-fg);
+  border-radius: var(--radius);
+  transition: background 0.2s;
+}
+.ticker-buy:hover { background: var(--ring); }
+.modal-disclaimer {
+  font-size: 0.75rem;
+  color: var(--muted-fg);
+  font-style: italic;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--border);
+  margin-top: 0.75rem;
+}
+.tickers-count {
+  font-size: 0.8125rem;
+  color: var(--muted-fg);
+  margin-bottom: 0.75rem;
 }
 
 /* =========================================================
@@ -1244,7 +1586,7 @@ section {
 <header class="site-header" id="siteHeader">
   <div class="container header-inner">
     <a href="/" class="header-logo">
-      <img src="../logo-f24.light.svg" alt="Freedom24" />
+      <img src="assets/logo-ffeu-ai-game.svg" alt="AI Game | Portfolio Battle" />
     </a>
 
     <nav class="header-nav">
@@ -1254,9 +1596,23 @@ section {
       <a href="#faq">FAQ</a>
     </nav>
 
+    <div class="header-status" id="headerStatus">
+      <span class="badge badge-live" style="font-size:0.6875rem; padding:0.25rem 0.625rem;">
+        <span class="pulse-dot" style="width:6px;height:6px;"></span> LIVE
+      </span>
+      <span class="header-countdown font-mono" id="headerCountdown">4d 18h</span>
+    </div>
+
     <div class="header-actions">
       <button class="lang-switcher" id="langBtn">EN</button>
-      <a href="#" class="btn btn-primary header-cta">Join Now</a>
+      <a href="https://freedom24.com/apps/?utm_campaign=product_rostix&utm_source=ai_game_site&utm_medium=web&utm_content=header" target="_blank" rel="noopener" class="btn btn-secondary header-cta header-cta-app">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Get App
+      </a>
+      <a href="https://tap.freedom24.com/to/chat/ai?text=play&utm_source=ai_game_site&utm_medium=web&utm_campaign=portfolio_battle_s1" target="_blank" rel="noopener" class="btn btn-primary header-cta">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        Play
+      </a>
       <button class="mobile-menu-btn" id="menuBtn" aria-label="Toggle menu">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
           <line x1="3" y1="6" x2="21" y2="6"/>
@@ -1274,15 +1630,19 @@ section {
   <a href="#prizes" onclick="closeMobileMenu()">Prizes</a>
   <a href="#leaderboard" onclick="closeMobileMenu()">Leaderboard</a>
   <a href="#faq" onclick="closeMobileMenu()">FAQ</a>
-  <a href="#" onclick="closeMobileMenu()" class="btn btn-primary" style="margin-top: auto;">Join the Challenge</a>
+  <a href="https://freedom24.com/apps/?utm_campaign=product_rostix&utm_source=ai_game_site&utm_medium=web&utm_content=mobile_nav" target="_blank" rel="noopener" onclick="closeMobileMenu()" class="btn btn-secondary">Get the App</a>
+  <a href="https://tap.freedom24.com/to/chat/ai?text=play&utm_source=ai_game_site&utm_medium=web&utm_campaign=portfolio_battle_s1&utm_content=mobile_nav" target="_blank" rel="noopener" onclick="closeMobileMenu()" class="btn btn-primary" style="margin-top: 0.5rem;">Play Now &rarr;</a>
 </nav>
 
-<!-- ==================== HERO (PRE-SEASON) ==================== -->
+<!-- ==================== HERO ==================== -->
 <section class="hero" id="hero">
   <div class="hero-glow"></div>
   <div class="container">
-    <div class="hero-content">
+
+    <!-- ===== STATE 1: NEW USER (pre-season / not yet joined) ===== -->
+    <div class="hero-content" id="heroNewUser" data-hero-state="new_user">
       <div class="hero-text">
+        <span class="badge badge-season">&#9889; Bull Run</span>
         <span class="badge badge-primary">Season 1 — Starts Soon</span>
         <h1 class="hero-title">
           The <span class="gradient-text">AI Investment Challenge</span> launches in
@@ -1311,8 +1671,11 @@ section {
         <p class="hero-description">Build your portfolio. Outsmart the market. Win real stocks deposited to your Freedom&nbsp;Finance account. No deposits. No fees. Just your strategy vs. real market data.</p>
 
         <div class="hero-ctas">
-          <a href="#" class="btn btn-primary">Reserve My $25K &rarr;</a>
-          <a href="#how-it-works" class="btn btn-secondary">How It Works</a>
+          <a href="https://tap.freedom24.com/to/chat/ai?text=play&utm_source=ai_game_site&utm_medium=web&utm_campaign=portfolio_battle_s1&utm_content=hero" target="_blank" rel="noopener" class="btn btn-primary">Join the Battle &rarr;</a>
+          <a href="https://freedom24.com/apps/?utm_campaign=product_rostix&utm_source=ai_game_site&utm_medium=web&utm_content=hero" target="_blank" rel="noopener" class="btn btn-secondary">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Get the App
+          </a>
         </div>
 
         <p class="hero-note">Registration is already open. You can also join after the start — but every hour costs you potential return.</p>
@@ -1321,7 +1684,7 @@ section {
       <!-- KEY VISUAL PLACEHOLDER -->
       <div class="hero-visual">
         <div class="hero-visual-placeholder">
-          <svg class="icon" viewBox="0 0 64 64" fill="none" stroke="hsl(239,84%,67%)" stroke-width="1.5">
+          <svg class="icon" viewBox="0 0 64 64" fill="none" stroke="var(--primary)" stroke-width="1.5">
             <rect x="4" y="8" width="56" height="48" rx="4"/>
             <path d="M4 20h56M24 8v48"/>
             <circle cx="44" cy="38" r="8"/>
@@ -1333,7 +1696,103 @@ section {
       </div>
     </div>
 
-    <!-- Hero Stats -->
+    <!-- ===== STATE 2: PARTICIPANT (season live or returning user) ===== -->
+    <div class="hero-content" id="heroParticipant" data-hero-state="participant">
+      <div class="hero-text">
+        <span class="badge badge-season">&#9889; Bull Run</span>
+        <span class="badge badge-live"><span class="pulse-dot"></span> Season 1 — LIVE</span>
+        <h1 class="hero-title">
+          The <span class="gradient-text">Battle Is On.</span> Where Do You Stand?
+        </h1>
+
+        <p class="hero-subtitle">Season ends <span class="font-mono" id="liveCountdownInline"></span></p>
+        <p class="hero-description">The leaderboard updates every 3 hours. Check your rank, adjust your strategy, climb to the top. Only 5 spots get rewarded.</p>
+
+        <div class="hero-ctas">
+          <a href="https://tap.freedom24.com/to/chat/ai?text=play&utm_source=ai_game_site&utm_medium=web&utm_campaign=portfolio_battle_s1&utm_content=hero_live" target="_blank" rel="noopener" class="btn btn-primary">Open My Portfolio &rarr;</a>
+          <a href="#leaderboard" class="btn btn-secondary">View Leaderboard</a>
+        </div>
+      </div>
+
+      <!-- LIVE LEADERBOARD WIDGET IN HERO -->
+      <div class="hero-leaderboard glass">
+        <div class="lb-header">
+          <h3>&#127942; Live Leaderboard</h3>
+          <span class="total">4,823 players</span>
+        </div>
+        <table class="leaderboard-table">
+          <tbody>
+            <tr>
+              <td><span class="lb-rank">&#129351; 1</span></td>
+              <td><div class="lb-player"><span class="lb-avatar">AK</span><span class="lb-name">Alexandra K.</span><span class="lb-flag">&#127465;&#127466;</span></div></td>
+              <td><span class="lb-return positive">+18.42%</span></td>
+            </tr>
+            <tr>
+              <td><span class="lb-rank">&#129352; 2</span></td>
+              <td><div class="lb-player"><span class="lb-avatar">MR</span><span class="lb-name">Marcos R.</span><span class="lb-flag">&#127466;&#127480;</span></div></td>
+              <td><span class="lb-return positive">+15.87%</span></td>
+            </tr>
+            <tr>
+              <td><span class="lb-rank">&#129353; 3</span></td>
+              <td><div class="lb-player"><span class="lb-avatar">JW</span><span class="lb-name">Jakub W.</span><span class="lb-flag">&#127477;&#127473;</span></div></td>
+              <td><span class="lb-return positive">+14.23%</span></td>
+            </tr>
+            <tr>
+              <td><span class="lb-rank">4</span></td>
+              <td><div class="lb-player"><span class="lb-avatar">NP</span><span class="lb-name">Nikos P.</span><span class="lb-flag">&#127468;&#127479;</span></div></td>
+              <td><span class="lb-return positive">+12.56%</span></td>
+            </tr>
+            <tr>
+              <td><span class="lb-rank">5</span></td>
+              <td><div class="lb-player"><span class="lb-avatar">LM</span><span class="lb-name">Lena M.</span><span class="lb-flag">&#127465;&#127466;</span></div></td>
+              <td><span class="lb-return positive">+11.89%</span></td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="lb-meta">
+          <span>Updated 3h ago</span>
+          <span style="color:var(--primary); font-weight:500;">You: check in Bot</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== STATE 3: CLOSED (season ended) ===== -->
+    <div id="heroClosed" data-hero-state="closed" style="text-align:center;">
+      <span class="badge badge-season">&#9889; Bull Run</span>
+      <span class="badge" style="background:var(--muted); color:var(--muted-fg);">Season 1 — Finished</span>
+      <h1 class="hero-closed-title" style="margin-top:1.5rem;">
+        Season 1 Is Over.<br>The <span class="gradient-text">Winners Have Been Crowned.</span>
+      </h1>
+      <p class="hero-closed-sub">Congratulations to the Top 5 traders. Gift stocks have been credited. Stay tuned for Season 2.</p>
+
+      <!-- Winners podium mini -->
+      <div style="display:flex; justify-content:center; gap:1rem; flex-wrap:wrap; margin-bottom:2rem;">
+        <div class="glass" style="padding:1.25rem 1.5rem; text-align:center; min-width:140px;">
+          <div style="font-size:2rem;">&#129351;</div>
+          <div style="font-weight:700;">Alexandra K.</div>
+          <div class="font-mono" style="color:var(--positive); font-size:0.875rem;">+18.42%</div>
+          <div style="font-size:0.75rem; color:var(--gold);">40 stocks</div>
+        </div>
+        <div class="glass" style="padding:1.25rem 1.5rem; text-align:center; min-width:140px;">
+          <div style="font-size:2rem;">&#129352;</div>
+          <div style="font-weight:700;">Marcos R.</div>
+          <div class="font-mono" style="color:var(--positive); font-size:0.875rem;">+15.87%</div>
+          <div style="font-size:0.75rem; color:var(--silver);">25 stocks</div>
+        </div>
+        <div class="glass" style="padding:1.25rem 1.5rem; text-align:center; min-width:140px;">
+          <div style="font-size:2rem;">&#129353;</div>
+          <div style="font-weight:700;">Jakub W.</div>
+          <div class="font-mono" style="color:var(--positive); font-size:0.875rem;">+14.23%</div>
+          <div style="font-size:0.75rem; color:var(--bronze);">15 stocks</div>
+        </div>
+      </div>
+
+      <div class="hero-ctas" style="justify-content:center;">
+        <a href="https://tap.freedom24.com/to/chat/ai?text=play&utm_source=ai_game_site&utm_medium=web&utm_campaign=portfolio_battle_s2&utm_content=hero_closed" target="_blank" rel="noopener" class="btn btn-primary">Pre-register for Season 2 &rarr;</a>
+      </div>
+    </div>
+
+    <!-- Hero Stats (all states) -->
     <div class="hero-stats">
       <div class="stat-card glass">
         <div class="stat-value">95</div>
@@ -1348,8 +1807,8 @@ section {
         <div class="stat-label">Win Real Shares</div>
       </div>
       <div class="stat-card glass">
-        <div class="stat-value font-mono" id="stat-countdown">4d 18h</div>
-        <div class="stat-label">Until Season Starts</div>
+        <div class="stat-value font-mono" id="stat-participants">4,823</div>
+        <div class="stat-label">Active Players</div>
       </div>
     </div>
   </div>
@@ -1442,24 +1901,36 @@ section {
         <h3 class="step-title">Get Invited</h3>
         <p class="step-text">Check your email, push notifications, or app stories. If you see the invite — you're in the club. Don't have an invite? Open a Freedom Finance account. It takes 5 minutes.</p>
         <div class="step-creative"><span>creative: invite mockup</span></div>
+        <a href="https://freedom24.com/apps/?utm_campaign=product_rostix&utm_source=ai_game_site&utm_medium=web&utm_content=step1" target="_blank" rel="noopener" class="step-cta">
+          Open Account <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
       </div>
       <div class="timeline-step glass animate-in">
         <div class="step-number">STEP 02</div>
         <h3 class="step-title">Accept the Challenge</h3>
         <p class="step-text">Open the AI Bot. Hit /start. Accept the terms. Hit /play. You now have $25,000 in virtual cash. Feel powerful yet?</p>
         <div class="step-creative"><span>creative: bot ui</span></div>
+        <a href="https://tap.freedom24.com/to/chat/ai?text=/start&utm_source=ai_game_site&utm_medium=web&utm_campaign=portfolio_battle_s1&utm_content=step2" target="_blank" rel="noopener" class="step-cta">
+          Open the Bot <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
       </div>
       <div class="timeline-step glass animate-in">
         <div class="step-number">STEP 03</div>
         <h3 class="step-title">Build Your Portfolio</h3>
-        <p class="step-text">Choose from approximately 1,000 stocks available in the Bot. Buy. Sell. Short. The market is live. Your moves are tracked. Leaderboard updates every 3 hours.</p>
+        <p class="step-text">Choose from approximately <a href="javascript:void(0)" onclick="openTickersModal()" style="color:var(--primary); font-weight:500; text-decoration:underline;">1,000 stocks</a> available in the Bot. Buy. Sell. Short. The market is live. Your moves are tracked. Leaderboard updates every 3 hours.</p>
         <div class="step-creative"><span>creative: portfolio screen</span></div>
+        <a href="https://tap.freedom24.com/to/chat/ai?text=play&utm_source=ai_game_site&utm_medium=web&utm_campaign=portfolio_battle_s1&utm_content=step3" target="_blank" rel="noopener" class="step-cta">
+          Play Now <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
       </div>
       <div class="timeline-step glass animate-in">
         <div class="step-number">STEP 04</div>
         <h3 class="step-title">Win Real Gift Stocks</h3>
         <p class="step-text">The season ends June 11, 2026. Final standings are locked. The TOP 5 traders receive coupons credited to their Freedom Finance account.</p>
         <div class="step-creative"><span>creative: winner celebration</span></div>
+        <a href="#prizes" class="step-cta">
+          See Prizes <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
       </div>
     </div>
   </div>
@@ -1476,35 +1947,50 @@ section {
 
     <div class="prizes-layout">
       <div class="prize-card glass gold animate-in">
-        <div class="prize-rank">&#129351;</div>
+        <div class="prize-creative">
+          <div class="prize-rank">&#129351;</div>
+          <span class="cp-size">100&times;100</span>
+        </div>
         <div class="prize-place">1st Place</div>
         <div class="prize-coupons">40</div>
         <div class="prize-label">coupons = 40 gift stocks</div>
         <div class="prize-tagline">The market bows to one trader.</div>
       </div>
       <div class="prize-card glass silver animate-in">
-        <div class="prize-rank">&#129352;</div>
+        <div class="prize-creative">
+          <div class="prize-rank">&#129352;</div>
+          <span class="cp-size">100&times;100</span>
+        </div>
         <div class="prize-place">2nd Place</div>
         <div class="prize-coupons">25</div>
         <div class="prize-label">coupons = 25 gift stocks</div>
         <div class="prize-tagline">A photo finish never felt so rewarding.</div>
       </div>
       <div class="prize-card glass bronze animate-in">
-        <div class="prize-rank">&#129353;</div>
+        <div class="prize-creative">
+          <div class="prize-rank">&#129353;</div>
+          <span class="cp-size">100&times;100</span>
+        </div>
         <div class="prize-place">3rd Place</div>
         <div class="prize-coupons">15</div>
         <div class="prize-label">coupons = 15 gift stocks</div>
         <div class="prize-tagline">Bronze on paper. Gold in your portfolio.</div>
       </div>
       <div class="prize-card glass animate-in">
-        <div class="prize-rank">4</div>
+        <div class="prize-creative">
+          <div class="prize-rank" style="font-size:2rem; color:var(--muted-fg);">4</div>
+          <span class="cp-size">100&times;100</span>
+        </div>
         <div class="prize-place">4th Place</div>
         <div class="prize-coupons">10</div>
         <div class="prize-label">coupons = 10 gift stocks</div>
         <div class="prize-tagline">Top 5 out of thousands. Not bad at all.</div>
       </div>
       <div class="prize-card glass animate-in">
-        <div class="prize-rank">5</div>
+        <div class="prize-creative">
+          <div class="prize-rank" style="font-size:2rem; color:var(--muted-fg);">5</div>
+          <span class="cp-size">100&times;100</span>
+        </div>
         <div class="prize-place">5th Place</div>
         <div class="prize-coupons">5</div>
         <div class="prize-label">coupons = 5 gift stocks</div>
@@ -1643,15 +2129,26 @@ section {
             <td><span class="lb-return positive">+11.89%</span></td>
             <td><span class="lb-value">$27,972</span></td>
           </tr>
+          <tr class="lb-separator-row">
+            <td colspan="4" style="text-align:center; padding:0.5rem 1rem; font-size:1.25rem; color:var(--muted-fg); letter-spacing:0.25em;">&hellip;</td>
+          </tr>
+          <tr style="opacity:0.7;">
+            <td><span class="lb-rank">#4,823</span></td>
+            <td><div class="lb-player"><span class="lb-avatar">??</span><span class="lb-name">Anonymous</span><span class="lb-flag">&mdash;</span></div></td>
+            <td><span class="lb-return negative">-45.20%</span></td>
+            <td><span class="lb-value">$13,700</span></td>
+          </tr>
         </tbody>
       </table>
       <div class="lb-meta">
-        <span>Last updated: 3 hours ago &middot; 4,823 participants</span>
-        <a href="#" style="color: hsl(239,84%,67%); font-weight: 500;">View Full Leaderboard &rarr;</a>
+        <span>Last updated: 3 hours ago &middot; 4,823 players competing</span>
+      </div>
+      <div style="text-align:center; padding:0 1rem 0.75rem; font-size:0.75rem; color:var(--muted-fg);">
+        Showing Top 5 + last place. Your individual rank is visible within the AI Bot.
       </div>
     </div>
 
-    <p style="text-align:center; font-size:0.75rem; color:hsl(215,16%,63%); margin-top:1rem; font-style:italic;">
+    <p style="text-align:center; font-size:0.75rem; color:var(--muted-fg); margin-top:1rem; font-style:italic;">
       Rankings are based solely on virtual portfolio return. Final ranking is determined at the end of the Promotion Period using official closing prices.
     </p>
   </div>
@@ -1665,9 +2162,11 @@ section {
       <div class="qr-content">
         <h3>Scan. Play. Win.</h3>
         <p>One scan opens the AI chat and launches the game instantly.</p>
-        <a href="#">Or tap here on mobile &rarr;</a>
+        <a href="https://tap.freedom24.com/to/chat/ai?text=play&utm_source=ai_game_site&utm_medium=web&utm_campaign=portfolio_battle_s1&utm_content=qr_block" target="_blank" rel="noopener">Or tap here on mobile &rarr;</a>
       </div>
-      <div class="qr-code">QR PLACEHOLDER</div>
+      <div class="qr-code" style="background:white; padding:8px; border-radius:var(--radius);">
+        <img src="qr-code (1).svg" alt="QR code — scan to play" width="144" height="144" style="display:block;" />
+      </div>
     </div>
 
     <!-- Mobile CTA -->
@@ -1676,7 +2175,7 @@ section {
         <span class="cp-label">creative placeholder</span>
         <span class="cp-desc">App download / game launch banner</span>
       </div>
-      <a href="#" class="btn btn-primary" style="margin-top:1.25rem;">Tap to Play &rarr;</a>
+      <a href="https://tap.freedom24.com/to/chat/ai?text=play&utm_source=ai_game_site&utm_medium=web&utm_campaign=portfolio_battle_s1&utm_content=mobile_play" target="_blank" rel="noopener" class="btn btn-primary" style="margin-top:1.25rem;">Tap to Play &rarr;</a>
     </div>
   </div>
 </section>
@@ -1685,7 +2184,7 @@ section {
 <div class="fomo-banner">
   <div class="container">
     <p class="fomo-text">&#128293; Only <strong>5 spots</strong> get rewarded. Thousands are competing. Every day you sit out, someone else climbs the leaderboard.</p>
-    <a href="#" class="btn btn-primary">Claim Your Spot &rarr;</a>
+    <a href="https://tap.freedom24.com/to/chat/ai?text=play&utm_source=ai_game_site&utm_medium=web&utm_campaign=portfolio_battle_s1&utm_content=fomo" target="_blank" rel="noopener" class="btn btn-primary">Claim Your Spot &rarr;</a>
   </div>
 </div>
 
@@ -1724,7 +2223,7 @@ section {
           What can I trade?
           <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
         </button>
-        <div class="faq-answer"><div class="faq-answer-inner">Approximately 1,000 stocks available in the Bot. Long and short positions allowed. Market orders only. No leverage. No commissions, no slippage.</div></div>
+        <div class="faq-answer"><div class="faq-answer-inner">Approximately <a href="javascript:void(0)" onclick="openTickersModal()" style="color:var(--primary); font-weight:500;">1,000 stocks</a> available in the Bot. Long and short positions allowed. Market orders only. No leverage. No commissions, no slippage.</div></div>
       </div>
       <div class="faq-item glass animate-in">
         <button class="faq-question" onclick="toggleFaq(this)">
@@ -1758,6 +2257,22 @@ section {
   </div>
 </section>
 
+<!-- ==================== ASK AI WIDGET ==================== -->
+<section class="ask-ai-section">
+  <div class="container">
+    <a href="https://tap.freedom24.com/to/chat/ai?text=play&utm_source=ai_game_site&utm_medium=web&utm_campaign=portfolio_battle_s1&utm_content=ask_ai" target="_blank" rel="noopener" class="ask-ai-button animate-in">
+      <div class="ask-ai-icon">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.5 4.5L18 9l-4.5 1.5L12 15l-1.5-4.5L6 9l4.5-1.5z"/><path d="M19 13l1 3 3 1-3 1-1 3-1-3-3-1 3-1z"/><path d="M5 17l0.5 1.5L7 19l-1.5 0.5L5 21l-0.5-1.5L3 19l1.5-0.5z"/></svg>
+      </div>
+      <div class="ask-ai-text">
+        <h3>Ask AI Anything</h3>
+        <p>Didn't find your answer? Get instant help from our AI Assistant.</p>
+      </div>
+      <svg class="ask-ai-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    </a>
+  </div>
+</section>
+
 <!-- ==================== FINAL CTA ==================== -->
 <section class="final-cta">
   <div class="final-cta-glow"></div>
@@ -1765,21 +2280,26 @@ section {
     <div class="animate-in">
       <h2 class="section-title">Still Thinking About It?</h2>
       <p class="final-cta-desc">While you're reading this, someone in Warsaw just went long on Tesla and someone in Athens just shorted a meme stock. The market doesn't wait. Neither should you.</p>
-      <a href="#" class="btn btn-primary">Join the AI Investment Challenge &rarr;</a>
+      <a href="https://tap.freedom24.com/to/chat/ai?text=play&utm_source=ai_game_site&utm_medium=web&utm_campaign=portfolio_battle_s1&utm_content=final_cta" target="_blank" rel="noopener" class="btn btn-primary">Join the AI Investment Challenge &rarr;</a>
       <p class="final-cta-subtext">Free &middot; No deposit &middot; Takes 60 seconds</p>
     </div>
   </div>
 </section>
 
-<!-- ==================== FUN FACT ==================== -->
-<section>
+<!-- ==================== FUN FACT CAROUSEL ==================== -->
+<section class="fun-facts-section">
   <div class="container">
-    <div class="fun-fact-card glass animate-in">
-      <div class="fun-fact-icon">&#128161;</div>
+    <div class="fun-fact-card glass animate-in" id="funFactCard">
+      <div class="fun-fact-icon" id="funFactIcon">&#128053;</div>
       <div>
         <div class="fun-fact-title">Fun Fact</div>
-        <p class="fun-fact-text">In 1999, a chimpanzee named Raven outperformed 6,000 professional brokers by throwing darts at a board of stock names. Her portfolio gained 213%. <em>Think you can beat a chimp? Prove it.</em></p>
+        <p class="fun-fact-text" id="funFactText"></p>
       </div>
+    </div>
+    <div class="fact-controls">
+      <button onclick="prevFact()" aria-label="Previous fact">&lsaquo;</button>
+      <div class="fact-dots" id="factDots"></div>
+      <button onclick="nextFact()" aria-label="Next fact">&rsaquo;</button>
     </div>
   </div>
 </section>
@@ -1790,7 +2310,7 @@ section {
     <div class="footer-grid">
       <div class="footer-brand">
         <div class="header-logo" style="margin-bottom:0.25rem;">
-          <img src="../logo-f24.light.svg" alt="Freedom24" />
+          <img src="assets/logo-ffeu-ai-game.svg" alt="AI Game | Portfolio Battle" />
         </div>
         <p>A promotional campaign by Freedom Finance Europe Ltd. Build your portfolio. Outsmart the market. Win real stocks.</p>
       </div>
@@ -1803,7 +2323,7 @@ section {
       </div>
       <div class="footer-col">
         <h4>Legal</h4>
-        <a href="/terms">Terms &amp; Conditions</a>
+        <a href="javascript:void(0)" onclick="openTermsModal()">Terms &amp; Conditions</a>
         <a href="/disclaimer">Disclaimer</a>
         <a href="/privacy">Privacy Policy</a>
         <a href="/gift-stocks-info">Gift Stocks Info</a>
@@ -1811,6 +2331,7 @@ section {
       <div class="footer-col">
         <h4>Company</h4>
         <a href="https://www.freedomfinance.eu" target="_blank" rel="noopener">freedomfinance.eu</a>
+        <a href="https://freedom24.com/apps/?utm_campaign=product_rostix&utm_source=ai_game_site&utm_medium=web&utm_content=footer" target="_blank" rel="noopener">Download App</a>
         <a href="#">Support</a>
       </div>
     </div>
@@ -1828,7 +2349,107 @@ section {
 
 <!-- ==================== MOBILE STICKY CTA ==================== -->
 <div class="sticky-cta" id="stickyCta">
-  <a href="#" class="btn btn-primary" style="width:100%">Join the AI Investment Challenge &rarr;</a>
+  <a href="https://tap.freedom24.com/to/chat/ai?text=play&utm_source=ai_game_site&utm_medium=web&utm_campaign=portfolio_battle_s1&utm_content=sticky" target="_blank" rel="noopener" class="btn btn-primary" style="width:100%">Play Now &rarr;</a>
+</div>
+
+<!-- ==================== TERMS MODAL ==================== -->
+<div class="modal-overlay" id="termsModal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2>Promotion Rules / Terms &amp; Conditions</h2>
+      <button class="modal-close" onclick="closeTermsModal()" aria-label="Close">&times;</button>
+    </div>
+    <div class="modal-body">
+      <h3>1. General</h3>
+      <p>1.1. These Terms and Conditions ("Rules") govern participation in the promotional campaign titled "Investment Challenge" ("Promotion").</p>
+      <p>1.2. The Promotion is organized by Freedom Finance Europe Ltd, a company incorporated under the laws of the Republic of Cyprus and regulated by the Cyprus Securities and Exchange Commission (CySEC) ("Organizer").</p>
+      <p>1.3. The Promotion is conducted exclusively through the Organizer's bot assistant ("Bot").</p>
+      <p>1.4. The Promotion does not constitute an investment service, investment advice, portfolio management, or a recommendation within the meaning of Directive 2014/65/EU (MiFID II) or applicable Cypriot law.</p>
+
+      <h3>2. Promotion Period</h3>
+      <p>2.1. The Promotion begins on May 11, 2026 and ends on June 11, 2026 (both dates are inclusive) ("Promotion Period").</p>
+      <p>2.2. Registration opens seven (7) calendar days prior to the Promotion start date.</p>
+
+      <h3>3. Eligibility</h3>
+      <p>3.1. Participation is open to individuals who:</p>
+      <ul>
+        <li>are at least 18 years old;</li>
+        <li>are clients of Freedom Finance Europe Ltd;</li>
+        <li>received an invitation to participate in this campaign via email, push, pop-up, stories notifications.</li>
+      </ul>
+      <p>3.2. Employees of the Organizer and its affiliated entities, as well as their immediate family members, are not eligible to participate.</p>
+      <p>3.3. The Organizer reserves the right to refuse or terminate participation at its sole discretion in case of breach of these Rules or applicable law.</p>
+
+      <h3>4. Participation Conditions</h3>
+      <p>4.1. Participation in the Promotion is free of charge.</p>
+      <p>4.2. The client's acceptance of the Promotion's terms is confirmed by clicking the 'I agree to the terms of the offer' button within the Bot.</p>
+      <p>4.3. No real funds or deposits are required to participate.</p>
+      <p>4.4. Upon commencement of the Promotion, each participant is credited with USD 25,000 in virtual funds ("Virtual Funds").</p>
+
+      <h3>5. Virtual Transactions</h3>
+      <p>5.1. Participants may use Virtual Funds to simulate market transactions through the Bot, including buying (long) and selling (short) positions.</p>
+      <p>5.2. All transactions are simulated using real-time market data but do not involve actual securities or financial instruments.</p>
+      <p>5.3. No commissions, spreads, or slippage are applied to virtual transactions.</p>
+
+      <h3>6. Performance Calculation</h3>
+      <p>6.1. Each participant's performance is calculated as the percentage change (PnL%) of their virtual portfolio relative to the initial Virtual Funds of USD 25,000.</p>
+      <p>6.2. Final rankings are determined at the end of the Promotion Period using official closing prices of the relevant securities.</p>
+      <p>6.3. In the event of a tie, the participant who achieved the tied performance earlier in time shall be ranked higher.</p>
+
+      <h3>7. Rewards</h3>
+      <p>7.1. The following rewards are distributed based on final rankings:</p>
+      <ul>
+        <li>1st Place: 40 coupons (= 40 gift stocks)</li>
+        <li>2nd Place: 25 coupons (= 25 gift stocks)</li>
+        <li>3rd Place: 15 coupons (= 15 gift stocks)</li>
+        <li>4th Place: 10 coupons (= 10 gift stocks)</li>
+        <li>5th Place: 5 coupons (= 5 gift stocks)</li>
+      </ul>
+      <p>7.2. Each coupon entitles the holder to one randomly selected gift stock from the approved list published at freedom24.com/gift-stocks-list.</p>
+      <p>7.3. Higher-value securities have a lower probability of selection. The selection process is automated and weighted.</p>
+      <p>7.4. Coupons and gift stocks are non-transferable. No cash alternative is available.</p>
+
+      <h3>8. Taxes</h3>
+      <p>8.1. Any tax obligations arising from the receipt of rewards are the sole responsibility of the participant.</p>
+
+      <h3>9. Disclaimers</h3>
+      <p>9.1. The Promotion is not a lottery, gambling activity, or game of chance.</p>
+      <p>9.2. Virtual trading results do not guarantee real-world outcomes.</p>
+      <p>9.3. Past performance is not indicative of future results.</p>
+
+      <h3>10. Data Protection</h3>
+      <p>10.1. Personal data collected during the Promotion is processed in accordance with the Organizer's Privacy Policy and applicable data protection legislation (GDPR).</p>
+
+      <h3>11. Amendments</h3>
+      <p>11.1. The Organizer reserves the right to amend these Rules at any time. Participants will be notified of material changes.</p>
+
+      <h3>12. Governing Law</h3>
+      <p>12.1. These Rules are governed by the laws of the Republic of Cyprus.</p>
+
+      <h3>13. Contact</h3>
+      <p>13.1. Freedom Finance Europe Ltd, Limassol, Cyprus. CySEC CIF License 275/15.</p>
+    </div>
+    <div class="modal-footer">
+      <a href="/terms">Open as full page &rarr;</a>
+      <button class="btn btn-primary" style="padding:0.5rem 1.5rem; font-size:0.875rem;" onclick="closeTermsModal()">Close</button>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== TICKERS MODAL ==================== -->
+<div class="modal-overlay" id="tickersModal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2>Available Stocks</h2>
+      <button class="modal-close" onclick="closeTickersModal()" aria-label="Close">&times;</button>
+    </div>
+    <div class="modal-body">
+      <input type="text" class="tickers-search" id="tickerSearch" placeholder="Search by ticker or company name&hellip;" oninput="filterTickers()">
+      <div class="tickers-count" id="tickersCount"></div>
+      <div class="ticker-list" id="tickerList"></div>
+      <p class="modal-disclaimer">Live market data is informational only. Does not constitute investment advice.</p>
+    </div>
+  </div>
 </div>
 
 <!-- ==================== SCRIPTS ==================== -->
@@ -1859,23 +2480,96 @@ function toggleFaq(btn) {
   if (!wasOpen) item.classList.add('open');
 }
 
-// Countdown timer (targeting May 11, 2026)
-const targetDate = new Date('2026-05-11T00:00:00Z').getTime();
+// ===== THREE-STATE HERO ENGINE =====
+const SEASON_START = new Date('2026-05-11T00:00:00Z').getTime();
+const SEASON_END   = new Date('2026-06-11T23:59:59Z').getTime();
+const COOKIE_NAME  = 'pb_returning';
+
+function getCookie(name) {
+  const m = document.cookie.match(new RegExp('(?:^|; )' + name + '=([^;]*)'));
+  return m ? decodeURIComponent(m[1]) : null;
+}
+function setCookie(name, val, days) {
+  const d = new Date(); d.setTime(d.getTime() + days * 86400000);
+  document.cookie = name + '=' + encodeURIComponent(val) + ';expires=' + d.toUTCString() + ';path=/;SameSite=Lax';
+}
+
+function getHeroState() {
+  const now = Date.now();
+  if (now > SEASON_END) return 'closed';
+  if (now >= SEASON_START || getCookie(COOKIE_NAME)) return 'participant';
+  return 'new_user';
+}
+
+function applyHeroState(state) {
+  document.querySelectorAll('[data-hero-state]').forEach(el => {
+    el.classList.toggle('active', el.dataset.heroState === state);
+  });
+
+  // Header badge: show LIVE only in participant state
+  const headerStatus = document.getElementById('headerStatus');
+  if (headerStatus) headerStatus.style.display = (state === 'participant') ? 'flex' : (state === 'new_user' ? 'flex' : 'none');
+
+  // Leaderboard preview section: hide for participant (it's in hero) and closed
+  const lbSection = document.getElementById('leaderboard');
+  if (lbSection) lbSection.classList.toggle('state-hide', state === 'participant');
+
+  // Benefits & How It Works: hide for closed
+  const benefits = document.getElementById('benefits');
+  const howItWorks = document.getElementById('how-it-works');
+  if (benefits) benefits.classList.toggle('state-hide', state === 'closed');
+  if (howItWorks) howItWorks.classList.toggle('state-hide', state === 'closed');
+
+  // FOMO banner text update for closed
+  const fomoBanner = document.querySelector('.fomo-banner');
+  if (fomoBanner && state === 'closed') fomoBanner.classList.add('state-hide');
+
+  // Set cookie on any CTA click (mark as returning user)
+  document.querySelectorAll('.btn-primary').forEach(btn => {
+    btn.addEventListener('click', () => setCookie(COOKIE_NAME, '1', 90), { once: true });
+  });
+}
+
+// Countdown — works for both start (new_user) and end (participant)
 function updateCountdown() {
   const now = Date.now();
-  let diff = Math.max(0, targetDate - now);
+  const state = getHeroState();
+  const target = (state === 'participant') ? SEASON_END : SEASON_START;
+  let diff = Math.max(0, target - now);
   const d = Math.floor(diff / 86400000); diff -= d * 86400000;
   const h = Math.floor(diff / 3600000); diff -= h * 3600000;
   const m = Math.floor(diff / 60000); diff -= m * 60000;
   const s = Math.floor(diff / 1000);
-  document.getElementById('cd-days').textContent = String(d).padStart(2, '0');
-  document.getElementById('cd-hours').textContent = String(h).padStart(2, '0');
-  document.getElementById('cd-mins').textContent = String(m).padStart(2, '0');
-  document.getElementById('cd-secs').textContent = String(s).padStart(2, '0');
-  document.getElementById('stat-countdown').textContent = d + 'd ' + h + 'h';
+
+  // Pre-season countdown digits
+  const cdDays = document.getElementById('cd-days');
+  if (cdDays) {
+    cdDays.textContent = String(d).padStart(2, '0');
+    document.getElementById('cd-hours').textContent = String(h).padStart(2, '0');
+    document.getElementById('cd-mins').textContent = String(m).padStart(2, '0');
+    document.getElementById('cd-secs').textContent = String(s).padStart(2, '0');
+  }
+
+  // Header compact countdown
+  const hc = document.getElementById('headerCountdown');
+  if (hc) {
+    if (state === 'new_user') hc.textContent = 'starts ' + d + 'd ' + h + 'h';
+    else if (state === 'participant') hc.textContent = 'ends ' + d + 'd ' + h + 'h';
+    else hc.textContent = 'ended';
+  }
+
+  // Participant inline countdown
+  const lci = document.getElementById('liveCountdownInline');
+  if (lci) lci.textContent = 'in ' + d + 'd ' + h + 'h ' + m + 'm';
 }
+
+// Init
+const heroState = getHeroState();
+applyHeroState(heroState);
 updateCountdown();
 setInterval(updateCountdown, 1000);
+// Re-check state every minute (handles live transition at midnight)
+setInterval(() => { const s = getHeroState(); applyHeroState(s); }, 60000);
 
 // Scroll-triggered animations
 const observer = new IntersectionObserver((entries) => {
@@ -1889,11 +2583,124 @@ const observer = new IntersectionObserver((entries) => {
 
 document.querySelectorAll('.animate-in').forEach(el => observer.observe(el));
 
+// Fun-fact carousel
+const funFacts = [
+  { icon: '🐵', text: 'In 1999, a chimpanzee named Raven outperformed 6,000 professional brokers by throwing darts. Her portfolio gained 213%.', punch: 'Think you can beat a chimp? Prove it.' },
+  { icon: '💰', text: "Warren Buffett made 99% of his wealth after his 50th birthday.", punch: "You've got time. But why wait?" },
+  { icon: '📱', text: 'The average person checks their phone 96 times a day. Imagine if one of those checks was your portfolio.', punch: 'Make screen time productive.' },
+  { icon: '👧', text: "In 2020, a 10-year-old girl's portfolio outperformed the S&P 500. Her strategy? 'I just bought what I like.'", punch: 'Sometimes simplicity wins.' },
+  { icon: '🌳', text: "The word 'stock' comes from the old English 'stocc' meaning trunk of a tree. Your portfolio is literally a money tree.", punch: 'Time to plant some seeds.' },
+  { icon: '📈', text: 'Apple shares cost $0.51 at IPO in 1980. A $1,000 investment then would be worth over $1.5 million today.', punch: 'Time in the market beats timing the market.' },
+  { icon: '🏛️', text: 'The Dutch East India Company (1602) was the first publicly traded company. It was also the first to crash spectacularly.', punch: 'Some things never change.' },
+  { icon: '📰', text: "Isaac Newton lost a fortune in the South Sea Bubble. He said: 'I can calculate the motion of heavenly bodies, but not the madness of people.'", punch: 'Even geniuses get rekt.' },
+  { icon: '💎', text: "The first stock exchange opened in Antwerp in 1531 — without a single stock listed. Traders just gathered to make deals.", punch: 'The vibes came first.' },
+  { icon: '🐂', text: "Bull markets get their name from how bulls attack — thrusting their horns up. Bears swipe down.", punch: 'Be the bull this season.' },
+  { icon: '🎰', text: "Casino games have a house edge of 1-15%. The S&P 500 has averaged ~10% annual return since 1957.", punch: 'Choose your battles wisely.' },
+  { icon: '🧠', text: 'Studies show retail traders who check their portfolio less often perform better.', punch: 'Patience > Panic.' },
+  { icon: '🦄', text: "Tesla traded under $5/share in 2010. Many said it was overpriced.", punch: 'Conviction matters more than consensus.' },
+  { icon: '🤖', text: "Today, AI-powered hedge funds manage over $1 trillion. You're playing with the same kind of tools — for free.", punch: 'Use the edge.' },
+  { icon: '🏆', text: "Jesse Livermore made $100M shorting the 1929 crash. In today's money: $1.7B.", punch: 'Same playbook works in 2026.' }
+];
+let currentFact = 0;
+const factIcon = document.getElementById('funFactIcon');
+const factText = document.getElementById('funFactText');
+const factDots = document.getElementById('factDots');
+
+funFacts.forEach((_, i) => {
+  const dot = document.createElement('button');
+  dot.className = 'fact-dot' + (i === 0 ? ' active' : '');
+  dot.setAttribute('aria-label', 'Go to fact ' + (i + 1));
+  dot.onclick = () => goToFact(i);
+  factDots.appendChild(dot);
+});
+
+function renderFact(idx) {
+  const f = funFacts[idx];
+  factIcon.textContent = f.icon;
+  factText.innerHTML = f.text + ' <em>' + f.punch + '</em>';
+  factDots.querySelectorAll('.fact-dot').forEach((d, i) => {
+    d.classList.toggle('active', i === idx);
+  });
+}
+function goToFact(idx) { currentFact = idx; renderFact(idx); }
+function nextFact() { currentFact = (currentFact + 1) % funFacts.length; renderFact(currentFact); }
+function prevFact() { currentFact = (currentFact - 1 + funFacts.length) % funFacts.length; renderFact(currentFact); }
+renderFact(0);
+setInterval(nextFact, 8000);
+
+// Terms modal
+function openTermsModal() {
+  document.getElementById('termsModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeTermsModal() {
+  document.getElementById('termsModal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.getElementById('termsModal').addEventListener('click', function(e) {
+  if (e.target === this) closeTermsModal();
+});
+if (new URLSearchParams(window.location.search).get('terms') === 'open') {
+  openTermsModal();
+}
+
+// Tickers modal
+const mockTickers = [
+  {t:'AAPL',n:'Apple Inc.'},{t:'MSFT',n:'Microsoft Corp.'},{t:'GOOGL',n:'Alphabet Inc.'},{t:'AMZN',n:'Amazon.com Inc.'},
+  {t:'NVDA',n:'NVIDIA Corp.'},{t:'TSLA',n:'Tesla Inc.'},{t:'META',n:'Meta Platforms Inc.'},{t:'NFLX',n:'Netflix Inc.'},
+  {t:'AMD',n:'Advanced Micro Devices'},{t:'INTC',n:'Intel Corp.'},{t:'CRM',n:'Salesforce Inc.'},{t:'ORCL',n:'Oracle Corp.'},
+  {t:'ADBE',n:'Adobe Inc.'},{t:'PYPL',n:'PayPal Holdings'},{t:'SHOP',n:'Shopify Inc.'},{t:'SQ',n:'Block Inc.'},
+  {t:'UBER',n:'Uber Technologies'},{t:'ABNB',n:'Airbnb Inc.'},{t:'COIN',n:'Coinbase Global'},{t:'SNAP',n:'Snap Inc.'},
+  {t:'PLTR',n:'Palantir Technologies'},{t:'RBLX',n:'Roblox Corp.'},{t:'U',n:'Unity Software'},{t:'DKNG',n:'DraftKings Inc.'},
+  {t:'ROKU',n:'Roku Inc.'},{t:'ZM',n:'Zoom Video Comm.'},{t:'DOCU',n:'DocuSign Inc.'},{t:'CRWD',n:'CrowdStrike Holdings'},
+  {t:'NET',n:'Cloudflare Inc.'},{t:'SNOW',n:'Snowflake Inc.'},{t:'BABA',n:'Alibaba Group'},{t:'JD',n:'JD.com Inc.'},
+  {t:'NIO',n:'NIO Inc.'},{t:'LI',n:'Li Auto Inc.'},{t:'XPEV',n:'XPeng Inc.'},{t:'BA',n:'Boeing Co.'},
+  {t:'DIS',n:'Walt Disney Co.'},{t:'NFLX',n:'Netflix Inc.'},{t:'V',n:'Visa Inc.'},{t:'MA',n:'Mastercard Inc.'},
+  {t:'JPM',n:'JPMorgan Chase'},{t:'GS',n:'Goldman Sachs'},{t:'MS',n:'Morgan Stanley'},{t:'BAC',n:'Bank of America'},
+  {t:'WFC',n:'Wells Fargo'},{t:'C',n:'Citigroup Inc.'},{t:'BRK.B',n:'Berkshire Hathaway B'},{t:'UNH',n:'UnitedHealth Group'},
+  {t:'JNJ',n:'Johnson & Johnson'},{t:'PFE',n:'Pfizer Inc.'}
+];
+
+function openTickersModal() {
+  document.getElementById('tickersModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  filterTickers();
+}
+function closeTickersModal() {
+  document.getElementById('tickersModal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.getElementById('tickersModal').addEventListener('click', function(e) {
+  if (e.target === this) closeTickersModal();
+});
+
+function filterTickers() {
+  const q = (document.getElementById('tickerSearch').value || '').toLowerCase();
+  const filtered = q ? mockTickers.filter(t => t.t.toLowerCase().includes(q) || t.n.toLowerCase().includes(q)) : mockTickers;
+  const list = document.getElementById('tickerList');
+  document.getElementById('tickersCount').textContent = filtered.length + ' of ~1,000 stocks shown (mock sample)';
+  list.innerHTML = filtered.map(t =>
+    '<div class="ticker-row">' +
+      '<div class="ticker-info"><strong>' + t.t + '</strong> <span>' + t.n + '</span></div>' +
+      '<a href="https://tap.freedom24.com/to/chat/ai?text=/buy ' + t.t + ' 10&utm_source=ai_game_site&utm_medium=web&utm_campaign=portfolio_battle_s1&utm_content=tickers_modal" target="_blank" rel="noopener" class="ticker-buy">Buy 10 &rarr;</a>' +
+    '</div>'
+  ).join('');
+}
+
 // Mobile sticky CTA
 const stickyCta = document.getElementById('stickyCta');
 window.addEventListener('scroll', () => {
   stickyCta.classList.toggle('visible', window.scrollY > 600);
 }, { passive: true });
+
+// ESC key closes modals
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') {
+    closeTermsModal();
+    closeTickersModal();
+    closeMobileMenu();
+  }
+});
 </script>
 </body>
 </html>
