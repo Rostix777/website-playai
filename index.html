@@ -1853,31 +1853,8 @@ body { top: 0 !important; }
 
 <!-- ==================== LIVE TICKERS STRIP ==================== -->
 <div class="tickers-strip notranslate" translate="no">
-  <div class="tickers-track" id="tickersTrack">
-    <!-- Set 1 -->
-    <div class="ticker-item"><span class="ticker-logo">A</span><span class="ticker-symbol">AAPL</span><span class="ticker-price">$234.56</span><span class="ticker-change up">+1.42%</span></div>
-    <div class="ticker-item"><span class="ticker-logo">N</span><span class="ticker-symbol">NVDA</span><span class="ticker-price">$142.78</span><span class="ticker-change up">+2.15%</span></div>
-    <div class="ticker-item"><span class="ticker-logo">T</span><span class="ticker-symbol">TSLA</span><span class="ticker-price">$248.12</span><span class="ticker-change down">-1.34%</span></div>
-    <div class="ticker-item"><span class="ticker-logo">M</span><span class="ticker-symbol">MSFT</span><span class="ticker-price">$458.90</span><span class="ticker-change up">+0.87%</span></div>
-    <div class="ticker-item"><span class="ticker-logo">G</span><span class="ticker-symbol">GOOGL</span><span class="ticker-price">$178.34</span><span class="ticker-change up">+1.23%</span></div>
-    <div class="ticker-item"><span class="ticker-logo">A</span><span class="ticker-symbol">AMZN</span><span class="ticker-price">$198.45</span><span class="ticker-change up">+0.56%</span></div>
-    <div class="ticker-item"><span class="ticker-logo">M</span><span class="ticker-symbol">META</span><span class="ticker-price">$512.67</span><span class="ticker-change down">-0.89%</span></div>
-    <div class="ticker-item"><span class="ticker-logo">N</span><span class="ticker-symbol">NFLX</span><span class="ticker-price">$685.23</span><span class="ticker-change up">+1.78%</span></div>
-    <div class="ticker-item"><span class="ticker-logo">A</span><span class="ticker-symbol">AMD</span><span class="ticker-price">$165.89</span><span class="ticker-change up">+3.12%</span></div>
-    <div class="ticker-item"><span class="ticker-logo">I</span><span class="ticker-symbol">INTC</span><span class="ticker-price">$32.45</span><span class="ticker-change down">-2.01%</span></div>
-    <!-- Set 2 (duplicate for seamless scroll) -->
-    <div class="ticker-item"><span class="ticker-logo">A</span><span class="ticker-symbol">AAPL</span><span class="ticker-price">$234.56</span><span class="ticker-change up">+1.42%</span></div>
-    <div class="ticker-item"><span class="ticker-logo">N</span><span class="ticker-symbol">NVDA</span><span class="ticker-price">$142.78</span><span class="ticker-change up">+2.15%</span></div>
-    <div class="ticker-item"><span class="ticker-logo">T</span><span class="ticker-symbol">TSLA</span><span class="ticker-price">$248.12</span><span class="ticker-change down">-1.34%</span></div>
-    <div class="ticker-item"><span class="ticker-logo">M</span><span class="ticker-symbol">MSFT</span><span class="ticker-price">$458.90</span><span class="ticker-change up">+0.87%</span></div>
-    <div class="ticker-item"><span class="ticker-logo">G</span><span class="ticker-symbol">GOOGL</span><span class="ticker-price">$178.34</span><span class="ticker-change up">+1.23%</span></div>
-    <div class="ticker-item"><span class="ticker-logo">A</span><span class="ticker-symbol">AMZN</span><span class="ticker-price">$198.45</span><span class="ticker-change up">+0.56%</span></div>
-    <div class="ticker-item"><span class="ticker-logo">M</span><span class="ticker-symbol">META</span><span class="ticker-price">$512.67</span><span class="ticker-change down">-0.89%</span></div>
-    <div class="ticker-item"><span class="ticker-logo">N</span><span class="ticker-symbol">NFLX</span><span class="ticker-price">$685.23</span><span class="ticker-change up">+1.78%</span></div>
-    <div class="ticker-item"><span class="ticker-logo">A</span><span class="ticker-symbol">AMD</span><span class="ticker-price">$165.89</span><span class="ticker-change up">+3.12%</span></div>
-    <div class="ticker-item"><span class="ticker-logo">I</span><span class="ticker-symbol">INTC</span><span class="ticker-price">$32.45</span><span class="ticker-change down">-2.01%</span></div>
-  </div>
-  <div class="tickers-disclaimer">Live market data shown for informational purposes only. Does not constitute investment advice.</div>
+  <div class="tickers-track" id="tickersTrack"></div>
+  <div class="tickers-disclaimer">Live market data via Tradernet. For informational purposes only. Does not constitute investment advice.</div>
 </div>
 
 <!-- ==================== BENEFITS ==================== -->
@@ -2910,6 +2887,49 @@ const stickyCta = document.getElementById('stickyCta');
 window.addEventListener('scroll', () => {
   stickyCta.classList.toggle('visible', window.scrollY > 600);
 }, { passive: true });
+
+// ==================== LIVE TICKERS STRIP ====================
+const STRIP_TICKERS = ['FRHC.US','AAPL.US','NVDA.US','TSLA.US','MSFT.US','GOOGL.US','AMZN.US','META.US','NFLX.US','AMD.US'];
+const TRADERNET_API = 'https://tradernet.com/securities/export?tickers=';
+let tickerCache = {};
+
+function renderTickerStrip() {
+  const track = document.getElementById('tickersTrack');
+  const items = STRIP_TICKERS.map(t => {
+    const d = tickerCache[t];
+    if (!d) return '';
+    const sym = t.replace('.US','');
+    const price = d.ltp != null ? '$' + Number(d.ltp).toFixed(2) : '—';
+    const pcp = d.pcp != null ? Number(d.pcp) : 0;
+    const cls = pcp >= 0 ? 'up' : 'down';
+    const sign = pcp >= 0 ? '+' : '';
+    return '<div class="ticker-item">' +
+      '<span class="ticker-logo">' + sym[0] + '</span>' +
+      '<span class="ticker-symbol">' + sym + '</span>' +
+      '<span class="ticker-price">' + price + '</span>' +
+      '<span class="ticker-change ' + cls + '">' + sign + pcp.toFixed(2) + '%</span>' +
+    '</div>';
+  }).join('');
+  track.innerHTML = items + items;
+}
+
+async function fetchTickerQuote(ticker) {
+  try {
+    const res = await fetch(TRADERNET_API + ticker);
+    const data = await res.json();
+    if (Array.isArray(data) && data.length > 0) {
+      tickerCache[ticker] = data[0];
+    }
+  } catch(e) {}
+}
+
+async function refreshTickers() {
+  await Promise.all(STRIP_TICKERS.map(t => fetchTickerQuote(t)));
+  renderTickerStrip();
+}
+
+refreshTickers();
+setInterval(refreshTickers, 30000);
 
 // ESC key closes modals
 document.addEventListener('keydown', function(e) {
