@@ -2855,6 +2855,9 @@ function closeTickersModal() {
 document.getElementById('tickersModal').addEventListener('click', function(e) {
   if (e.target === this) closeTickersModal();
 });
+if (new URLSearchParams(window.location.search).get('tickers') === 'open') {
+  openTickersModal();
+}
 
 function filterTickers() {
   const q = (document.getElementById('tickerSearch').value || '').toLowerCase();
