@@ -261,6 +261,21 @@ section {
 /* =========================================================
    1. HEADER
    ========================================================= */
+.scroll-progress {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  z-index: 200;
+  background: transparent;
+}
+.scroll-progress-bar {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--primary), var(--ring));
+  box-shadow: 0 0 8px color-mix(in srgb, var(--primary) 50%, transparent);
+  transition: width 0.1s ease-out;
+  transform-origin: left;
+}
 .site-header {
   position: fixed;
   top: 0; left: 0; right: 0;
@@ -1621,6 +1636,9 @@ body { top: 0 !important; }
 <div class="gradient-bg"></div>
 <div class="ai-grid"></div>
 
+<!-- ==================== SCROLL PROGRESS ==================== -->
+<div class="scroll-progress"><div class="scroll-progress-bar" id="scrollProgress"></div></div>
+
 <!-- ==================== HEADER ==================== -->
 <header class="site-header" id="siteHeader">
   <div class="container header-inner">
@@ -2886,6 +2904,13 @@ function filterTickers() {
 const stickyCta = document.getElementById('stickyCta');
 window.addEventListener('scroll', () => {
   stickyCta.classList.toggle('visible', window.scrollY > 600);
+}, { passive: true });
+
+// ==================== SCROLL PROGRESS ====================
+const scrollBar = document.getElementById('scrollProgress');
+window.addEventListener('scroll', function() {
+  const h = document.documentElement.scrollHeight - window.innerHeight;
+  scrollBar.style.width = h > 0 ? (window.scrollY / h * 100) + '%' : '0%';
 }, { passive: true });
 
 // ==================== LIVE TICKERS STRIP ====================
