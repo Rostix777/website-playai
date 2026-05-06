@@ -380,7 +380,9 @@ section {
 }
 .lang-dropdown.open { display: block; }
 .lang-dropdown a {
-  display: block;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
   padding: 0.5rem 1rem;
   color: var(--muted-fg);
   font-size: 0.8125rem;
@@ -388,6 +390,7 @@ section {
   transition: background 0.15s, color 0.15s;
   white-space: nowrap;
 }
+.lang-dropdown a img { flex-shrink: 0; }
 .lang-dropdown a:hover { background: rgba(255,255,255,0.06); color: var(--fg); }
 .lang-dropdown a.active { color: var(--primary); font-weight: 600; }
 #google_translate_element { display: none !important; }
@@ -1641,14 +1644,13 @@ body { top: 0 !important; }
       <a href="#faq">FAQ</a>
     </nav>
 
-    <div class="header-status notranslate" translate="no" id="headerStatus">
-      <span class="badge badge-live" style="font-size:0.6875rem; padding:0.25rem 0.625rem;">
-        <span class="pulse-dot" style="width:6px;height:6px;"></span> LIVE
-      </span>
-      <span class="header-countdown font-mono notranslate" translate="no" id="headerCountdown">4d 18h</span>
-    </div>
-
     <div class="header-actions">
+      <div class="header-status notranslate" translate="no" id="headerStatus">
+        <span class="badge badge-live" style="font-size:0.6875rem; padding:0.25rem 0.625rem;">
+          <span class="pulse-dot" style="width:6px;height:6px;"></span> LIVE
+        </span>
+        <span class="header-countdown font-mono" id="headerCountdown">4d 18h</span>
+      </div>
       <div class="notranslate" translate="no" style="position:relative;display:inline-block;">
         <button class="lang-switcher" id="langBtn" onclick="toggleLangDropdown()">ENG <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button>
         <div class="lang-dropdown" id="langDropdown"></div>
