@@ -1,0 +1,1899 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Investment Challenge | Win Real Stocks | Freedom Finance</title>
+<meta name="description" content="$25,000 virtual capital. Real prizes. Zero risk. Compete across Europe and win real gift stocks.">
+<meta property="og:title" content="AI Investment Challenge — Portfolio Battle Season 1">
+<meta property="og:description" content="Build your portfolio. Outsmart the market. Win real stocks.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Outfit:wght@500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+/* ======== RESET & BASE ======== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  background: #090b0c;
+  color: #f9fbfb;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+a { color: inherit; text-decoration: none; }
+img { max-width: 100%; height: auto; display: block; }
+button { font: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+ul, ol { list-style: none; }
+
+/* ======== DESIGN TOKENS (preset b2pl3aBRQ: luma / mist / green) ======== */
+:root {
+  --bg: #090b0c;
+  --fg: #f9fbfb;
+  --card: #161b1d;
+  --card-fg: #f9fbfb;
+  --muted: #22292b;
+  --muted-fg: #9ca8ab;
+  --border: rgba(255, 255, 255, 0.10);
+  --input: rgba(255, 255, 255, 0.15);
+  --primary: #05df72;
+  --primary-fg: #090b0c;
+  --secondary: #22292b;
+  --accent: #22292b;
+  --accent-fg: #f9fbfb;
+  --destructive: #ff6467;
+  --ring: #00c950;
+  --positive: #05df72;
+  --negative: #ff6467;
+  --gold: #f5c542;
+  --silver: #b0b8bc;
+  --bronze: #d4863a;
+  --radius: 0.625rem;
+  --radius-lg: 0.875rem;
+  --radius-xl: 1.25rem;
+  --container: 1200px;
+  --header-h: 72px;
+}
+
+.font-mono { font-family: 'JetBrains Mono', 'Fira Code', ui-monospace, monospace; }
+.font-display { font-family: 'Outfit', 'Inter', system-ui, sans-serif; font-weight: 800; }
+
+/* ======== LAYOUT ======== */
+.container {
+  width: 100%;
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 1.25rem;
+}
+@media (min-width: 768px) { .container { padding: 0 2rem; } }
+@media (min-width: 1280px) { .container { padding: 0 2.5rem; } }
+
+section {
+  padding: 4rem 0;
+}
+@media (min-width: 768px) {
+  section { padding: 5rem 0; }
+}
+@media (min-width: 1024px) {
+  section { padding: 6rem 0; }
+}
+
+/* ======== GLASSMORPHISM ======== */
+.glass {
+  background: linear-gradient(135deg, rgba(255,255,255,0.06), rgba(255,255,255,0.025));
+  border: 1px solid var(--border);
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  border-radius: var(--radius-lg);
+}
+.glass-strong {
+  background: linear-gradient(135deg, rgba(255,255,255,0.10), rgba(255,255,255,0.05));
+  border: 1px solid rgba(255,255,255,0.12);
+  backdrop-filter: blur(18px) saturate(140%);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+  border-radius: var(--radius-lg);
+}
+
+/* ======== GRADIENT BG ======== */
+.gradient-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(ellipse 80% 50% at 50% -20%, color-mix(in srgb, var(--primary) 15%, transparent) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 80% 60%, color-mix(in srgb, var(--ring) 8%, transparent) 0%, transparent 50%),
+    radial-gradient(ellipse 50% 50% at 20% 80%, color-mix(in srgb, var(--positive) 6%, transparent) 0%, transparent 50%),
+    var(--bg);
+}
+.ai-grid {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background-image:
+    linear-gradient(color-mix(in srgb, var(--primary) 3%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in srgb, var(--primary) 3%, transparent) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
+}
+
+/* ======== BUTTONS ======== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.875rem 2rem;
+  border-radius: var(--radius);
+  font-weight: 600;
+  font-size: 0.9375rem;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+.btn-primary {
+  background: var(--primary);
+  color: var(--primary-fg);
+  font-weight: 700;
+  box-shadow: 0 0 24px color-mix(in srgb, var(--primary) 30%, transparent);
+}
+.btn-primary:hover {
+  background: var(--ring);
+  box-shadow: 0 0 40px color-mix(in srgb, var(--primary) 50%, transparent);
+  transform: translateY(-1px);
+}
+.btn-secondary {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  color: var(--fg);
+  backdrop-filter: blur(8px);
+}
+.btn-secondary:hover {
+  background: rgba(255,255,255,0.1);
+  border-color: rgba(255,255,255,0.2);
+}
+@media (max-width: 640px) {
+  .btn { width: 100%; padding: 1rem; font-size: 1rem; }
+}
+
+/* ======== BADGE ======== */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.375rem 0.875rem;
+  border-radius: 100px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+}
+.badge-primary {
+  background: color-mix(in srgb, var(--primary) 15%, transparent);
+  border: 1px solid color-mix(in srgb, var(--primary) 30%, transparent);
+  color: var(--primary);
+}
+.badge-live {
+  background: color-mix(in srgb, var(--negative) 15%, transparent);
+  border: 1px solid color-mix(in srgb, var(--negative) 30%, transparent);
+  color: var(--negative);
+}
+.pulse-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--negative);
+  animation: pulse-dot 1.5s ease-in-out infinite;
+}
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; box-shadow: 0 0 0 0 color-mix(in srgb, var(--negative) 60%, transparent); }
+  50% { opacity: 0.8; box-shadow: 0 0 0 6px transparent; }
+}
+
+/* ======== SECTION HEADERS ======== */
+.section-eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--primary);
+  margin-bottom: 0.75rem;
+}
+.section-title {
+  font-family: 'Outfit', 'Inter', system-ui, sans-serif;
+  font-size: clamp(1.75rem, 4vw, 2.75rem);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin-bottom: 1rem;
+}
+.section-subtitle {
+  font-size: clamp(1rem, 1.5vw, 1.125rem);
+  color: var(--muted-fg);
+  max-width: 640px;
+}
+.section-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+.section-header .section-subtitle {
+  margin: 0 auto;
+}
+
+/* ======== ANIMATIONS ======== */
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes scroll-x {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 20px color-mix(in srgb, var(--primary) 30%, transparent); }
+  50% { box-shadow: 0 0 40px color-mix(in srgb, var(--primary) 60%, transparent); }
+}
+.animate-in {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.animate-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+@media (prefers-reduced-motion: reduce) {
+  .animate-in { opacity: 1; transform: none; transition: none; }
+  * { animation-duration: 0.01ms !important; }
+}
+
+/* =========================================================
+   1. HEADER
+   ========================================================= */
+.site-header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: var(--header-h);
+  z-index: 100;
+  transition: background 0.3s, border-color 0.3s;
+}
+.site-header.scrolled {
+  background: color-mix(in srgb, var(--bg) 85%, transparent);
+  backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+  border-bottom: 1px solid var(--border);
+}
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+}
+.header-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  font-weight: 700;
+  font-size: 1.0625rem;
+  white-space: nowrap;
+}
+.header-logo svg, .header-logo img { height: 28px; width: auto; flex-shrink: 0; }
+.header-nav {
+  display: none;
+  align-items: center;
+  gap: 1.75rem;
+}
+@media (min-width: 1024px) {
+  .header-nav { display: flex; }
+}
+.header-nav a {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--muted-fg);
+  transition: color 0.2s;
+}
+.header-nav a:hover { color: var(--fg); }
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.header-cta {
+  display: none;
+  padding: 0.5rem 1.25rem;
+  font-size: 0.8125rem;
+}
+@media (min-width: 768px) {
+  .header-cta { display: inline-flex; }
+}
+.lang-switcher {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--muted-fg);
+  padding: 0.375rem 0.625rem;
+  border-radius: var(--radius);
+  border: 1px solid transparent;
+  transition: all 0.2s;
+  cursor: pointer;
+  background: transparent;
+}
+.lang-switcher:hover {
+  color: var(--fg);
+  border-color: var(--border);
+  background: rgba(255,255,255,0.04);
+}
+
+/* Mobile menu */
+.mobile-menu-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px; height: 40px;
+  color: var(--muted-fg);
+}
+@media (min-width: 1024px) {
+  .mobile-menu-btn { display: none; }
+}
+.mobile-menu-btn svg { width: 24px; height: 24px; }
+
+.mobile-nav {
+  display: none;
+  position: fixed;
+  top: var(--header-h);
+  left: 0; right: 0; bottom: 0;
+  background: color-mix(in srgb, var(--bg) 97%, transparent);
+  backdrop-filter: blur(20px);
+  z-index: 99;
+  padding: 1.5rem;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+.mobile-nav.open { display: flex; }
+.mobile-nav a {
+  display: block;
+  padding: 1rem;
+  font-size: 1.0625rem;
+  font-weight: 500;
+  color: var(--muted-fg);
+  border-radius: var(--radius);
+  transition: all 0.2s;
+}
+.mobile-nav a:hover, .mobile-nav a:active {
+  color: var(--fg);
+  background: rgba(255,255,255,0.04);
+}
+.mobile-nav .btn { margin-top: 1rem; }
+
+/* =========================================================
+   2. HERO (Pre-Season state)
+   ========================================================= */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding-top: var(--header-h);
+  position: relative;
+  overflow: hidden;
+}
+.hero-glow {
+  position: absolute;
+  width: 600px; height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, color-mix(in srgb, var(--primary) 20%, transparent) 0%, transparent 70%);
+  top: -200px; right: -100px;
+  pointer-events: none;
+  filter: blur(60px);
+}
+.hero-content {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+  align-items: center;
+  width: 100%;
+}
+@media (min-width: 1024px) {
+  .hero-content { grid-template-columns: 1fr 1fr; gap: 4rem; }
+}
+.hero-text { max-width: 580px; }
+.hero-text .badge { margin-bottom: 1.5rem; }
+.hero-title {
+  font-size: clamp(2.25rem, 5.5vw, 3.75rem);
+  font-weight: 900;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  margin-bottom: 1.25rem;
+}
+.hero-title .gradient-text {
+  background: linear-gradient(135deg, var(--primary), #7bf1a8, var(--ring));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.hero-subtitle {
+  font-size: clamp(1.125rem, 2vw, 1.375rem);
+  font-weight: 600;
+  color: var(--gold);
+  margin-bottom: 1rem;
+}
+.hero-description {
+  font-size: clamp(0.9375rem, 1.3vw, 1.0625rem);
+  color: var(--muted-fg);
+  line-height: 1.7;
+  margin-bottom: 2rem;
+  max-width: 480px;
+}
+.hero-ctas {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+@media (max-width: 640px) {
+  .hero-ctas { flex-direction: column; }
+}
+.hero-note {
+  font-size: 0.8125rem;
+  color: var(--muted-fg);
+  font-style: italic;
+}
+
+/* Hero Key Visual placeholder */
+.hero-visual {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 360px;
+  border-radius: var(--radius-xl);
+  border: 2px dashed color-mix(in srgb, var(--primary) 30%, transparent);
+  background: color-mix(in srgb, var(--primary) 3%, transparent);
+  overflow: hidden;
+}
+.hero-visual-placeholder {
+  text-align: center;
+  padding: 2rem;
+}
+.hero-visual-placeholder .icon {
+  width: 64px; height: 64px;
+  margin: 0 auto 1rem;
+  opacity: 0.3;
+}
+.hero-visual-placeholder p {
+  color: var(--muted-fg);
+  font-size: 0.875rem;
+}
+.hero-visual-placeholder .label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  color: color-mix(in srgb, var(--primary) 60%, transparent);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-top: 0.5rem;
+}
+
+/* Hero Stats */
+.hero-stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+  margin-top: 2.5rem;
+}
+@media (min-width: 640px) {
+  .hero-stats { grid-template-columns: repeat(4, 1fr); }
+}
+.stat-card {
+  padding: 1.25rem;
+  text-align: center;
+}
+.stat-value {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1.2;
+}
+.stat-label {
+  font-size: 0.75rem;
+  color: var(--muted-fg);
+  margin-top: 0.25rem;
+  font-weight: 500;
+}
+
+/* Countdown */
+.countdown {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  margin: 1rem 0;
+}
+.countdown-unit {
+  text-align: center;
+}
+.countdown-value {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  font-weight: 700;
+  color: var(--fg);
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0.5rem 0.75rem;
+  min-width: 3.5rem;
+  display: block;
+  line-height: 1.2;
+}
+.countdown-label {
+  font-size: 0.6875rem;
+  color: var(--muted-fg);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-top: 0.25rem;
+}
+
+/* =========================================================
+   3. LIVE TICKERS STRIP
+   ========================================================= */
+.tickers-strip {
+  padding: 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  background: color-mix(in srgb, var(--card) 50%, transparent);
+  overflow: hidden;
+  position: relative;
+}
+.tickers-track {
+  display: flex;
+  animation: scroll-x 40s linear infinite;
+  width: max-content;
+}
+.tickers-track:hover { animation-play-state: paused; }
+.ticker-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.875rem 1.5rem;
+  white-space: nowrap;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+.ticker-logo {
+  width: 24px; height: 24px;
+  border-radius: 50%;
+  background: var(--muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.625rem;
+  font-weight: 700;
+  color: var(--muted-fg);
+  flex-shrink: 0;
+}
+.ticker-symbol { font-weight: 600; color: var(--fg); }
+.ticker-price { font-family: 'JetBrains Mono', monospace; font-size: 0.8125rem; }
+.ticker-change { font-family: 'JetBrains Mono', monospace; font-size: 0.8125rem; font-weight: 500; }
+.ticker-change.up { color: var(--positive); }
+.ticker-change.down { color: var(--negative); }
+.tickers-disclaimer {
+  text-align: center;
+  padding: 0.375rem 1rem;
+  font-size: 0.6875rem;
+  color: var(--muted-fg);
+  font-style: italic;
+  background: color-mix(in srgb, var(--bg) 50%, transparent);
+}
+
+/* =========================================================
+   4. BENEFITS GRID
+   ========================================================= */
+.benefits-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+@media (min-width: 640px) {
+  .benefits-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (min-width: 1024px) {
+  .benefits-grid { grid-template-columns: repeat(3, 1fr); }
+}
+.benefit-card {
+  padding: 1.75rem;
+  transition: border-color 0.2s, transform 0.2s;
+}
+.benefit-card:hover {
+  border-color: color-mix(in srgb, var(--primary) 20%, transparent);
+  transform: translateY(-2px);
+}
+.benefit-icon {
+  width: 48px; height: 48px;
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--primary) 10%, transparent);
+  border: 1px solid color-mix(in srgb, var(--primary) 20%, transparent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+}
+.benefit-title {
+  font-size: 1.0625rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+.benefit-text {
+  font-size: 0.875rem;
+  color: var(--muted-fg);
+  line-height: 1.65;
+}
+
+/* =========================================================
+   5. HOW IT WORKS TIMELINE
+   ========================================================= */
+.timeline {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  position: relative;
+}
+@media (min-width: 768px) {
+  .timeline { grid-template-columns: repeat(2, 1fr); gap: 2rem; }
+}
+@media (min-width: 1024px) {
+  .timeline { grid-template-columns: repeat(4, 1fr); }
+}
+.timeline-step {
+  position: relative;
+  padding: 1.75rem;
+}
+.step-number {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--primary);
+  letter-spacing: 0.1em;
+  margin-bottom: 1rem;
+}
+.step-title {
+  font-size: 1.125rem;
+  font-weight: 700;
+  margin-bottom: 0.625rem;
+}
+.step-text {
+  font-size: 0.875rem;
+  color: var(--muted-fg);
+  line-height: 1.65;
+}
+.step-creative {
+  margin-top: 1rem;
+  border-radius: var(--radius);
+  border: 1px dashed color-mix(in srgb, var(--primary) 20%, transparent);
+  background: color-mix(in srgb, var(--primary) 2%, transparent);
+  padding: 1.25rem;
+  min-height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.step-creative span {
+  font-size: 0.6875rem;
+  color: var(--muted-fg);
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 0.05em;
+}
+
+/* =========================================================
+   6. PRIZES PODIUM
+   ========================================================= */
+.prizes-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+@media (min-width: 640px) {
+  .prizes-layout { grid-template-columns: repeat(2, 1fr); }
+}
+@media (min-width: 1024px) {
+  .prizes-layout { grid-template-columns: repeat(5, 1fr); }
+}
+.prize-card {
+  padding: 2rem 1.5rem;
+  text-align: center;
+  transition: transform 0.2s, border-color 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+.prize-card:hover { transform: translateY(-3px); }
+.prize-card.gold { border-color: color-mix(in srgb, var(--gold) 30%, transparent); }
+.prize-card.silver { border-color: color-mix(in srgb, var(--silver) 30%, transparent); }
+.prize-card.bronze { border-color: color-mix(in srgb, var(--bronze) 30%, transparent); }
+.prize-card.gold::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--gold), #e8c96a);
+}
+.prize-card.silver::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--silver), #d4d8dc);
+}
+.prize-card.bronze::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--bronze), #c9925c);
+}
+.prize-rank {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  line-height: 1;
+}
+.prize-place {
+  font-weight: 700;
+  font-size: 1rem;
+  margin-bottom: 0.75rem;
+}
+.prize-coupons {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 0.25rem;
+}
+.prize-label {
+  font-size: 0.8125rem;
+  color: var(--muted-fg);
+  margin-bottom: 1rem;
+}
+.prize-tagline {
+  font-size: 0.8125rem;
+  color: var(--muted-fg);
+  font-style: italic;
+}
+
+/* =========================================================
+   7. COUPONS EXPLAINER
+   ========================================================= */
+.coupons-flow {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+@media (min-width: 768px) {
+  .coupons-flow { grid-template-columns: repeat(4, 1fr); }
+}
+.coupon-step {
+  text-align: center;
+  padding: 1.5rem 1rem;
+  position: relative;
+}
+.coupon-icon {
+  font-size: 2rem;
+  margin-bottom: 0.75rem;
+}
+.coupon-title {
+  font-weight: 600;
+  font-size: 0.9375rem;
+  margin-bottom: 0.375rem;
+}
+.coupon-text {
+  font-size: 0.8125rem;
+  color: var(--muted-fg);
+}
+.coupon-arrow {
+  display: none;
+  position: absolute;
+  right: -0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: color-mix(in srgb, var(--primary) 40%, transparent);
+  font-size: 1.25rem;
+}
+@media (min-width: 768px) {
+  .coupon-arrow { display: block; }
+  .coupon-step:last-child .coupon-arrow { display: none; }
+}
+.coupons-note {
+  text-align: center;
+  font-size: 0.8125rem;
+  color: var(--muted-fg);
+  max-width: 640px;
+  margin: 0 auto;
+  line-height: 1.65;
+}
+
+/* =========================================================
+   8. TRANSPARENCY BLOCK
+   ========================================================= */
+.transparency-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+@media (min-width: 640px) {
+  .transparency-grid { grid-template-columns: repeat(2, 1fr); }
+}
+.transparency-card {
+  padding: 1.5rem;
+}
+.transparency-card .icon { font-size: 1.5rem; margin-bottom: 0.75rem; }
+.transparency-card h4 { font-size: 1rem; font-weight: 700; margin-bottom: 0.5rem; }
+.transparency-card p { font-size: 0.875rem; color: var(--muted-fg); line-height: 1.6; }
+
+/* Tie-breaker */
+.tiebreaker-card {
+  padding: 1.5rem 2rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  max-width: 640px;
+  margin: 1.5rem auto 0;
+}
+.tiebreaker-card .icon { font-size: 1.5rem; flex-shrink: 0; }
+.tiebreaker-card h4 { font-weight: 700; margin-bottom: 0.25rem; }
+.tiebreaker-card p { font-size: 0.875rem; color: var(--muted-fg); }
+
+/* =========================================================
+   9. LEADERBOARD PREVIEW
+   ========================================================= */
+.leaderboard-section { background: color-mix(in srgb, var(--card) 30%, transparent); }
+.leaderboard-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.leaderboard-table th {
+  text-align: left;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--muted-fg);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--border);
+}
+.leaderboard-table td {
+  padding: 1rem;
+  font-size: 0.9375rem;
+  border-bottom: 1px solid var(--border);
+  vertical-align: middle;
+}
+.leaderboard-table tr:last-child td { border-bottom: none; }
+.lb-rank {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 600;
+  font-size: 0.875rem;
+}
+.lb-player {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.lb-avatar {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: var(--muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 0.75rem;
+  color: var(--muted-fg);
+  flex-shrink: 0;
+}
+.lb-name { font-weight: 600; }
+.lb-flag { font-size: 1.125rem; }
+.lb-return {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 600;
+}
+.lb-return.positive { color: var(--positive); }
+.lb-return.negative { color: var(--negative); }
+.lb-value {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.875rem;
+  color: var(--muted-fg);
+}
+.lb-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  font-size: 0.8125rem;
+  color: var(--muted-fg);
+  border-top: 1px solid var(--border);
+  margin-top: 0.5rem;
+}
+
+/* Mobile leaderboard cards */
+@media (max-width: 640px) {
+  .leaderboard-table thead { display: none; }
+  .leaderboard-table, .leaderboard-table tbody, .leaderboard-table tr, .leaderboard-table td {
+    display: block; width: 100%;
+  }
+  .leaderboard-table tr {
+    padding: 1rem;
+    border-bottom: 1px solid var(--border);
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 0.5rem 0.75rem;
+    align-items: center;
+  }
+  .leaderboard-table td { padding: 0; border: none; }
+  .leaderboard-table td:nth-child(1) { grid-row: 1 / 3; }
+  .leaderboard-table td:nth-child(3) { text-align: right; }
+  .leaderboard-table td:nth-child(4) { grid-column: 2 / 4; font-size: 0.8125rem; }
+}
+
+/* =========================================================
+   10. QR JOIN BLOCK
+   ========================================================= */
+.qr-block {
+  display: none;
+}
+@media (min-width: 768px) {
+  .qr-block {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 2.5rem;
+  }
+}
+.qr-content h3 {
+  font-size: 1.5rem;
+  font-weight: 800;
+  margin-bottom: 0.75rem;
+}
+.qr-content p {
+  font-size: 0.9375rem;
+  color: var(--muted-fg);
+  margin-bottom: 1rem;
+}
+.qr-content a {
+  font-size: 0.875rem;
+  color: var(--primary);
+  font-weight: 500;
+}
+.qr-code {
+  width: 160px; height: 160px;
+  background: var(--muted);
+  border-radius: var(--radius);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.6875rem;
+  color: var(--muted-fg);
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* Mobile tap-to-play */
+.mobile-play-block {
+  text-align: center;
+}
+@media (min-width: 768px) {
+  .mobile-play-block { display: none; }
+}
+
+/* =========================================================
+   11. FOMO BANNER
+   ========================================================= */
+.fomo-banner {
+  text-align: center;
+  padding: 3rem 1.25rem;
+  background: linear-gradient(135deg, color-mix(in srgb, var(--primary) 8%, transparent), color-mix(in srgb, var(--accent) 8%, transparent));
+  border-top: 1px solid color-mix(in srgb, var(--primary) 15%, transparent);
+  border-bottom: 1px solid color-mix(in srgb, var(--primary) 15%, transparent);
+}
+.fomo-text {
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  max-width: 640px;
+  margin: 0 auto 1.5rem;
+  line-height: 1.6;
+}
+.fomo-text strong { color: var(--accent); }
+
+/* =========================================================
+   12. FAQ ACCORDION
+   ========================================================= */
+.faq-list {
+  max-width: 768px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.faq-item {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+.faq-question {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 1.25rem 1.5rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  text-align: left;
+  color: var(--fg);
+  transition: color 0.2s;
+  gap: 1rem;
+}
+.faq-question:hover { color: var(--primary); }
+.faq-chevron {
+  width: 20px; height: 20px;
+  flex-shrink: 0;
+  transition: transform 0.3s ease;
+  color: var(--muted-fg);
+}
+.faq-item.open .faq-chevron { transform: rotate(180deg); }
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s ease, padding 0.35s ease;
+}
+.faq-item.open .faq-answer {
+  max-height: 500px;
+}
+.faq-answer-inner {
+  padding: 0 1.5rem 1.25rem;
+  font-size: 0.9375rem;
+  color: var(--muted-fg);
+  line-height: 1.7;
+}
+
+/* =========================================================
+   13. FINAL CTA
+   ========================================================= */
+.final-cta {
+  text-align: center;
+  padding: 5rem 0;
+  position: relative;
+}
+.final-cta-glow {
+  position: absolute;
+  width: 500px; height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, color-mix(in srgb, var(--primary) 10%, transparent) 0%, transparent 70%);
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+.final-cta .section-title { margin-bottom: 1rem; }
+.final-cta-desc {
+  font-size: 1rem;
+  color: var(--muted-fg);
+  max-width: 600px;
+  margin: 0 auto 2rem;
+  line-height: 1.7;
+}
+.final-cta-subtext {
+  margin-top: 1rem;
+  font-size: 0.8125rem;
+  color: var(--muted-fg);
+}
+
+/* =========================================================
+   14. FUN FACT
+   ========================================================= */
+.fun-fact-card {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 2rem;
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+}
+.fun-fact-icon {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+  line-height: 1;
+}
+.fun-fact-title {
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+.fun-fact-text {
+  font-size: 0.9375rem;
+  color: var(--muted-fg);
+  line-height: 1.65;
+}
+.fun-fact-text em {
+  color: var(--fg);
+  font-style: italic;
+}
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+.site-footer {
+  border-top: 1px solid var(--border);
+  padding: 3rem 0 2rem;
+  background: color-mix(in srgb, var(--bg) 80%, transparent);
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+@media (min-width: 640px) {
+  .footer-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (min-width: 768px) {
+  .footer-grid { grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; }
+}
+.footer-brand p {
+  font-size: 0.875rem;
+  color: var(--muted-fg);
+  max-width: 280px;
+  line-height: 1.6;
+  margin-top: 0.75rem;
+}
+.footer-col h4 {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted-fg);
+  margin-bottom: 1rem;
+}
+.footer-col a {
+  display: block;
+  font-size: 0.875rem;
+  color: var(--muted-fg);
+  padding: 0.25rem 0;
+  transition: color 0.2s;
+}
+.footer-col a:hover { color: var(--fg); }
+.footer-disclaimer {
+  font-size: 0.75rem;
+  color: var(--muted-fg);
+  line-height: 1.65;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+}
+.footer-bottom {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1rem;
+  font-size: 0.75rem;
+  color: var(--muted-fg);
+}
+
+/* =========================================================
+   MOBILE STICKY CTA
+   ========================================================= */
+.sticky-cta {
+  display: none;
+  position: fixed;
+  left: 0; right: 0; bottom: 0;
+  padding: 0.75rem 1rem;
+  padding-bottom: calc(0.75rem + env(safe-area-inset-bottom, 0px));
+  background: color-mix(in srgb, var(--bg) 95%, transparent);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-top: 1px solid var(--border);
+  z-index: 90;
+  transform: translateY(100%);
+  transition: transform 0.3s ease;
+}
+.sticky-cta.visible { transform: translateY(0); }
+@media (max-width: 767px) {
+  .sticky-cta { display: block; }
+}
+
+/* =========================================================
+   CREATIVE PLACEHOLDER (reusable)
+   ========================================================= */
+.creative-placeholder {
+  border: 2px dashed color-mix(in srgb, var(--primary) 20%, transparent);
+  border-radius: var(--radius-lg);
+  background: color-mix(in srgb, var(--primary) 2%, transparent);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  min-height: 200px;
+  text-align: center;
+}
+.creative-placeholder .cp-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.6875rem;
+  color: color-mix(in srgb, var(--primary) 50%, transparent);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+.creative-placeholder .cp-desc {
+  font-size: 0.8125rem;
+  color: var(--muted-fg);
+}
+.creative-placeholder .cp-size {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.625rem;
+  color: var(--muted-fg);
+  margin-top: 0.375rem;
+  opacity: 0.5;
+}
+</style>
+</head>
+<body>
+
+<!-- Background -->
+<div class="gradient-bg"></div>
+<div class="ai-grid"></div>
+
+<!-- ==================== HEADER ==================== -->
+<header class="site-header" id="siteHeader">
+  <div class="container header-inner">
+    <a href="/" class="header-logo">
+      <img src="../logo-f24.light.svg" alt="Freedom24" />
+    </a>
+
+    <nav class="header-nav">
+      <a href="#how-it-works">How It Works</a>
+      <a href="#prizes">Prizes</a>
+      <a href="#leaderboard">Leaderboard</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+
+    <div class="header-actions">
+      <button class="lang-switcher" id="langBtn">EN</button>
+      <a href="#" class="btn btn-primary header-cta">Join Now</a>
+      <button class="mobile-menu-btn" id="menuBtn" aria-label="Toggle menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <line x1="3" y1="6" x2="21" y2="6"/>
+          <line x1="3" y1="12" x2="21" y2="12"/>
+          <line x1="3" y1="18" x2="21" y2="18"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile Nav -->
+<nav class="mobile-nav" id="mobileNav">
+  <a href="#how-it-works" onclick="closeMobileMenu()">How It Works</a>
+  <a href="#prizes" onclick="closeMobileMenu()">Prizes</a>
+  <a href="#leaderboard" onclick="closeMobileMenu()">Leaderboard</a>
+  <a href="#faq" onclick="closeMobileMenu()">FAQ</a>
+  <a href="#" onclick="closeMobileMenu()" class="btn btn-primary" style="margin-top: auto;">Join the Challenge</a>
+</nav>
+
+<!-- ==================== HERO (PRE-SEASON) ==================== -->
+<section class="hero" id="hero">
+  <div class="hero-glow"></div>
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-text">
+        <span class="badge badge-primary">Season 1 — Starts Soon</span>
+        <h1 class="hero-title">
+          The <span class="gradient-text">AI Investment Challenge</span> launches in
+        </h1>
+
+        <div class="countdown" id="countdown">
+          <div class="countdown-unit">
+            <span class="countdown-value" id="cd-days">04</span>
+            <span class="countdown-label">Days</span>
+          </div>
+          <div class="countdown-unit">
+            <span class="countdown-value" id="cd-hours">18</span>
+            <span class="countdown-label">Hours</span>
+          </div>
+          <div class="countdown-unit">
+            <span class="countdown-value" id="cd-mins">32</span>
+            <span class="countdown-label">Min</span>
+          </div>
+          <div class="countdown-unit">
+            <span class="countdown-value" id="cd-secs">07</span>
+            <span class="countdown-label">Sec</span>
+          </div>
+        </div>
+
+        <p class="hero-subtitle">$25,000 to prove it. Real stocks if you do.</p>
+        <p class="hero-description">Build your portfolio. Outsmart the market. Win real stocks deposited to your Freedom&nbsp;Finance account. No deposits. No fees. Just your strategy vs. real market data.</p>
+
+        <div class="hero-ctas">
+          <a href="#" class="btn btn-primary">Reserve My $25K &rarr;</a>
+          <a href="#how-it-works" class="btn btn-secondary">How It Works</a>
+        </div>
+
+        <p class="hero-note">Registration is already open. You can also join after the start — but every hour costs you potential return.</p>
+      </div>
+
+      <!-- KEY VISUAL PLACEHOLDER -->
+      <div class="hero-visual">
+        <div class="hero-visual-placeholder">
+          <svg class="icon" viewBox="0 0 64 64" fill="none" stroke="hsl(239,84%,67%)" stroke-width="1.5">
+            <rect x="4" y="8" width="56" height="48" rx="4"/>
+            <path d="M4 20h56M24 8v48"/>
+            <circle cx="44" cy="38" r="8"/>
+            <path d="M36 46l4-4 6 6 10-10"/>
+          </svg>
+          <p>Key Visual Goes Here</p>
+          <span class="label">creative placeholder &middot; hero visual</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Hero Stats -->
+    <div class="hero-stats">
+      <div class="stat-card glass">
+        <div class="stat-value">95</div>
+        <div class="stat-label">Real Gift Stocks</div>
+      </div>
+      <div class="stat-card glass">
+        <div class="stat-value">$25K</div>
+        <div class="stat-label">Virtual Starting Capital</div>
+      </div>
+      <div class="stat-card glass">
+        <div class="stat-value">TOP 5</div>
+        <div class="stat-label">Win Real Shares</div>
+      </div>
+      <div class="stat-card glass">
+        <div class="stat-value font-mono" id="stat-countdown">4d 18h</div>
+        <div class="stat-label">Until Season Starts</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== LIVE TICKERS STRIP ==================== -->
+<div class="tickers-strip">
+  <div class="tickers-track" id="tickersTrack">
+    <!-- Set 1 -->
+    <div class="ticker-item"><span class="ticker-logo">A</span><span class="ticker-symbol">AAPL</span><span class="ticker-price">$234.56</span><span class="ticker-change up">+1.42%</span></div>
+    <div class="ticker-item"><span class="ticker-logo">N</span><span class="ticker-symbol">NVDA</span><span class="ticker-price">$142.78</span><span class="ticker-change up">+2.15%</span></div>
+    <div class="ticker-item"><span class="ticker-logo">T</span><span class="ticker-symbol">TSLA</span><span class="ticker-price">$248.12</span><span class="ticker-change down">-1.34%</span></div>
+    <div class="ticker-item"><span class="ticker-logo">M</span><span class="ticker-symbol">MSFT</span><span class="ticker-price">$458.90</span><span class="ticker-change up">+0.87%</span></div>
+    <div class="ticker-item"><span class="ticker-logo">G</span><span class="ticker-symbol">GOOGL</span><span class="ticker-price">$178.34</span><span class="ticker-change up">+1.23%</span></div>
+    <div class="ticker-item"><span class="ticker-logo">A</span><span class="ticker-symbol">AMZN</span><span class="ticker-price">$198.45</span><span class="ticker-change up">+0.56%</span></div>
+    <div class="ticker-item"><span class="ticker-logo">M</span><span class="ticker-symbol">META</span><span class="ticker-price">$512.67</span><span class="ticker-change down">-0.89%</span></div>
+    <div class="ticker-item"><span class="ticker-logo">N</span><span class="ticker-symbol">NFLX</span><span class="ticker-price">$685.23</span><span class="ticker-change up">+1.78%</span></div>
+    <div class="ticker-item"><span class="ticker-logo">A</span><span class="ticker-symbol">AMD</span><span class="ticker-price">$165.89</span><span class="ticker-change up">+3.12%</span></div>
+    <div class="ticker-item"><span class="ticker-logo">I</span><span class="ticker-symbol">INTC</span><span class="ticker-price">$32.45</span><span class="ticker-change down">-2.01%</span></div>
+    <!-- Set 2 (duplicate for seamless scroll) -->
+    <div class="ticker-item"><span class="ticker-logo">A</span><span class="ticker-symbol">AAPL</span><span class="ticker-price">$234.56</span><span class="ticker-change up">+1.42%</span></div>
+    <div class="ticker-item"><span class="ticker-logo">N</span><span class="ticker-symbol">NVDA</span><span class="ticker-price">$142.78</span><span class="ticker-change up">+2.15%</span></div>
+    <div class="ticker-item"><span class="ticker-logo">T</span><span class="ticker-symbol">TSLA</span><span class="ticker-price">$248.12</span><span class="ticker-change down">-1.34%</span></div>
+    <div class="ticker-item"><span class="ticker-logo">M</span><span class="ticker-symbol">MSFT</span><span class="ticker-price">$458.90</span><span class="ticker-change up">+0.87%</span></div>
+    <div class="ticker-item"><span class="ticker-logo">G</span><span class="ticker-symbol">GOOGL</span><span class="ticker-price">$178.34</span><span class="ticker-change up">+1.23%</span></div>
+    <div class="ticker-item"><span class="ticker-logo">A</span><span class="ticker-symbol">AMZN</span><span class="ticker-price">$198.45</span><span class="ticker-change up">+0.56%</span></div>
+    <div class="ticker-item"><span class="ticker-logo">M</span><span class="ticker-symbol">META</span><span class="ticker-price">$512.67</span><span class="ticker-change down">-0.89%</span></div>
+    <div class="ticker-item"><span class="ticker-logo">N</span><span class="ticker-symbol">NFLX</span><span class="ticker-price">$685.23</span><span class="ticker-change up">+1.78%</span></div>
+    <div class="ticker-item"><span class="ticker-logo">A</span><span class="ticker-symbol">AMD</span><span class="ticker-price">$165.89</span><span class="ticker-change up">+3.12%</span></div>
+    <div class="ticker-item"><span class="ticker-logo">I</span><span class="ticker-symbol">INTC</span><span class="ticker-price">$32.45</span><span class="ticker-change down">-2.01%</span></div>
+  </div>
+  <div class="tickers-disclaimer">Live market data shown for informational purposes only. Does not constitute investment advice.</div>
+</div>
+
+<!-- ==================== BENEFITS ==================== -->
+<section id="benefits">
+  <div class="container">
+    <div class="section-header animate-in">
+      <p class="section-eyebrow">Why Play</p>
+      <h2 class="section-title">Why You Should Be In This Game</h2>
+      <p class="section-subtitle">Spoiler: doing nothing is the only losing strategy here.</p>
+    </div>
+
+    <div class="benefits-grid">
+      <div class="benefit-card glass animate-in">
+        <div class="benefit-icon">&#127942;</div>
+        <h3 class="benefit-title">Real Prizes, Zero Investment</h3>
+        <p class="benefit-text">95 real gift stocks distributed among the top 5 traders. No deposit, no fees, no hidden costs. Your only investment is your intellect.</p>
+      </div>
+      <div class="benefit-card glass animate-in">
+        <div class="benefit-icon">&#128161;</div>
+        <h3 class="benefit-title">Test Your Hypotheses</h3>
+        <p class="benefit-text">That "brilliant" stock idea you had at 3AM? Now you can test it with $25K in virtual cash instead of your savings. You're welcome.</p>
+      </div>
+      <div class="benefit-card glass animate-in">
+        <div class="benefit-icon">&#128200;</div>
+        <h3 class="benefit-title">Level Up Your Financial IQ</h3>
+        <p class="benefit-text">Learn portfolio management by actually doing it. No textbooks. No boring lectures. Just real market data and real decisions.</p>
+      </div>
+      <div class="benefit-card glass animate-in">
+        <div class="benefit-icon">&#129302;</div>
+        <h3 class="benefit-title">AI-Powered Experience</h3>
+        <p class="benefit-text">Trade through our AI Assistant — the same kind of technology hedge funds pay millions for. You get it for free. For now.</p>
+      </div>
+      <div class="benefit-card glass animate-in">
+        <div class="benefit-icon">&#128201;</div>
+        <h3 class="benefit-title">Short Selling Included</h3>
+        <p class="benefit-text">Think a stock is overpriced? Short it. Because real investing isn't just about buying — it's about being right.</p>
+      </div>
+      <div class="benefit-card glass animate-in">
+        <div class="benefit-icon">&#127758;</div>
+        <h3 class="benefit-title">Compete Across Europe</h3>
+        <p class="benefit-text">You're not just playing against yourself. Thousands of traders across Europe are in the ring. Where do you rank?</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== HOW IT WORKS ==================== -->
+<section id="how-it-works">
+  <div class="container">
+    <div class="section-header animate-in">
+      <p class="section-eyebrow">4 Steps</p>
+      <h2 class="section-title">From Zero to Portfolio Hero in 4&nbsp;Steps</h2>
+    </div>
+
+    <div class="timeline">
+      <div class="timeline-step glass animate-in">
+        <div class="step-number">STEP 01</div>
+        <h3 class="step-title">Get Invited</h3>
+        <p class="step-text">Check your email, push notifications, or app stories. If you see the invite — you're in the club. Don't have an invite? Open a Freedom Finance account. It takes 5 minutes.</p>
+        <div class="step-creative"><span>creative: invite mockup</span></div>
+      </div>
+      <div class="timeline-step glass animate-in">
+        <div class="step-number">STEP 02</div>
+        <h3 class="step-title">Accept the Challenge</h3>
+        <p class="step-text">Open the AI Bot. Hit /start. Accept the terms. Hit /play. You now have $25,000 in virtual cash. Feel powerful yet?</p>
+        <div class="step-creative"><span>creative: bot ui</span></div>
+      </div>
+      <div class="timeline-step glass animate-in">
+        <div class="step-number">STEP 03</div>
+        <h3 class="step-title">Build Your Portfolio</h3>
+        <p class="step-text">Choose from approximately 1,000 stocks available in the Bot. Buy. Sell. Short. The market is live. Your moves are tracked. Leaderboard updates every 3 hours.</p>
+        <div class="step-creative"><span>creative: portfolio screen</span></div>
+      </div>
+      <div class="timeline-step glass animate-in">
+        <div class="step-number">STEP 04</div>
+        <h3 class="step-title">Win Real Gift Stocks</h3>
+        <p class="step-text">The season ends June 11, 2026. Final standings are locked. The TOP 5 traders receive coupons credited to their Freedom Finance account.</p>
+        <div class="step-creative"><span>creative: winner celebration</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== PRIZES PODIUM ==================== -->
+<section id="prizes">
+  <div class="container">
+    <div class="section-header animate-in">
+      <p class="section-eyebrow">Season 1 &middot; Rewards</p>
+      <h2 class="section-title">Five Spots. Ninety-Five Real Stocks. One&nbsp;Leaderboard.</h2>
+      <p class="section-subtitle">No participation prizes. No consolation rounds. Only the top 5 walk away with shares. Where will you finish?</p>
+    </div>
+
+    <div class="prizes-layout">
+      <div class="prize-card glass gold animate-in">
+        <div class="prize-rank">&#129351;</div>
+        <div class="prize-place">1st Place</div>
+        <div class="prize-coupons">40</div>
+        <div class="prize-label">coupons = 40 gift stocks</div>
+        <div class="prize-tagline">The market bows to one trader.</div>
+      </div>
+      <div class="prize-card glass silver animate-in">
+        <div class="prize-rank">&#129352;</div>
+        <div class="prize-place">2nd Place</div>
+        <div class="prize-coupons">25</div>
+        <div class="prize-label">coupons = 25 gift stocks</div>
+        <div class="prize-tagline">A photo finish never felt so rewarding.</div>
+      </div>
+      <div class="prize-card glass bronze animate-in">
+        <div class="prize-rank">&#129353;</div>
+        <div class="prize-place">3rd Place</div>
+        <div class="prize-coupons">15</div>
+        <div class="prize-label">coupons = 15 gift stocks</div>
+        <div class="prize-tagline">Bronze on paper. Gold in your portfolio.</div>
+      </div>
+      <div class="prize-card glass animate-in">
+        <div class="prize-rank">4</div>
+        <div class="prize-place">4th Place</div>
+        <div class="prize-coupons">10</div>
+        <div class="prize-label">coupons = 10 gift stocks</div>
+        <div class="prize-tagline">Top 5 out of thousands. Not bad at all.</div>
+      </div>
+      <div class="prize-card glass animate-in">
+        <div class="prize-rank">5</div>
+        <div class="prize-place">5th Place</div>
+        <div class="prize-coupons">5</div>
+        <div class="prize-label">coupons = 5 gift stocks</div>
+        <div class="prize-tagline">You made the cut. The market noticed.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== COUPONS EXPLAINER ==================== -->
+<section id="coupons">
+  <div class="container">
+    <div class="section-header animate-in">
+      <p class="section-eyebrow">Rewards Flow</p>
+      <h2 class="section-title">How Coupons Work</h2>
+    </div>
+
+    <div class="coupons-flow">
+      <div class="coupon-step glass animate-in">
+        <div class="coupon-icon">&#127942;</div>
+        <div class="coupon-title">You finish in Top 5</div>
+        <div class="coupon-text">Final leaderboard is locked</div>
+        <span class="coupon-arrow">&rarr;</span>
+      </div>
+      <div class="coupon-step glass animate-in">
+        <div class="coupon-icon">&#127915;</div>
+        <div class="coupon-title">Coupons hit your account</div>
+        <div class="coupon-text">Credited to your Freedom Finance account</div>
+        <span class="coupon-arrow">&rarr;</span>
+      </div>
+      <div class="coupon-step glass animate-in">
+        <div class="coupon-icon">&#127873;</div>
+        <div class="coupon-title">You open each coupon</div>
+        <div class="coupon-text">A randomly selected gift stock is credited</div>
+        <span class="coupon-arrow">&rarr;</span>
+      </div>
+      <div class="coupon-step glass animate-in">
+        <div class="coupon-icon">&#128200;</div>
+        <div class="coupon-title">Real stock in your portfolio</div>
+        <div class="coupon-text">Hold it, sell it, build around it</div>
+      </div>
+    </div>
+
+    <p class="coupons-note">One coupon = one randomly selected gift stock from the approved list at freedom24.com/gift-stocks-list. The moment a stock is credited — it's yours to hold, sell, or stack.</p>
+  </div>
+</section>
+
+<!-- ==================== TRANSPARENCY ==================== -->
+<section id="transparency">
+  <div class="container">
+    <div class="section-header animate-in">
+      <p class="section-eyebrow">Fair Play</p>
+      <h2 class="section-title">Full Transparency</h2>
+    </div>
+
+    <div class="transparency-grid">
+      <div class="transparency-card glass animate-in">
+        <div class="icon">&#127919;</div>
+        <h4>Winners by Performance</h4>
+        <p>Your rank is decided by virtual portfolio return — not by luck, not by random draws. The market is the only judge.</p>
+      </div>
+      <div class="transparency-card glass animate-in">
+        <div class="icon">&#127922;</div>
+        <h4>Stocks by Random Allocation</h4>
+        <p>Specific gift stocks are drawn at random from the approved list. You can't pick the issuer — but every stock is real, tradeable, and yours to keep.</p>
+      </div>
+      <div class="transparency-card glass animate-in">
+        <div class="icon">&#9878;&#65039;</div>
+        <h4>Weighted by Value</h4>
+        <p>Higher-value securities have lower probability. Lower-value — higher. Fair, transparent, automated.</p>
+      </div>
+      <div class="transparency-card glass animate-in">
+        <div class="icon">&#128274;</div>
+        <h4>Non-Transferable</h4>
+        <p>Coupons and gift stocks are tied to your account. No cash alternative. No transfers. But once credited — do whatever you want with it.</p>
+      </div>
+    </div>
+
+    <div class="tiebreaker-card glass animate-in">
+      <div class="icon">&#9889;</div>
+      <div>
+        <h4>What if there's a tie?</h4>
+        <p>If two traders post identical returns, the one who got there first in time takes the higher rank. Speed of conviction matters.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== LEADERBOARD PREVIEW ==================== -->
+<section id="leaderboard" class="leaderboard-section">
+  <div class="container">
+    <div class="section-header animate-in">
+      <p class="section-eyebrow">Rankings</p>
+      <h2 class="section-title">Live Leaderboard</h2>
+      <p class="section-subtitle">Updated every 3 hours. Where do you stand?</p>
+    </div>
+
+    <div class="glass animate-in" style="overflow:hidden">
+      <table class="leaderboard-table">
+        <thead>
+          <tr>
+            <th>Rank</th>
+            <th>Player</th>
+            <th>Return %</th>
+            <th>Portfolio Value</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="lb-rank">&#129351; 1</span></td>
+            <td><div class="lb-player"><span class="lb-avatar">AK</span><span class="lb-name">Alexandra K.</span><span class="lb-flag">&#127465;&#127466;</span></div></td>
+            <td><span class="lb-return positive">+18.42%</span></td>
+            <td><span class="lb-value">$29,605</span></td>
+          </tr>
+          <tr>
+            <td><span class="lb-rank">&#129352; 2</span></td>
+            <td><div class="lb-player"><span class="lb-avatar">MR</span><span class="lb-name">Marcos R.</span><span class="lb-flag">&#127466;&#127480;</span></div></td>
+            <td><span class="lb-return positive">+15.87%</span></td>
+            <td><span class="lb-value">$28,967</span></td>
+          </tr>
+          <tr>
+            <td><span class="lb-rank">&#129353; 3</span></td>
+            <td><div class="lb-player"><span class="lb-avatar">JW</span><span class="lb-name">Jakub W.</span><span class="lb-flag">&#127477;&#127473;</span></div></td>
+            <td><span class="lb-return positive">+14.23%</span></td>
+            <td><span class="lb-value">$28,557</span></td>
+          </tr>
+          <tr>
+            <td><span class="lb-rank">4</span></td>
+            <td><div class="lb-player"><span class="lb-avatar">NP</span><span class="lb-name">Nikos P.</span><span class="lb-flag">&#127468;&#127479;</span></div></td>
+            <td><span class="lb-return positive">+12.56%</span></td>
+            <td><span class="lb-value">$28,140</span></td>
+          </tr>
+          <tr>
+            <td><span class="lb-rank">5</span></td>
+            <td><div class="lb-player"><span class="lb-avatar">LM</span><span class="lb-name">Lena M.</span><span class="lb-flag">&#127465;&#127466;</span></div></td>
+            <td><span class="lb-return positive">+11.89%</span></td>
+            <td><span class="lb-value">$27,972</span></td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="lb-meta">
+        <span>Last updated: 3 hours ago &middot; 4,823 participants</span>
+        <a href="#" style="color: hsl(239,84%,67%); font-weight: 500;">View Full Leaderboard &rarr;</a>
+      </div>
+    </div>
+
+    <p style="text-align:center; font-size:0.75rem; color:hsl(215,16%,63%); margin-top:1rem; font-style:italic;">
+      Rankings are based solely on virtual portfolio return. Final ranking is determined at the end of the Promotion Period using official closing prices.
+    </p>
+  </div>
+</section>
+
+<!-- ==================== QR / JOIN BLOCK ==================== -->
+<section id="join">
+  <div class="container">
+    <!-- Desktop QR -->
+    <div class="qr-block glass">
+      <div class="qr-content">
+        <h3>Scan. Play. Win.</h3>
+        <p>One scan opens the AI chat and launches the game instantly.</p>
+        <a href="#">Or tap here on mobile &rarr;</a>
+      </div>
+      <div class="qr-code">QR PLACEHOLDER</div>
+    </div>
+
+    <!-- Mobile CTA -->
+    <div class="mobile-play-block">
+      <div class="creative-placeholder" style="min-height:120px;">
+        <span class="cp-label">creative placeholder</span>
+        <span class="cp-desc">App download / game launch banner</span>
+      </div>
+      <a href="#" class="btn btn-primary" style="margin-top:1.25rem;">Tap to Play &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== FOMO BANNER ==================== -->
+<div class="fomo-banner">
+  <div class="container">
+    <p class="fomo-text">&#128293; Only <strong>5 spots</strong> get rewarded. Thousands are competing. Every day you sit out, someone else climbs the leaderboard.</p>
+    <a href="#" class="btn btn-primary">Claim Your Spot &rarr;</a>
+  </div>
+</div>
+
+<!-- ==================== FAQ ==================== -->
+<section id="faq">
+  <div class="container">
+    <div class="section-header animate-in">
+      <p class="section-eyebrow">FAQ</p>
+      <h2 class="section-title">Got Questions? We've Got Answers.</h2>
+    </div>
+
+    <div class="faq-list">
+      <div class="faq-item glass animate-in">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          Is this really free?
+          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer"><div class="faq-answer-inner">Yes. Zero. Nada. Participation is completely free of charge. No deposits, no hidden fees, no "premium" upsells. You get $25,000 in virtual funds the moment you start.</div></div>
+      </div>
+      <div class="faq-item glass animate-in">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          Do I need to deposit real money?
+          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer"><div class="faq-answer-inner">Absolutely not. No real funds or deposits are required to participate. This is a demo challenge with real prizes.</div></div>
+      </div>
+      <div class="faq-item glass animate-in">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          Who can participate?
+          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer"><div class="faq-answer-inner">You need to be (1) at least 18 years old, (2) a client of Freedom Finance Europe Ltd, (3) have received an invitation via email, push, pop-up, or stories notification.</div></div>
+      </div>
+      <div class="faq-item glass animate-in">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          What can I trade?
+          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer"><div class="faq-answer-inner">Approximately 1,000 stocks available in the Bot. Long and short positions allowed. Market orders only. No leverage. No commissions, no slippage.</div></div>
+      </div>
+      <div class="faq-item glass animate-in">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          How are winners determined?
+          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer"><div class="faq-answer-inner">By portfolio return percentage (PnL%) from the starting $25,000. No random draws, no luck factor for ranking. Best performance wins. In case of a tie — whoever achieved that performance first in time takes the higher rank.</div></div>
+      </div>
+      <div class="faq-item glass animate-in">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          Are the prizes real?
+          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer"><div class="faq-answer-inner">100% real. Whole shares of publicly traded companies deposited directly into your Freedom Finance account. Not virtual. Not tokens. Real stocks.</div></div>
+      </div>
+      <div class="faq-item glass animate-in">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          Can I choose which stock I get?
+          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer"><div class="faq-answer-inner">No. Gift stocks are selected randomly from an approved list at freedom24.com/gift-stocks-list. Higher-value securities have lower probability. The selection is automated and weighted.</div></div>
+      </div>
+      <div class="faq-item glass animate-in">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          Is this gambling?
+          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer"><div class="faq-answer-inner">No. The Promotion is not a lottery, gambling activity, or game of chance within the meaning of Cypriot law. Winners are determined by objective performance criteria, not random selection.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== FINAL CTA ==================== -->
+<section class="final-cta">
+  <div class="final-cta-glow"></div>
+  <div class="container" style="position:relative;">
+    <div class="animate-in">
+      <h2 class="section-title">Still Thinking About It?</h2>
+      <p class="final-cta-desc">While you're reading this, someone in Warsaw just went long on Tesla and someone in Athens just shorted a meme stock. The market doesn't wait. Neither should you.</p>
+      <a href="#" class="btn btn-primary">Join the AI Investment Challenge &rarr;</a>
+      <p class="final-cta-subtext">Free &middot; No deposit &middot; Takes 60 seconds</p>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== FUN FACT ==================== -->
+<section>
+  <div class="container">
+    <div class="fun-fact-card glass animate-in">
+      <div class="fun-fact-icon">&#128161;</div>
+      <div>
+        <div class="fun-fact-title">Fun Fact</div>
+        <p class="fun-fact-text">In 1999, a chimpanzee named Raven outperformed 6,000 professional brokers by throwing darts at a board of stock names. Her portfolio gained 213%. <em>Think you can beat a chimp? Prove it.</em></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== FOOTER ==================== -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="header-logo" style="margin-bottom:0.25rem;">
+          <img src="../logo-f24.light.svg" alt="Freedom24" />
+        </div>
+        <p>A promotional campaign by Freedom Finance Europe Ltd. Build your portfolio. Outsmart the market. Win real stocks.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Game</h4>
+        <a href="#how-it-works">How It Works</a>
+        <a href="#prizes">Prizes</a>
+        <a href="#leaderboard">Leaderboard</a>
+        <a href="#faq">FAQ</a>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <a href="/terms">Terms &amp; Conditions</a>
+        <a href="/disclaimer">Disclaimer</a>
+        <a href="/privacy">Privacy Policy</a>
+        <a href="/gift-stocks-info">Gift Stocks Info</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="https://www.freedomfinance.eu" target="_blank" rel="noopener">freedomfinance.eu</a>
+        <a href="#">Support</a>
+      </div>
+    </div>
+
+    <div class="footer-disclaimer">
+      This promotion does not constitute investment advice. Past performance is not indicative of future results. Virtual trading results do not guarantee real-world outcomes. Participation is free and requires no deposit. The Promotion is organized by Freedom Finance Europe Ltd, regulated by CySEC (CIF License 275/15). Gift stocks are selected at random from an approved list; higher-value securities are allocated with lower probability. Entitlements are non-transferable. Cash alternatives are not available. Any tax obligations are the sole responsibility of the participant.
+    </div>
+
+    <div class="footer-bottom">
+      <span>&copy; 2026 Freedom Finance Europe Ltd. All rights reserved.</span>
+      <span>CySEC CIF License 275/15</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ==================== MOBILE STICKY CTA ==================== -->
+<div class="sticky-cta" id="stickyCta">
+  <a href="#" class="btn btn-primary" style="width:100%">Join the AI Investment Challenge &rarr;</a>
+</div>
+
+<!-- ==================== SCRIPTS ==================== -->
+<script>
+// Header scroll effect
+const header = document.getElementById('siteHeader');
+window.addEventListener('scroll', () => {
+  header.classList.toggle('scrolled', window.scrollY > 40);
+}, { passive: true });
+
+// Mobile menu
+const menuBtn = document.getElementById('menuBtn');
+const mobileNav = document.getElementById('mobileNav');
+menuBtn.addEventListener('click', () => {
+  mobileNav.classList.toggle('open');
+  document.body.style.overflow = mobileNav.classList.contains('open') ? 'hidden' : '';
+});
+function closeMobileMenu() {
+  mobileNav.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+// FAQ toggle
+function toggleFaq(btn) {
+  const item = btn.closest('.faq-item');
+  const wasOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+  if (!wasOpen) item.classList.add('open');
+}
+
+// Countdown timer (targeting May 11, 2026)
+const targetDate = new Date('2026-05-11T00:00:00Z').getTime();
+function updateCountdown() {
+  const now = Date.now();
+  let diff = Math.max(0, targetDate - now);
+  const d = Math.floor(diff / 86400000); diff -= d * 86400000;
+  const h = Math.floor(diff / 3600000); diff -= h * 3600000;
+  const m = Math.floor(diff / 60000); diff -= m * 60000;
+  const s = Math.floor(diff / 1000);
+  document.getElementById('cd-days').textContent = String(d).padStart(2, '0');
+  document.getElementById('cd-hours').textContent = String(h).padStart(2, '0');
+  document.getElementById('cd-mins').textContent = String(m).padStart(2, '0');
+  document.getElementById('cd-secs').textContent = String(s).padStart(2, '0');
+  document.getElementById('stat-countdown').textContent = d + 'd ' + h + 'h';
+}
+updateCountdown();
+setInterval(updateCountdown, 1000);
+
+// Scroll-triggered animations
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.animate-in').forEach(el => observer.observe(el));
+
+// Mobile sticky CTA
+const stickyCta = document.getElementById('stickyCta');
+window.addEventListener('scroll', () => {
+  stickyCta.classList.toggle('visible', window.scrollY > 600);
+}, { passive: true });
+</script>
+</body>
+</html>
