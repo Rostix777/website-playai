@@ -390,6 +390,8 @@ section {
 .lang-dropdown a.active { color: var(--primary); font-weight: 600; }
 #google_translate_element { display: none !important; }
 .goog-te-banner-frame, .skiptranslate, .goog-te-spinner-pos { display: none !important; }
+.goog-te-balloon-frame, .goog-te-menu-frame, .goog-tooltip, .goog-text-highlight { display: none !important; }
+#goog-gt-tt, .goog-te-ftab-link { display: none !important; }
 body { top: 0 !important; }
 }
 
@@ -1642,7 +1644,7 @@ body { top: 0 !important; }
       <span class="badge badge-live" style="font-size:0.6875rem; padding:0.25rem 0.625rem;">
         <span class="pulse-dot" style="width:6px;height:6px;"></span> LIVE
       </span>
-      <span class="header-countdown font-mono" id="headerCountdown">4d 18h</span>
+      <span class="header-countdown font-mono notranslate" translate="no" id="headerCountdown">4d 18h</span>
     </div>
 
     <div class="header-actions">
@@ -1693,7 +1695,7 @@ body { top: 0 !important; }
           The <span class="gradient-text">AI Investment Challenge</span> launches in
         </h1>
 
-        <div class="countdown" id="countdown">
+        <div class="countdown notranslate" translate="no" id="countdown">
           <div class="countdown-unit">
             <span class="countdown-value" id="cd-days">04</span>
             <span class="countdown-label">Days</span>
@@ -1750,7 +1752,7 @@ body { top: 0 !important; }
           The <span class="gradient-text">Battle Is On.</span> Where Do You Stand?
         </h1>
 
-        <p class="hero-subtitle">Season ends <span class="font-mono" id="liveCountdownInline"></span></p>
+        <p class="hero-subtitle">Season ends <span class="font-mono notranslate" translate="no" id="liveCountdownInline"></span></p>
         <p class="hero-description">The leaderboard updates every 3 hours. Check your rank, adjust your strategy, climb to the top. Only 5 spots get rewarded.</p>
 
         <div class="hero-ctas">
@@ -2935,21 +2937,36 @@ document.addEventListener('keydown', function(e) {
 
 // ==================== GOOGLE TRANSLATE ====================
 const LANGS = [
-  {code:'da',label:'Dansk'},{code:'de',label:'Deutsch'},{code:'et',label:'Eesti'},
-  {code:'en',label:'English'},{code:'es',label:'Español'},{code:'fr',label:'Français'},
-  {code:'it',label:'Italiano'},{code:'lt',label:'Lietuvių'},{code:'nl',label:'Nederlands'},
-  {code:'pl',label:'Polski'},{code:'pt',label:'Português'},{code:'ro',label:'Română'},
-  {code:'tr',label:'Türkçe'},{code:'cs',label:'Čeština'},{code:'el',label:'Ελληνικά'},
-  {code:'bg',label:'Български'},{code:'kk',label:'Казақша'},{code:'ru',label:'Русский'},
-  {code:'tg',label:'Тоҷикӣ'},{code:'uk',label:'Українська'},{code:'hy',label:'Հայերեն'},
-  {code:'ar',label:'اَلْعَرَبِيَّةُ'},{code:'zh-CN',label:'中文'}
+  {code:'da',short:'DA',flag:'🇩🇰',label:'Dansk'},
+  {code:'de',short:'DE',flag:'🇩🇪',label:'Deutsch'},
+  {code:'et',short:'ET',flag:'🇪🇪',label:'Eesti'},
+  {code:'en',short:'ENG',flag:'🇬🇧',label:'English'},
+  {code:'es',short:'ES',flag:'🇪🇸',label:'Español'},
+  {code:'fr',short:'FR',flag:'🇫🇷',label:'Français'},
+  {code:'it',short:'IT',flag:'🇮🇹',label:'Italiano'},
+  {code:'lt',short:'LT',flag:'🇱🇹',label:'Lietuvių'},
+  {code:'nl',short:'NL',flag:'🇳🇱',label:'Nederlands'},
+  {code:'pl',short:'PL',flag:'🇵🇱',label:'Polski'},
+  {code:'pt',short:'PT',flag:'🇵🇹',label:'Português'},
+  {code:'ro',short:'RO',flag:'🇷🇴',label:'Română'},
+  {code:'tr',short:'TR',flag:'🇹🇷',label:'Türkçe'},
+  {code:'cs',short:'CZ',flag:'🇨🇿',label:'Čeština'},
+  {code:'el',short:'GR',flag:'🇬🇷',label:'Ελληνικά'},
+  {code:'bg',short:'BG',flag:'🇧🇬',label:'Български'},
+  {code:'kk',short:'KZ',flag:'🇰🇿',label:'Казақша'},
+  {code:'ru',short:'RU',flag:'🇷🇺',label:'Русский'},
+  {code:'tg',short:'TJ',flag:'🇹🇯',label:'Тоҷикӣ'},
+  {code:'uk',short:'UA',flag:'🇺🇦',label:'Українська'},
+  {code:'hy',short:'AM',flag:'🇦🇲',label:'Հայերեն'},
+  {code:'ar',short:'AR',flag:'🇸🇦',label:'العربية'},
+  {code:'zh-CN',short:'CN',flag:'🇨🇳',label:'中文'}
 ];
 let currentLang = 'en';
 
 function buildLangDropdown() {
   const dd = document.getElementById('langDropdown');
   dd.innerHTML = LANGS.map(l =>
-    '<a href="#" data-lang="' + l.code + '"' + (l.code === currentLang ? ' class="active"' : '') + '>' + l.label + '</a>'
+    '<a href="#" data-lang="' + l.code + '"' + (l.code === currentLang ? ' class="active"' : '') + '>' + l.flag + ' ' + l.short + '</a>'
   ).join('');
   dd.addEventListener('click', function(e) {
     e.preventDefault();
@@ -2972,7 +2989,7 @@ document.addEventListener('click', function(e) {
 function switchLang(code) {
   currentLang = code;
   const label = LANGS.find(l => l.code === code);
-  document.getElementById('langBtn').innerHTML = (label ? label.label.slice(0,2).toUpperCase() : 'EN') +
+  document.getElementById('langBtn').innerHTML = (label ? label.flag + ' ' + label.short : '🇬🇧 ENG') +
     ' <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>';
   document.querySelectorAll('#langDropdown a').forEach(a => {
     a.classList.toggle('active', a.dataset.lang === code);
@@ -3026,7 +3043,7 @@ function getManualLang() {
 function updateLangUI(code) {
   currentLang = code;
   const label = LANGS.find(l => l.code === code);
-  document.getElementById('langBtn').innerHTML = (label ? label.label.slice(0,2).toUpperCase() : 'EN') +
+  document.getElementById('langBtn').innerHTML = (label ? label.flag + ' ' + label.short : '🇬🇧 ENG') +
     ' <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>';
   document.querySelectorAll('#langDropdown a').forEach(a => {
     a.classList.toggle('active', a.dataset.lang === code);
