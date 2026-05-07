@@ -1,0 +1,27 @@
+.final-cta {
+  text-align: center;
+  padding: 5rem 0;
+  position: relative;
+}
+.final-cta-glow {
+  position: absolute;
+  width: 500px; height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, color-mix(in srgb, var(--primary) 10%, transparent) 0%, transparent 70%);
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+.final-cta .section-title { margin-bottom: 1rem; }
+.final-cta-desc {
+  font-size: 1rem;
+  color: var(--muted-fg);
+  max-width: 600px;
+  margin: 0 auto 2rem;
+  line-height: 1.7;
+}
+.final-cta-subtext {
+  margin-top: 1rem;
+  font-size: 0.8125rem;
+  color: var(--muted-fg);
+}

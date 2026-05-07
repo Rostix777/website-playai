@@ -1,0 +1,22 @@
+.tickers-strip {
+  padding: 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  background: color-mix(in srgb, var(--card) 50%, transparent);
+  overflow: hidden;
+  position: relative;
+}
+.tickers-track {
+  display: flex;
+  animation: scroll-x 40s linear infinite;
+  width: max-content;
+}
+.tickers-track:hover { animation-play-state: paused; }
+.tickers-disclaimer {
+  text-align: center;
+  padding: 0.375rem 1rem;
+  font-size: 0.6875rem;
+  color: var(--muted-fg);
+  font-style: italic;
+  background: color-mix(in srgb, var(--bg) 50%, transparent);
+}

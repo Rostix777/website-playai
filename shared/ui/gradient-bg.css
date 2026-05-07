@@ -1,0 +1,21 @@
+/* ======== GRADIENT BG ======== */
+.gradient-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(ellipse 80% 50% at 50% -20%, color-mix(in srgb, var(--primary) 15%, transparent) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 80% 60%, color-mix(in srgb, var(--ring) 8%, transparent) 0%, transparent 50%),
+    radial-gradient(ellipse 50% 50% at 20% 80%, color-mix(in srgb, var(--positive) 6%, transparent) 0%, transparent 50%),
+    var(--bg);
+}
+.ai-grid {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background-image:
+    linear-gradient(color-mix(in srgb, var(--primary) 3%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in srgb, var(--primary) 3%, transparent) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
+}

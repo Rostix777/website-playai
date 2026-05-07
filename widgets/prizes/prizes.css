@@ -1,0 +1,221 @@
+/* --- Prize Pool Showcase --- */
+.prize-pool-showcase {
+  text-align: center;
+  margin-bottom: 3rem;
+  padding: 2.5rem 1.5rem;
+  border-radius: var(--radius-xl);
+  background: linear-gradient(135deg, color-mix(in srgb, var(--primary) 5%, var(--card)), color-mix(in srgb, var(--gold) 5%, var(--card)));
+  border: 1px solid color-mix(in srgb, var(--primary) 12%, transparent);
+  position: relative;
+  overflow: hidden;
+}
+.prize-pool-showcase::before {
+  content: '';
+  position: absolute;
+  top: -50%; left: -50%;
+  width: 200%; height: 200%;
+  background: radial-gradient(circle at 30% 50%, color-mix(in srgb, var(--primary) 6%, transparent) 0%, transparent 50%),
+              radial-gradient(circle at 70% 50%, color-mix(in srgb, var(--gold) 6%, transparent) 0%, transparent 50%);
+  pointer-events: none;
+}
+.prize-pool-eyebrow {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--primary);
+  margin-bottom: 0.75rem;
+  position: relative;
+}
+.prize-pool-number {
+  font-family: 'Outfit', 'Inter', system-ui, sans-serif;
+  font-size: clamp(5rem, 12vw, 9rem);
+  font-weight: 900;
+  line-height: 1;
+  background: linear-gradient(135deg, var(--primary), var(--gold));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  position: relative;
+  margin-bottom: 0.25rem;
+}
+.prize-pool-label {
+  font-size: clamp(1.25rem, 3vw, 1.75rem);
+  font-weight: 700;
+  color: var(--fg);
+  margin-bottom: 0.5rem;
+  position: relative;
+}
+.prize-pool-sub {
+  font-size: 0.9375rem;
+  color: var(--muted-fg);
+  max-width: 480px;
+  margin: 0 auto 2rem;
+  position: relative;
+}
+
+/* Distribution bar */
+.prize-dist-bar {
+  display: flex;
+  height: 40px;
+  border-radius: var(--radius);
+  overflow: hidden;
+  margin-bottom: 0.75rem;
+  position: relative;
+  gap: 2px;
+}
+.prize-dist-seg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: #000;
+  transition: flex 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+  border-radius: 4px;
+}
+.prize-dist-seg[data-place="1"] { background: linear-gradient(135deg, #f5c542, #e8b430); flex: 0; }
+.prize-dist-seg[data-place="2"] { background: linear-gradient(135deg, #c0c8cc, #a8b0b4); flex: 0; }
+.prize-dist-seg[data-place="3"] { background: linear-gradient(135deg, #d4863a, #c07832); flex: 0; }
+.prize-dist-seg[data-place="4"] { background: linear-gradient(135deg, var(--primary), #04c464); flex: 0; }
+.prize-dist-seg[data-place="5"] { background: linear-gradient(135deg, #22a86a, #1a9058); flex: 0; }
+.prize-dist-bar.animated .prize-dist-seg[data-place="1"] { flex: 40; }
+.prize-dist-bar.animated .prize-dist-seg[data-place="2"] { flex: 25; }
+.prize-dist-bar.animated .prize-dist-seg[data-place="3"] { flex: 15; }
+.prize-dist-bar.animated .prize-dist-seg[data-place="4"] { flex: 10; }
+.prize-dist-bar.animated .prize-dist-seg[data-place="5"] { flex: 5; }
+.prize-dist-legend {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.25rem;
+  font-size: 0.75rem;
+  color: var(--muted-fg);
+  position: relative;
+}
+.prize-dist-legend span {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+}
+.prize-dist-legend .dot {
+  width: 8px; height: 8px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+/* --- Prize Cards --- */
+.prizes-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+@media (min-width: 640px) {
+  .prizes-layout { grid-template-columns: repeat(2, 1fr); }
+}
+@media (min-width: 1024px) {
+  .prizes-layout { grid-template-columns: repeat(5, 1fr); }
+}
+.prize-card {
+  padding: 2rem 1.5rem;
+  text-align: center;
+  transition: transform 0.2s, border-color 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+.prize-card:hover { transform: translateY(-3px); }
+.prize-card.gold { border-color: color-mix(in srgb, var(--gold) 30%, transparent); }
+.prize-card.silver { border-color: color-mix(in srgb, var(--silver) 30%, transparent); }
+.prize-card.bronze { border-color: color-mix(in srgb, var(--bronze) 30%, transparent); }
+.prize-card.gold::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--gold), #e8c96a);
+}
+.prize-card.silver::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--silver), #d4d8dc);
+}
+.prize-card.bronze::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--bronze), #c9925c);
+}
+.prize-rank {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  line-height: 1;
+}
+.prize-creative {
+  width: 160px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 0.75rem;
+}
+.prize-creative img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+@media (max-width: 640px) {
+  .prize-creative { width: 130px; height: 52px; }
+}
+.prize-place {
+  font-weight: 700;
+  font-size: 1rem;
+  margin-bottom: 0.75rem;
+}
+.prize-coupons {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 0.25rem;
+}
+.prize-label {
+  font-size: 0.8125rem;
+  color: var(--muted-fg);
+  margin-bottom: 0.75rem;
+}
+.prize-tagline {
+  font-size: 0.8125rem;
+  color: var(--muted-fg);
+  font-style: italic;
+  margin-bottom: 1rem;
+}
+/* Proportion bar inside card */
+.prize-proportion {
+  height: 4px;
+  background: var(--muted);
+  border-radius: 2px;
+  overflow: hidden;
+  margin-top: 0.5rem;
+}
+.prize-proportion-fill {
+  height: 100%;
+  border-radius: 2px;
+  width: 0%;
+  transition: width 1s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.prize-card.visible .prize-proportion-fill { width: var(--pct); }
+.prize-card.gold .prize-proportion-fill { background: var(--gold); }
+.prize-card.silver .prize-proportion-fill { background: var(--silver); }
+.prize-card.bronze .prize-proportion-fill { background: var(--bronze); }
+.prize-card .prize-proportion-fill { background: var(--primary); }
+.prize-pct {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.6875rem;
+  color: var(--muted-fg);
+  margin-top: 0.375rem;
+}

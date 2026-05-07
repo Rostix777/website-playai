@@ -1,0 +1,20 @@
+.stat-card {
+  padding: 1.25rem;
+  text-align: center;
+}
+.stat-value {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--primary), #7bf1a8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1.2;
+}
+.stat-label {
+  font-size: 0.75rem;
+  color: var(--muted-fg);
+  margin-top: 0.25rem;
+  font-weight: 500;
+}

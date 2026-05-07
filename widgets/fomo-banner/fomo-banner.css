@@ -1,0 +1,14 @@
+.fomo-banner {
+  text-align: center;
+  padding: 3rem 1.25rem;
+  background: linear-gradient(135deg, color-mix(in srgb, var(--primary) 8%, transparent), color-mix(in srgb, var(--accent) 8%, transparent));
+  border-top: 1px solid color-mix(in srgb, var(--primary) 15%, transparent);
+  border-bottom: 1px solid color-mix(in srgb, var(--primary) 15%, transparent);
+}
+.fomo-text {
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  max-width: 640px;
+  margin: 0 auto 1.5rem;
+  line-height: 1.6;
+}
+.fomo-text strong { color: var(--gold); font-weight: 800; text-shadow: 0 0 20px color-mix(in srgb, var(--gold) 40%, transparent); }

@@ -1,0 +1,50 @@
+/* ==========================================================
+   FSD Layer Imports — strict order: shared → entities → features → widgets
+   ========================================================== */
+
+/* --- SHARED: styles --- */
+@import '../shared/styles/reset.css';
+@import '../shared/styles/tokens.css';
+@import '../shared/styles/typography.css';
+@import '../shared/styles/layout.css';
+@import '../shared/styles/animations.css';
+
+/* --- SHARED: ui --- */
+@import '../shared/ui/glass.css';
+@import '../shared/ui/gradient-bg.css';
+@import '../shared/ui/buttons.css';
+@import '../shared/ui/badges.css';
+@import '../shared/ui/section-headers.css';
+@import '../shared/ui/modals.css';
+@import '../shared/ui/creative-placeholder.css';
+
+/* --- ENTITIES --- */
+@import '../entities/player/player.css';
+@import '../entities/ticker/ticker.css';
+@import '../entities/stat/stat.css';
+
+/* --- FEATURES --- */
+@import '../features/scroll-progress/scroll-progress.css';
+@import '../features/countdown/countdown.css';
+@import '../features/language-switcher/language-switcher.css';
+@import '../features/mobile-menu/mobile-menu.css';
+@import '../features/ticker-strip/ticker-strip.css';
+@import '../features/tickers-modal/tickers-modal.css';
+@import '../features/fun-facts/fun-facts.css';
+
+/* --- WIDGETS --- */
+@import '../widgets/header/header.css';
+@import '../widgets/hero/hero.css';
+@import '../widgets/benefits/benefits.css';
+@import '../widgets/how-it-works/how-it-works.css';
+@import '../widgets/prizes/prizes.css';
+@import '../widgets/coupons/coupons.css';
+@import '../widgets/transparency/transparency.css';
+@import '../widgets/leaderboard/leaderboard.css';
+@import '../widgets/fomo-banner/fomo-banner.css';
+@import '../widgets/qr-join/qr-join.css';
+@import '../widgets/faq/faq.css';
+@import '../widgets/ask-ai/ask-ai.css';
+@import '../widgets/final-cta/final-cta.css';
+@import '../widgets/footer/footer.css';
+@import '../widgets/sticky-cta/sticky-cta.css';

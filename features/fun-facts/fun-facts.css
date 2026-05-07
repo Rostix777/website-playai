@@ -1,0 +1,65 @@
+.fun-facts-section { padding: 3rem 0; }
+.fun-fact-card {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 2rem;
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  min-height: 140px;
+  transition: opacity 0.4s, transform 0.4s;
+}
+.fun-fact-icon {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+  line-height: 1;
+}
+.fun-fact-title {
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+.fun-fact-text {
+  font-size: 0.9375rem;
+  color: var(--muted-fg);
+  line-height: 1.65;
+}
+.fun-fact-text em {
+  color: var(--fg);
+  font-style: italic;
+}
+.fact-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+.fact-controls button {
+  color: var(--muted-fg);
+  font-size: 1.25rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--radius);
+  transition: color 0.2s, background 0.2s;
+}
+.fact-controls button:hover {
+  color: var(--fg);
+  background: rgba(255,255,255,0.06);
+}
+.fact-dots {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+.fact-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--muted);
+  transition: all 0.3s;
+  padding: 0;
+}
+.fact-dot.active {
+  background: var(--primary);
+  width: 24px;
+  border-radius: 4px;
+}

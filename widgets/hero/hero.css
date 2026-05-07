@@ -1,0 +1,170 @@
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding-top: var(--header-h);
+  position: relative;
+  overflow: hidden;
+}
+.hero-glow {
+  position: absolute;
+  width: 600px; height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, color-mix(in srgb, var(--primary) 20%, transparent) 0%, transparent 70%);
+  top: -200px; right: -100px;
+  pointer-events: none;
+  filter: blur(60px);
+}
+.hero-content {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+  align-items: center;
+  width: 100%;
+}
+@media (min-width: 1024px) {
+  .hero-content { grid-template-columns: 1.3fr 1fr; gap: 3rem; }
+}
+@media (min-width: 1280px) {
+  .hero-content { grid-template-columns: 1.4fr 1fr; gap: 4rem; }
+}
+.hero-text { }
+.hero-text .badge { margin-bottom: 1.5rem; }
+.hero-title {
+  font-size: clamp(2.25rem, 4.5vw, 3.25rem);
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  margin-bottom: 1.25rem;
+}
+.hero-title .gradient-text {
+  background: linear-gradient(135deg, var(--primary), #7bf1a8, var(--ring));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.hero-subtitle {
+  font-size: clamp(1.125rem, 2vw, 1.375rem);
+  font-weight: 600;
+  color: var(--gold);
+  margin-bottom: 1rem;
+}
+.hero-description {
+  font-size: clamp(0.9375rem, 1.3vw, 1.0625rem);
+  color: var(--muted-fg);
+  line-height: 1.7;
+  margin-bottom: 2rem;
+  max-width: 480px;
+}
+.hero-ctas {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+@media (max-width: 640px) {
+  .hero-ctas { flex-direction: column; }
+}
+.hero-note {
+  font-size: 0.8125rem;
+  color: var(--muted-fg);
+  font-style: italic;
+}
+
+/* Hero Key Visual placeholder */
+.hero-visual {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 360px;
+  border-radius: var(--radius-xl);
+  border: 2px dashed color-mix(in srgb, var(--primary) 30%, transparent);
+  background: color-mix(in srgb, var(--primary) 3%, transparent);
+  overflow: hidden;
+}
+.hero-visual-placeholder {
+  text-align: center;
+  padding: 2rem;
+}
+.hero-visual-placeholder .icon {
+  width: 64px; height: 64px;
+  margin: 0 auto 1rem;
+  opacity: 0.3;
+}
+.hero-visual-placeholder p {
+  color: var(--muted-fg);
+  font-size: 0.875rem;
+}
+.hero-visual-placeholder .label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  color: color-mix(in srgb, var(--primary) 60%, transparent);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-top: 0.5rem;
+}
+
+/* Hero state visibility */
+[data-hero-state] { display: none; }
+[data-hero-state].active { display: grid; }
+@media (max-width: 1023px) {
+  [data-hero-state].active { display: block; }
+}
+#heroClosed.active { display: block; }
+
+/* Hero leaderboard widget (participant state) */
+.hero-leaderboard {
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  min-height: 360px;
+  display: flex;
+  flex-direction: column;
+}
+.hero-leaderboard .leaderboard-table { font-size: 0.875rem; }
+.hero-leaderboard .lb-header {
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.hero-leaderboard .lb-header h3 {
+  font-size: 1rem;
+  font-weight: 700;
+}
+.hero-leaderboard .lb-header .total {
+  font-size: 0.75rem;
+  color: var(--muted-fg);
+}
+
+/* Hero closed state */
+.hero-closed-title {
+  font-size: clamp(2rem, 5vw, 3.25rem);
+  font-weight: 900;
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+.hero-closed-sub {
+  font-size: 1.125rem;
+  color: var(--muted-fg);
+  text-align: center;
+  margin-bottom: 2rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Conditional sections visibility */
+.state-hide { display: none !important; }
+
+/* Hero Stats */
+.hero-stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+  margin-top: 2.5rem;
+}
+@media (min-width: 640px) {
+  .hero-stats { grid-template-columns: repeat(4, 1fr); }
+}

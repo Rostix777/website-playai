@@ -1,0 +1,19 @@
+/* ======== LAYOUT ======== */
+.container {
+  width: 100%;
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 1.25rem;
+}
+@media (min-width: 768px) { .container { padding: 0 2rem; } }
+@media (min-width: 1280px) { .container { padding: 0 2.5rem; } }
+
+section {
+  padding: 4rem 0;
+}
+@media (min-width: 768px) {
+  section { padding: 5rem 0; }
+}
+@media (min-width: 1024px) {
+  section { padding: 6rem 0; }
+}

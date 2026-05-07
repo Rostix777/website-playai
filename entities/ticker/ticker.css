@@ -1,0 +1,26 @@
+.ticker-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.875rem 1.5rem;
+  white-space: nowrap;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+.ticker-logo {
+  width: 24px; height: 24px;
+  border-radius: 50%;
+  background: var(--muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.625rem;
+  font-weight: 700;
+  color: var(--muted-fg);
+  flex-shrink: 0;
+}
+.ticker-symbol { font-weight: 600; color: var(--fg); }
+.ticker-price { font-family: 'JetBrains Mono', monospace; font-size: 0.8125rem; }
+.ticker-change { font-family: 'JetBrains Mono', monospace; font-size: 0.8125rem; font-weight: 500; }
+.ticker-change.up { color: var(--positive); }
+.ticker-change.down { color: var(--negative); }

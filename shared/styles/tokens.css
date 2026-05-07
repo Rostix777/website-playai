@@ -1,0 +1,28 @@
+/* ======== DESIGN TOKENS (preset b2pl3aBRQ: luma / mist / green) ======== */
+:root {
+  --bg: #090b0c;
+  --fg: #f9fbfb;
+  --card: #161b1d;
+  --card-fg: #f9fbfb;
+  --muted: #22292b;
+  --muted-fg: #9ca8ab;
+  --border: rgba(255, 255, 255, 0.10);
+  --input: rgba(255, 255, 255, 0.15);
+  --primary: #05df72;
+  --primary-fg: #090b0c;
+  --secondary: #22292b;
+  --accent: #22292b;
+  --accent-fg: #f9fbfb;
+  --destructive: #ff6467;
+  --ring: #00c950;
+  --positive: #05df72;
+  --negative: #ff6467;
+  --gold: #f5c542;
+  --silver: #b0b8bc;
+  --bronze: #d4863a;
+  --radius: 0.625rem;
+  --radius-lg: 0.875rem;
+  --radius-xl: 1.25rem;
+  --container: 1200px;
+  --header-h: 72px;
+}
