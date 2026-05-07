@@ -219,3 +219,26 @@
   color: var(--muted-fg);
   margin-top: 0.375rem;
 }
+
+/* --- Lottie cursor follower (prizes section only) --- */
+.prizes-section {
+  position: relative;
+}
+.prize-lottie-cursor {
+  position: fixed;
+  width: 220px;
+  height: 220px;
+  pointer-events: none;
+  z-index: 50;
+  opacity: 0;
+  transform: translate(-50%, -50%);
+  transition: opacity 0.25s ease;
+  filter: drop-shadow(0 0 20px color-mix(in srgb, var(--gold) 40%, transparent));
+}
+.prizes-section.lottie-active .prize-lottie-cursor {
+  opacity: 1;
+}
+/* Hide on touch / small screens */
+@media (hover: none), (max-width: 768px) {
+  .prize-lottie-cursor { display: none !important; }
+}

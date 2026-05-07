@@ -16,6 +16,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Outfit:wght@500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
 <link rel="stylesheet" href="app/styles.css">
+<script src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.9.10/dist/dotlottie-wc.js" type="module"></script>
 </head>
 <body>
 
@@ -367,7 +368,15 @@
 </section>
 
 <!-- ==================== PRIZES PODIUM ==================== -->
-<section id="prizes">
+<section id="prizes" class="prizes-section">
+  <!-- Lottie cursor follower (visible only on hover, desktop) -->
+  <dotlottie-wc
+    id="prizeLottie"
+    src="https://lottie.host/0e8f8fbb-a4c2-4156-a03a-519d241c2df4/iJbQKH43Sq.lottie"
+    class="prize-lottie-cursor"
+    autoplay
+    loop
+  ></dotlottie-wc>
   <div class="container">
     <div class="section-header animate-in">
       <p class="section-eyebrow">Season 1 &middot; Rewards</p>

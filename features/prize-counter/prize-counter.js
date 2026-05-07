@@ -31,3 +31,23 @@
   }, { threshold: 0.2 });
   prizeObs.observe(showcase);
 })();
+
+// Lottie cursor follower on prizes section
+(function() {
+  var section = document.querySelector('.prizes-section');
+  var lottie = document.getElementById('prizeLottie');
+  if (!section || !lottie) return;
+  // Only on hover-capable devices
+  if (window.matchMedia('(hover: none)').matches) return;
+
+  section.addEventListener('mouseenter', function() {
+    section.classList.add('lottie-active');
+  });
+  section.addEventListener('mouseleave', function() {
+    section.classList.remove('lottie-active');
+  });
+  section.addEventListener('mousemove', function(e) {
+    lottie.style.left = e.clientX + 'px';
+    lottie.style.top = e.clientY + 'px';
+  });
+})();
