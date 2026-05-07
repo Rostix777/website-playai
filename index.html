@@ -1081,67 +1081,6 @@ body { top: 0 !important; }
   margin-top: 0.375rem;
 }
 
-/* --- Stock Value Potential --- */
-.stock-value-block {
-  margin-top: 3rem;
-  padding: 2rem 2rem;
-  border-radius: var(--radius-xl);
-  border: 1px solid color-mix(in srgb, var(--primary) 12%, transparent);
-  background: color-mix(in srgb, var(--primary) 3%, var(--card));
-  text-align: center;
-}
-.stock-value-title {
-  font-size: 1.125rem;
-  font-weight: 700;
-  margin-bottom: 0.75rem;
-}
-.stock-value-desc {
-  font-size: 0.875rem;
-  color: var(--muted-fg);
-  max-width: 600px;
-  margin: 0 auto 1.5rem;
-  line-height: 1.6;
-}
-.stock-logos-strip {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 1.5rem;
-  flex-wrap: wrap;
-  margin-bottom: 1.5rem;
-}
-.stock-logo-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.375rem;
-}
-.stock-logo-circle {
-  width: 48px; height: 48px;
-  border-radius: 50%;
-  background: var(--muted);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 700;
-  font-size: 0.625rem;
-  color: var(--muted-fg);
-  border: 1px solid var(--border);
-}
-.stock-logo-name {
-  font-size: 0.6875rem;
-  font-family: 'JetBrains Mono', monospace;
-  color: var(--muted-fg);
-}
-.stock-value-footnote {
-  font-size: 0.75rem;
-  color: var(--muted-fg);
-  font-style: italic;
-}
-@media (max-width: 640px) {
-  .stock-logos-strip { gap: 1rem; }
-  .stock-logo-circle { width: 40px; height: 40px; font-size: 0.5625rem; }
-}
 
 /* =========================================================
    7. COUPONS EXPLAINER
@@ -2293,23 +2232,6 @@ body { top: 0 !important; }
         <div class="prize-proportion"><div class="prize-proportion-fill" style="--pct:12.5%"></div></div>
         <div class="prize-pct">5% of all prizes</div>
       </div>
-    </div>
-
-    <!-- Stock Value Potential -->
-    <div class="stock-value-block animate-in">
-      <div class="stock-value-title">What could 40 stocks look like in your portfolio?</div>
-      <div class="stock-value-desc">Gift stocks are randomly selected from the approved list at freedom24.com/gift-stocks-list. The list includes shares of companies like:</div>
-      <div class="stock-logos-strip">
-        <div class="stock-logo-item"><div class="stock-logo-circle">AAPL</div><div class="stock-logo-name">Apple</div></div>
-        <div class="stock-logo-item"><div class="stock-logo-circle">TSLA</div><div class="stock-logo-name">Tesla</div></div>
-        <div class="stock-logo-item"><div class="stock-logo-circle">NVDA</div><div class="stock-logo-name">NVIDIA</div></div>
-        <div class="stock-logo-item"><div class="stock-logo-circle">AMZN</div><div class="stock-logo-name">Amazon</div></div>
-        <div class="stock-logo-item"><div class="stock-logo-circle">MSFT</div><div class="stock-logo-name">Microsoft</div></div>
-        <div class="stock-logo-item"><div class="stock-logo-circle">GOOGL</div><div class="stock-logo-name">Alphabet</div></div>
-        <div class="stock-logo-item"><div class="stock-logo-circle">META</div><div class="stock-logo-name">Meta</div></div>
-        <div class="stock-logo-item"><div class="stock-logo-circle">NFLX</div><div class="stock-logo-name">Netflix</div></div>
-      </div>
-      <div class="stock-value-footnote">Specific stocks are determined by weighted random allocation. Higher-value securities have lower probability. All stocks are real, tradeable, and deposited to your account.</div>
     </div>
 
   </div>
