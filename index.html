@@ -858,6 +858,116 @@ body { top: 0 !important; }
 /* =========================================================
    6. PRIZES PODIUM
    ========================================================= */
+
+/* --- Prize Pool Showcase --- */
+.prize-pool-showcase {
+  text-align: center;
+  margin-bottom: 3rem;
+  padding: 2.5rem 1.5rem;
+  border-radius: var(--radius-xl);
+  background: linear-gradient(135deg, color-mix(in srgb, var(--primary) 5%, var(--card)), color-mix(in srgb, var(--gold) 5%, var(--card)));
+  border: 1px solid color-mix(in srgb, var(--primary) 12%, transparent);
+  position: relative;
+  overflow: hidden;
+}
+.prize-pool-showcase::before {
+  content: '';
+  position: absolute;
+  top: -50%; left: -50%;
+  width: 200%; height: 200%;
+  background: radial-gradient(circle at 30% 50%, color-mix(in srgb, var(--primary) 6%, transparent) 0%, transparent 50%),
+              radial-gradient(circle at 70% 50%, color-mix(in srgb, var(--gold) 6%, transparent) 0%, transparent 50%);
+  pointer-events: none;
+}
+.prize-pool-eyebrow {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--primary);
+  margin-bottom: 0.75rem;
+  position: relative;
+}
+.prize-pool-number {
+  font-family: 'Outfit', 'Inter', system-ui, sans-serif;
+  font-size: clamp(5rem, 12vw, 9rem);
+  font-weight: 900;
+  line-height: 1;
+  background: linear-gradient(135deg, var(--primary), var(--gold));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  position: relative;
+  margin-bottom: 0.25rem;
+}
+.prize-pool-label {
+  font-size: clamp(1.25rem, 3vw, 1.75rem);
+  font-weight: 700;
+  color: var(--fg);
+  margin-bottom: 0.5rem;
+  position: relative;
+}
+.prize-pool-sub {
+  font-size: 0.9375rem;
+  color: var(--muted-fg);
+  max-width: 480px;
+  margin: 0 auto 2rem;
+  position: relative;
+}
+
+/* Distribution bar */
+.prize-dist-bar {
+  display: flex;
+  height: 40px;
+  border-radius: var(--radius);
+  overflow: hidden;
+  margin-bottom: 0.75rem;
+  position: relative;
+  gap: 2px;
+}
+.prize-dist-seg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: #000;
+  transition: flex 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+  border-radius: 4px;
+}
+.prize-dist-seg[data-place="1"] { background: linear-gradient(135deg, #f5c542, #e8b430); flex: 0; }
+.prize-dist-seg[data-place="2"] { background: linear-gradient(135deg, #c0c8cc, #a8b0b4); flex: 0; }
+.prize-dist-seg[data-place="3"] { background: linear-gradient(135deg, #d4863a, #c07832); flex: 0; }
+.prize-dist-seg[data-place="4"] { background: linear-gradient(135deg, var(--primary), #04c464); flex: 0; }
+.prize-dist-seg[data-place="5"] { background: linear-gradient(135deg, #22a86a, #1a9058); flex: 0; }
+.prize-dist-bar.animated .prize-dist-seg[data-place="1"] { flex: 40; }
+.prize-dist-bar.animated .prize-dist-seg[data-place="2"] { flex: 25; }
+.prize-dist-bar.animated .prize-dist-seg[data-place="3"] { flex: 15; }
+.prize-dist-bar.animated .prize-dist-seg[data-place="4"] { flex: 10; }
+.prize-dist-bar.animated .prize-dist-seg[data-place="5"] { flex: 5; }
+.prize-dist-legend {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.25rem;
+  font-size: 0.75rem;
+  color: var(--muted-fg);
+  position: relative;
+}
+.prize-dist-legend span {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+}
+.prize-dist-legend .dot {
+  width: 8px; height: 8px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+/* --- Prize Cards --- */
 .prizes-layout {
   display: grid;
   grid-template-columns: 1fr;
@@ -937,12 +1047,100 @@ body { top: 0 !important; }
 .prize-label {
   font-size: 0.8125rem;
   color: var(--muted-fg);
-  margin-bottom: 1rem;
+  margin-bottom: 0.75rem;
 }
 .prize-tagline {
   font-size: 0.8125rem;
   color: var(--muted-fg);
   font-style: italic;
+  margin-bottom: 1rem;
+}
+/* Proportion bar inside card */
+.prize-proportion {
+  height: 4px;
+  background: var(--muted);
+  border-radius: 2px;
+  overflow: hidden;
+  margin-top: 0.5rem;
+}
+.prize-proportion-fill {
+  height: 100%;
+  border-radius: 2px;
+  width: 0%;
+  transition: width 1s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.prize-card.visible .prize-proportion-fill { width: var(--pct); }
+.prize-card.gold .prize-proportion-fill { background: var(--gold); }
+.prize-card.silver .prize-proportion-fill { background: var(--silver); }
+.prize-card.bronze .prize-proportion-fill { background: var(--bronze); }
+.prize-card .prize-proportion-fill { background: var(--primary); }
+.prize-pct {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.6875rem;
+  color: var(--muted-fg);
+  margin-top: 0.375rem;
+}
+
+/* --- Stock Value Potential --- */
+.stock-value-block {
+  margin-top: 3rem;
+  padding: 2rem 2rem;
+  border-radius: var(--radius-xl);
+  border: 1px solid color-mix(in srgb, var(--primary) 12%, transparent);
+  background: color-mix(in srgb, var(--primary) 3%, var(--card));
+  text-align: center;
+}
+.stock-value-title {
+  font-size: 1.125rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+}
+.stock-value-desc {
+  font-size: 0.875rem;
+  color: var(--muted-fg);
+  max-width: 600px;
+  margin: 0 auto 1.5rem;
+  line-height: 1.6;
+}
+.stock-logos-strip {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+}
+.stock-logo-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.375rem;
+}
+.stock-logo-circle {
+  width: 48px; height: 48px;
+  border-radius: 50%;
+  background: var(--muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.625rem;
+  color: var(--muted-fg);
+  border: 1px solid var(--border);
+}
+.stock-logo-name {
+  font-size: 0.6875rem;
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--muted-fg);
+}
+.stock-value-footnote {
+  font-size: 0.75rem;
+  color: var(--muted-fg);
+  font-style: italic;
+}
+@media (max-width: 640px) {
+  .stock-logos-strip { gap: 1rem; }
+  .stock-logo-circle { width: 40px; height: 40px; font-size: 0.5625rem; }
 }
 
 /* =========================================================
@@ -1749,7 +1947,7 @@ body { top: 0 !important; }
           </div>
         </div>
 
-        <p class="hero-subtitle">$25,000 to prove it. Real stocks if you do.</p>
+        <p class="hero-subtitle">$25,000 to prove it. 95 real stocks for those who do.</p>
         <p class="hero-description">Build your portfolio. Outsmart the market. Win real stocks deposited to your Freedom&nbsp;Finance account. No deposits. No fees. Just your strategy vs. real market data.</p>
 
         <div class="hero-ctas">
@@ -1925,8 +2123,8 @@ body { top: 0 !important; }
     <div class="benefits-grid">
       <div class="benefit-card glass animate-in">
         <div class="benefit-icon">&#127942;</div>
-        <h3 class="benefit-title">Real Prizes, Zero Investment</h3>
-        <p class="benefit-text">95 real gift stocks distributed among the top 5 traders. No deposit, no fees, no hidden costs. Your only investment is your intellect.</p>
+        <h3 class="benefit-title">95 Real Stocks. Zero Investment.</h3>
+        <p class="benefit-text">The winner takes 40 gift stocks. Second place — 25. That's real shares of real companies deposited to your account. No deposit, no fees. Your only investment is your intellect.</p>
       </div>
       <div class="benefit-card glass animate-in">
         <div class="benefit-icon">&#128161;</div>
@@ -1996,7 +2194,7 @@ body { top: 0 !important; }
       <div class="timeline-step glass animate-in">
         <div class="step-number">STEP 04</div>
         <h3 class="step-title">Win Real Gift Stocks</h3>
-        <p class="step-text">The season ends June 11, 2026. Final standings are locked. The TOP 5 traders receive coupons credited to their Freedom Finance account.</p>
+        <p class="step-text">The season ends June 11, 2026. Final standings are locked. 95 real gift stocks split among the TOP 5: the winner alone takes home 40. Coupons are credited to your Freedom Finance account.</p>
         <div class="step-creative"><span>creative: winner celebration</span></div>
         <a href="#prizes" class="step-cta">
           See Prizes <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
@@ -2015,6 +2213,30 @@ body { top: 0 !important; }
       <p class="section-subtitle">No participation prizes. No consolation rounds. Only the top 5 walk away with shares. Where will you finish?</p>
     </div>
 
+    <!-- Prize Pool Showcase -->
+    <div class="prize-pool-showcase animate-in" id="prizePoolShowcase">
+      <div class="prize-pool-eyebrow">Total Prize Pool</div>
+      <div class="prize-pool-number font-display" id="prizePoolCounter">0</div>
+      <div class="prize-pool-label">Real Gift Stocks</div>
+      <div class="prize-pool-sub">Each coupon = one randomly selected share of a publicly traded company. Deposited directly to your Freedom Finance account. Real. Tradeable. Yours to keep.</div>
+
+      <div class="prize-dist-bar" id="prizeDistBar">
+        <div class="prize-dist-seg" data-place="1">40</div>
+        <div class="prize-dist-seg" data-place="2">25</div>
+        <div class="prize-dist-seg" data-place="3">15</div>
+        <div class="prize-dist-seg" data-place="4">10</div>
+        <div class="prize-dist-seg" data-place="5">5</div>
+      </div>
+      <div class="prize-dist-legend">
+        <span><span class="dot" style="background:#f5c542;"></span> 1st &mdash; 40 stocks</span>
+        <span><span class="dot" style="background:#b0b8bc;"></span> 2nd &mdash; 25 stocks</span>
+        <span><span class="dot" style="background:#d4863a;"></span> 3rd &mdash; 15 stocks</span>
+        <span><span class="dot" style="background:var(--primary);"></span> 4th &mdash; 10 stocks</span>
+        <span><span class="dot" style="background:#22a86a;"></span> 5th &mdash; 5 stocks</span>
+      </div>
+    </div>
+
+    <!-- Prize Cards -->
     <div class="prizes-layout">
       <div class="prize-card glass gold animate-in">
         <div class="prize-creative">
@@ -2024,6 +2246,8 @@ body { top: 0 !important; }
         <div class="prize-coupons">40</div>
         <div class="prize-label">coupons = 40 gift stocks</div>
         <div class="prize-tagline">The market bows to one trader.</div>
+        <div class="prize-proportion"><div class="prize-proportion-fill" style="--pct:100%"></div></div>
+        <div class="prize-pct">42% of all prizes</div>
       </div>
       <div class="prize-card glass silver animate-in">
         <div class="prize-creative">
@@ -2033,6 +2257,8 @@ body { top: 0 !important; }
         <div class="prize-coupons">25</div>
         <div class="prize-label">coupons = 25 gift stocks</div>
         <div class="prize-tagline">A photo finish never felt so rewarding.</div>
+        <div class="prize-proportion"><div class="prize-proportion-fill" style="--pct:62.5%"></div></div>
+        <div class="prize-pct">26% of all prizes</div>
       </div>
       <div class="prize-card glass bronze animate-in">
         <div class="prize-creative">
@@ -2042,6 +2268,8 @@ body { top: 0 !important; }
         <div class="prize-coupons">15</div>
         <div class="prize-label">coupons = 15 gift stocks</div>
         <div class="prize-tagline">Bronze on paper. Gold in your portfolio.</div>
+        <div class="prize-proportion"><div class="prize-proportion-fill" style="--pct:37.5%"></div></div>
+        <div class="prize-pct">16% of all prizes</div>
       </div>
       <div class="prize-card glass animate-in">
         <div class="prize-creative">
@@ -2051,6 +2279,8 @@ body { top: 0 !important; }
         <div class="prize-coupons">10</div>
         <div class="prize-label">coupons = 10 gift stocks</div>
         <div class="prize-tagline">Top 5 out of thousands. Not bad at all.</div>
+        <div class="prize-proportion"><div class="prize-proportion-fill" style="--pct:25%"></div></div>
+        <div class="prize-pct">11% of all prizes</div>
       </div>
       <div class="prize-card glass animate-in">
         <div class="prize-creative">
@@ -2060,8 +2290,28 @@ body { top: 0 !important; }
         <div class="prize-coupons">5</div>
         <div class="prize-label">coupons = 5 gift stocks</div>
         <div class="prize-tagline">You made the cut. The market noticed.</div>
+        <div class="prize-proportion"><div class="prize-proportion-fill" style="--pct:12.5%"></div></div>
+        <div class="prize-pct">5% of all prizes</div>
       </div>
     </div>
+
+    <!-- Stock Value Potential -->
+    <div class="stock-value-block animate-in">
+      <div class="stock-value-title">What could 40 stocks look like in your portfolio?</div>
+      <div class="stock-value-desc">Gift stocks are randomly selected from the approved list at freedom24.com/gift-stocks-list. The list includes shares of companies like:</div>
+      <div class="stock-logos-strip">
+        <div class="stock-logo-item"><div class="stock-logo-circle">AAPL</div><div class="stock-logo-name">Apple</div></div>
+        <div class="stock-logo-item"><div class="stock-logo-circle">TSLA</div><div class="stock-logo-name">Tesla</div></div>
+        <div class="stock-logo-item"><div class="stock-logo-circle">NVDA</div><div class="stock-logo-name">NVIDIA</div></div>
+        <div class="stock-logo-item"><div class="stock-logo-circle">AMZN</div><div class="stock-logo-name">Amazon</div></div>
+        <div class="stock-logo-item"><div class="stock-logo-circle">MSFT</div><div class="stock-logo-name">Microsoft</div></div>
+        <div class="stock-logo-item"><div class="stock-logo-circle">GOOGL</div><div class="stock-logo-name">Alphabet</div></div>
+        <div class="stock-logo-item"><div class="stock-logo-circle">META</div><div class="stock-logo-name">Meta</div></div>
+        <div class="stock-logo-item"><div class="stock-logo-circle">NFLX</div><div class="stock-logo-name">Netflix</div></div>
+      </div>
+      <div class="stock-value-footnote">Specific stocks are determined by weighted random allocation. Higher-value securities have lower probability. All stocks are real, tradeable, and deposited to your account.</div>
+    </div>
+
   </div>
 </section>
 
@@ -2255,7 +2505,7 @@ body { top: 0 !important; }
 <!-- ==================== FOMO BANNER ==================== -->
 <div class="fomo-banner">
   <div class="container">
-    <p class="fomo-text">&#128293; Only <strong>5 spots</strong> get rewarded. Thousands are competing. Every day you sit out, someone else climbs the leaderboard.</p>
+    <p class="fomo-text">&#128293; <strong>95 real stocks</strong> for just <strong>5 traders</strong>. Thousands are competing. The 1st place alone takes home 40 stocks. Every day you sit out, someone else climbs closer to your prize.</p>
     <a href="https://tap.freedom24.com/to/chat/ai?text=play&utm_source=ai_game_site&utm_medium=web&utm_campaign=portfolio_battle_s1&utm_content=fomo" target="_blank" rel="noopener" class="btn btn-primary">Claim Your Spot &rarr;</a>
   </div>
 </div>
@@ -2350,10 +2600,10 @@ body { top: 0 !important; }
   <div class="final-cta-glow"></div>
   <div class="container" style="position:relative;">
     <div class="animate-in">
-      <h2 class="section-title">Still Thinking About It?</h2>
-      <p class="final-cta-desc">While you're reading this, someone in Warsaw just went long on Tesla and someone in Athens just shorted a meme stock. The market doesn't wait. Neither should you.</p>
+      <h2 class="section-title">95 Stocks. 5 Winners. You?</h2>
+      <p class="final-cta-desc">While you're reading this, someone in Warsaw just went long on Tesla and someone in Athens just shorted a meme stock. 40 real stocks go to the #1 player. The market doesn't wait. Neither should you.</p>
       <a href="https://tap.freedom24.com/to/chat/ai?text=play&utm_source=ai_game_site&utm_medium=web&utm_campaign=portfolio_battle_s1&utm_content=final_cta" target="_blank" rel="noopener" class="btn btn-primary">Join the AI Investment Challenge &rarr;</a>
-      <p class="final-cta-subtext">Free &middot; No deposit &middot; Takes 60 seconds</p>
+      <p class="final-cta-subtext">Free &middot; No deposit &middot; 95 real stocks at stake &middot; Takes 60 seconds</p>
     </div>
   </div>
 </section>
@@ -2683,6 +2933,40 @@ const observer = new IntersectionObserver((entries) => {
 }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
 
 document.querySelectorAll('.animate-in').forEach(el => observer.observe(el));
+
+// Prize pool animated counter + distribution bar
+(function() {
+  const showcase = document.getElementById('prizePoolShowcase');
+  const counter = document.getElementById('prizePoolCounter');
+  const distBar = document.getElementById('prizeDistBar');
+  if (!showcase || !counter) return;
+
+  let counted = false;
+  const prizeObs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && !counted) {
+        counted = true;
+        // Animate counter from 0 to 95
+        const target = 95;
+        const duration = 1600;
+        const start = performance.now();
+        function tick(now) {
+          const elapsed = now - start;
+          const progress = Math.min(elapsed / duration, 1);
+          // Ease-out cubic
+          const ease = 1 - Math.pow(1 - progress, 3);
+          counter.textContent = Math.round(ease * target);
+          if (progress < 1) requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
+        // Animate distribution bar
+        setTimeout(() => { if (distBar) distBar.classList.add('animated'); }, 400);
+        prizeObs.unobserve(showcase);
+      }
+    });
+  }, { threshold: 0.2 });
+  prizeObs.observe(showcase);
+})();
 
 // Fun-fact carousel
 const funFacts = [
