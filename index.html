@@ -1083,6 +1083,15 @@ body { top: 0 !important; }
 }
 .lb-return.positive { color: var(--positive); }
 .lb-return.negative { color: var(--negative); }
+.lb-change {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 600;
+  font-size: 0.8125rem;
+  white-space: nowrap;
+}
+.lb-change.up { color: var(--positive); }
+.lb-change.down { color: var(--negative); }
+.lb-change.same { color: var(--muted-fg); }
 .lb-value {
   font-family: 'JetBrains Mono', monospace;
   font-size: 0.875rem;
@@ -1116,7 +1125,8 @@ body { top: 0 !important; }
   .leaderboard-table td { padding: 0; border: none; }
   .leaderboard-table td:nth-child(1) { grid-row: 1 / 3; }
   .leaderboard-table td:nth-child(3) { text-align: right; }
-  .leaderboard-table td:nth-child(4) { grid-column: 2 / 4; font-size: 0.8125rem; }
+  .leaderboard-table td:nth-child(4) { text-align: right; }
+  .leaderboard-table td:nth-child(5) { grid-column: 2 / 4; font-size: 0.8125rem; }
 }
 
 /* =========================================================
@@ -2122,6 +2132,7 @@ body { top: 0 !important; }
             <th>Rank</th>
             <th>Player</th>
             <th>Return %</th>
+            <th>Change</th>
             <th>Portfolio Value</th>
           </tr>
         </thead>
@@ -2130,39 +2141,45 @@ body { top: 0 !important; }
             <td><span class="lb-rank">&#129351; 1</span></td>
             <td><div class="lb-player"><span class="lb-avatar">AK</span><span class="lb-name">Alexandra K.</span><span class="lb-flag">&#127465;&#127466;</span></div></td>
             <td><span class="lb-return positive">+18.42%</span></td>
+            <td><span class="lb-change same">&mdash;</span></td>
             <td><span class="lb-value">$29,605</span></td>
           </tr>
           <tr>
             <td><span class="lb-rank">&#129352; 2</span></td>
             <td><div class="lb-player"><span class="lb-avatar">MR</span><span class="lb-name">Marcos R.</span><span class="lb-flag">&#127466;&#127480;</span></div></td>
             <td><span class="lb-return positive">+15.87%</span></td>
+            <td><span class="lb-change up">&#9650; 3</span></td>
             <td><span class="lb-value">$28,967</span></td>
           </tr>
           <tr>
             <td><span class="lb-rank">&#129353; 3</span></td>
             <td><div class="lb-player"><span class="lb-avatar">JW</span><span class="lb-name">Jakub W.</span><span class="lb-flag">&#127477;&#127473;</span></div></td>
             <td><span class="lb-return positive">+14.23%</span></td>
+            <td><span class="lb-change down">&#9660; 1</span></td>
             <td><span class="lb-value">$28,557</span></td>
           </tr>
           <tr>
             <td><span class="lb-rank">4</span></td>
             <td><div class="lb-player"><span class="lb-avatar">NP</span><span class="lb-name">Nikos P.</span><span class="lb-flag">&#127468;&#127479;</span></div></td>
             <td><span class="lb-return positive">+12.56%</span></td>
+            <td><span class="lb-change up">&#9650; 12</span></td>
             <td><span class="lb-value">$28,140</span></td>
           </tr>
           <tr>
             <td><span class="lb-rank">5</span></td>
             <td><div class="lb-player"><span class="lb-avatar">LM</span><span class="lb-name">Lena M.</span><span class="lb-flag">&#127465;&#127466;</span></div></td>
             <td><span class="lb-return positive">+11.89%</span></td>
+            <td><span class="lb-change down">&#9660; 2</span></td>
             <td><span class="lb-value">$27,972</span></td>
           </tr>
           <tr class="lb-separator-row">
-            <td colspan="4" style="text-align:center; padding:0.5rem 1rem; font-size:1.25rem; color:var(--muted-fg); letter-spacing:0.25em;">&hellip;</td>
+            <td colspan="5" style="text-align:center; padding:0.5rem 1rem; font-size:1.25rem; color:var(--muted-fg); letter-spacing:0.25em;">&hellip;</td>
           </tr>
           <tr style="opacity:0.7;">
             <td><span class="lb-rank">#4,823</span></td>
             <td><div class="lb-player"><span class="lb-avatar">??</span><span class="lb-name">Anonymous</span><span class="lb-flag">&mdash;</span></div></td>
             <td><span class="lb-return negative">-45.20%</span></td>
+            <td><span class="lb-change down">&#9660; 87</span></td>
             <td><span class="lb-value">$13,700</span></td>
           </tr>
         </tbody>
