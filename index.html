@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
 <title>AI Investment Challenge | Win Real Stocks | Freedom Finance</title>
 <meta name="description" content="$25,000 virtual capital. Real prizes. Zero risk. Compete across Europe and win real gift stocks.">
 <meta property="og:title" content="AI Investment Challenge — Portfolio Battle Season 1">
@@ -18,7 +18,7 @@
 <style>
 /* ======== RESET & BASE ======== */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; overflow-x: hidden; }
 body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
   background: #090b0c;
@@ -1115,18 +1115,35 @@ body { top: 0 !important; }
     display: block; width: 100%;
   }
   .leaderboard-table tr {
-    padding: 1rem;
+    padding: 0.75rem 1rem;
     border-bottom: 1px solid var(--border);
     display: grid;
-    grid-template-columns: auto 1fr auto;
-    gap: 0.5rem 0.75rem;
+    grid-template-columns: 2rem 1fr auto auto;
+    gap: 0.25rem 0.5rem;
     align-items: center;
   }
   .leaderboard-table td { padding: 0; border: none; }
-  .leaderboard-table td:nth-child(1) { grid-row: 1 / 3; }
-  .leaderboard-table td:nth-child(3) { text-align: right; }
-  .leaderboard-table td:nth-child(4) { text-align: right; }
-  .leaderboard-table td:nth-child(5) { grid-column: 2 / 4; font-size: 0.8125rem; }
+  /* Rank */
+  .leaderboard-table td:nth-child(1) { grid-column: 1; grid-row: 1 / 3; align-self: center; }
+  .leaderboard-table td:nth-child(1) .lb-rank { font-size: 0.75rem; }
+  /* Player */
+  .leaderboard-table td:nth-child(2) { grid-column: 2; grid-row: 1; }
+  .leaderboard-table td:nth-child(2) .lb-player { gap: 0.5rem; }
+  .leaderboard-table td:nth-child(2) .lb-avatar { width: 28px; height: 28px; font-size: 0.625rem; }
+  .leaderboard-table td:nth-child(2) .lb-name { font-size: 0.8125rem; }
+  .leaderboard-table td:nth-child(2) .lb-flag { font-size: 0.875rem; }
+  /* Return % */
+  .leaderboard-table td:nth-child(3) { grid-column: 3; grid-row: 1; text-align: right; }
+  .leaderboard-table td:nth-child(3) .lb-return { font-size: 0.8125rem; }
+  /* Change */
+  .leaderboard-table td:nth-child(4) { grid-column: 4; grid-row: 1; text-align: right; }
+  .leaderboard-table td:nth-child(4) .lb-change { font-size: 0.6875rem; }
+  /* Portfolio Value */
+  .leaderboard-table td:nth-child(5) { grid-column: 2 / 5; grid-row: 2; font-size: 0.75rem; color: var(--muted-fg); }
+  .leaderboard-table td:nth-child(5) .lb-value { font-size: 0.75rem; }
+  /* Separator row */
+  .leaderboard-table tr.lb-separator-row { display: block; padding: 0; }
+  .leaderboard-table .lb-separator-row td { display: block; }
 }
 
 /* =========================================================
