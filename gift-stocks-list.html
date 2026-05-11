@@ -7,18 +7,16 @@
   <meta name="description" content="Full list of eligible gift stocks. One coupon = one randomly selected stock from this list.">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#127918;</text></svg>">
 
-  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
 
   <style>
-    /* --- Reset --- */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { -webkit-text-size-adjust: 100%; }
+    html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
     body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background: #ffffff;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #f8f9fb;
       color: #1a1a2e;
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
@@ -26,173 +24,340 @@
     }
     a { color: #2563eb; text-decoration: none; }
     a:hover { text-decoration: underline; }
-    img { max-width: 100%; height: auto; display: inline-block; vertical-align: middle; }
 
-    /* --- Header --- */
-    .f24-header {
-      background: #ffffff;
+    /* ---- Header ---- */
+    .hdr {
+      background: #fff;
       border-bottom: 1px solid #e5e7eb;
-      padding: 0 1.5rem;
-      height: 64px;
+      padding: 0 2rem;
+      height: 60px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      position: sticky;
-      top: 0;
-      z-index: 100;
+      position: sticky; top: 0; z-index: 100;
     }
-    .f24-logo {
-      display: flex;
-      align-items: center;
-      gap: 0.625rem;
-    }
-    .f24-logo img { height: 28px; }
-    .f24-logo-text {
-      font-size: 1.125rem;
-      font-weight: 700;
-      color: #1a1a2e;
-    }
-    .f24-logo-text span { color: #2563eb; }
-    .f24-back {
-      font-size: 0.875rem;
-      font-weight: 500;
-      color: #6b7280;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.375rem;
-      transition: color 0.2s;
-    }
-    .f24-back:hover { color: #2563eb; text-decoration: none; }
+    .hdr-logo { display: flex; align-items: center; gap: 0.5rem; font-weight: 700; font-size: 1.0625rem; color: #1a1a2e; }
+    .hdr-logo span { color: #2563eb; }
+    .hdr-back { font-size: 0.8125rem; font-weight: 500; color: #6b7280; display: inline-flex; align-items: center; gap: 0.375rem; transition: color 0.2s; }
+    .hdr-back:hover { color: #2563eb; text-decoration: none; }
 
-    /* --- Main content --- */
-    .f24-content {
-      max-width: 860px;
-      margin: 0 auto;
-      padding: 2.5rem 1.5rem 4rem;
+    /* ---- Hero banner ---- */
+    .hero {
+      background: linear-gradient(135deg, #1e3a5f 0%, #2563eb 50%, #3b82f6 100%);
+      color: #fff;
+      text-align: center;
+      padding: 3.5rem 1.5rem 3rem;
+      position: relative;
+      overflow: hidden;
     }
-
-    /* --- Page title --- */
-    .f24-title {
-      font-size: 1.75rem;
-      font-weight: 700;
-      color: #1a1a2e;
-      margin-bottom: 1.5rem;
-      line-height: 1.3;
-    }
-
-    /* --- Info box --- */
-    .f24-info {
-      background: #f0f7ff;
-      border: 1px solid #dbeafe;
-      border-radius: 8px;
-      padding: 1rem 1.25rem;
-      margin-bottom: 2rem;
-      font-size: 0.9375rem;
-      color: #374151;
-      line-height: 1.65;
-    }
-    .f24-info strong { color: #1a1a2e; }
-
-    /* --- Stock list --- */
-    .f24-stock-list {
-      list-style: none;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0;
-      margin-bottom: 2rem;
-      line-height: 2.2;
-    }
-    .f24-stock-item {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.375rem;
-      white-space: nowrap;
-      font-size: 0.9375rem;
-      color: #374151;
-    }
-    .f24-stock-item::after {
-      content: ',';
-      margin-right: 0.5rem;
-      color: #9ca3af;
-    }
-    .f24-stock-item:last-child::after {
+    .hero::before {
       content: '';
-      margin-right: 0;
+      position: absolute;
+      top: -50%; right: -30%;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%);
+      pointer-events: none;
     }
-    .f24-stock-icon {
-      width: 24px;
-      height: 24px;
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -40%; left: -20%;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(255,255,255,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-eyebrow {
+      display: inline-block;
+      font-size: 0.6875rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 100px;
+      padding: 0.3rem 1rem;
+      margin-bottom: 1rem;
+      position: relative;
+    }
+    .hero h1 {
+      font-size: clamp(1.75rem, 4vw, 2.5rem);
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 0.75rem;
+      position: relative;
+    }
+    .hero-sub {
+      font-size: 1rem;
+      opacity: 0.85;
+      max-width: 520px;
+      margin: 0 auto;
+      line-height: 1.65;
+      position: relative;
+    }
+
+    /* ---- Stats strip ---- */
+    .stats {
+      display: flex;
+      justify-content: center;
+      gap: 3rem;
+      padding: 1.5rem 1rem;
+      background: #fff;
+      border-bottom: 1px solid #e5e7eb;
+      flex-wrap: wrap;
+    }
+    .stat { text-align: center; }
+    .stat-val {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1.375rem;
+      font-weight: 700;
+      color: #2563eb;
+      line-height: 1.2;
+    }
+    .stat-lbl {
+      font-size: 0.6875rem;
+      font-weight: 600;
+      color: #9ca3af;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    /* ---- Container ---- */
+    .wrap {
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem 3rem;
+    }
+
+    /* ---- Search bar ---- */
+    .search-bar {
+      position: relative;
+      max-width: 420px;
+      margin: 0 auto 2rem;
+    }
+    .search-bar svg {
+      position: absolute;
+      left: 1rem; top: 50%;
+      transform: translateY(-50%);
+      color: #9ca3af;
+      pointer-events: none;
+    }
+    .search-bar input {
+      width: 100%;
+      padding: 0.8rem 1rem 0.8rem 2.75rem;
+      font: inherit;
+      font-size: 0.9375rem;
+      background: #fff;
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      color: #1a1a2e;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .search-bar input::placeholder { color: #9ca3af; }
+    .search-bar input:focus {
+      border-color: #2563eb;
+      box-shadow: 0 0 0 3px rgba(37,99,235,0.1);
+    }
+
+    .results-info {
+      text-align: center;
+      font-size: 0.8125rem;
+      color: #9ca3af;
+      margin-bottom: 1.5rem;
+    }
+
+    /* ---- Grid of cards ---- */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+    @media (min-width: 640px) {
+      .grid { grid-template-columns: repeat(auto-fill, minmax(195px, 1fr)); gap: 0.875rem; }
+    }
+    @media (min-width: 1024px) {
+      .grid { grid-template-columns: repeat(5, 1fr); }
+    }
+
+    .card {
+      background: #fff;
+      border: 1px solid #e5e7eb;
+      border-radius: 14px;
+      padding: 1.25rem 1rem 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+      position: relative;
+      cursor: default;
+    }
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+      border-color: #bfdbfe;
+    }
+    .card-logo {
+      width: 48px; height: 48px;
       border-radius: 50%;
       object-fit: cover;
       background: #f3f4f6;
+      border: 2px solid #f0f0f0;
+      margin-bottom: 0.75rem;
       flex-shrink: 0;
-      border: 1px solid #e5e7eb;
     }
-    .f24-stock-ticker {
-      font-weight: 600;
+    .card-logo.fallback {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1rem;
+      color: #6b7280;
+      background: linear-gradient(135deg, #f3f4f6, #e5e7eb);
+    }
+    .card-ticker {
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 700;
+      font-size: 0.875rem;
       color: #1a1a2e;
+      margin-bottom: 0.125rem;
     }
-    .f24-stock-price {
-      color: #6b7280;
-    }
-
-    /* --- Separator --- */
-    .f24-separator {
-      border: none;
-      border-top: 1px solid #e5e7eb;
-      margin: 2rem 0;
-    }
-
-    /* --- Disclaimer / Legal --- */
-    .f24-disclaimer {
-      font-size: 0.8125rem;
-      color: #6b7280;
-      line-height: 1.75;
-      margin-bottom: 1.5rem;
-    }
-    .f24-disclaimer p { margin-bottom: 0.75rem; }
-    .f24-disclaimer a { color: #2563eb; }
-
-    .f24-legal {
-      font-size: 0.8125rem;
+    .card-ticker .exch {
+      font-weight: 500;
+      font-size: 0.6875rem;
       color: #9ca3af;
-      line-height: 1.75;
     }
-    .f24-legal p { margin-bottom: 0.5rem; }
-    .f24-legal a { color: #2563eb; }
+    .card-name {
+      font-size: 0.75rem;
+      color: #6b7280;
+      line-height: 1.35;
+      margin-bottom: 0.625rem;
+      min-height: 2em;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .card-price {
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 700;
+      font-size: 1rem;
+      color: #2563eb;
+      margin-top: auto;
+    }
+    .card-price.premium { color: #d97706; }
 
-    /* --- Back to game link at bottom --- */
-    .f24-bottom-link {
-      text-align: center;
-      margin-top: 2.5rem;
-      padding-top: 1.5rem;
-      border-top: 1px solid #e5e7eb;
+    /* Price probability hint */
+    .card-prob {
+      margin-top: 0.5rem;
+      width: 100%;
+      height: 3px;
+      background: #f3f4f6;
+      border-radius: 2px;
+      overflow: hidden;
     }
-    .f24-bottom-link a {
+    .card-prob-fill {
+      height: 100%;
+      border-radius: 2px;
+      background: #2563eb;
+    }
+    .card-prob-label {
+      font-size: 0.5625rem;
+      color: #9ca3af;
+      margin-top: 0.25rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-weight: 600;
+    }
+
+    /* ---- Tier badges on cards ---- */
+    .card[data-tier="gold"] { border-color: #fde68a; }
+    .card[data-tier="gold"] .card-logo { border-color: #fbbf24; }
+    .card[data-tier="gold"]::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #fbbf24, #f59e0b);
+      border-radius: 14px 14px 0 0;
+    }
+
+    /* ---- Disclaimer ---- */
+    .note-box {
+      max-width: 700px;
+      margin: 2.5rem auto 0;
+      background: #fffbeb;
+      border: 1px solid #fde68a;
+      border-radius: 12px;
+      padding: 1.25rem 1.5rem;
+      font-size: 0.8125rem;
+      color: #92400e;
+      line-height: 1.7;
+      text-align: center;
+    }
+    .note-box strong { color: #78350f; }
+
+    .footer-text {
+      text-align: center;
+      margin-top: 2rem;
+      font-size: 0.75rem;
+      color: #9ca3af;
+      line-height: 1.7;
+    }
+    .footer-text a { color: #2563eb; }
+
+    .bottom-back {
+      text-align: center;
+      margin-top: 2rem;
+    }
+    .bottom-back a {
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
-      font-size: 0.9375rem;
+      font-size: 0.875rem;
       font-weight: 600;
-      color: #2563eb;
-      padding: 0.625rem 1.25rem;
-      border-radius: 8px;
-      border: 1px solid #dbeafe;
-      background: #f0f7ff;
-      transition: all 0.2s;
+      color: #fff;
+      background: #2563eb;
+      padding: 0.7rem 1.5rem;
+      border-radius: 10px;
+      transition: background 0.2s;
     }
-    .f24-bottom-link a:hover {
-      background: #dbeafe;
-      text-decoration: none;
-    }
+    .bottom-back a:hover { background: #1d4ed8; text-decoration: none; }
 
-    /* --- Responsive --- */
-    @media (max-width: 640px) {
-      .f24-content { padding: 1.5rem 1rem 3rem; }
-      .f24-title { font-size: 1.375rem; }
-      .f24-stock-list { line-height: 2.4; }
-      .f24-stock-item { font-size: 0.875rem; }
-      .f24-stock-icon { width: 20px; height: 20px; }
+    /* ---- Empty ---- */
+    .empty { text-align: center; padding: 3rem 1rem; color: #9ca3af; }
+    .empty-icon { font-size: 2.5rem; margin-bottom: 0.5rem; }
+
+    /* ---- Scroll-top ---- */
+    .scroll-top {
+      position: fixed;
+      bottom: 1.5rem; right: 1.5rem;
+      width: 42px; height: 42px;
+      border-radius: 50%;
+      background: #2563eb;
+      color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      z-index: 100;
+      opacity: 0; transform: translateY(10px);
+      transition: opacity 0.3s, transform 0.3s;
+      pointer-events: none;
+      box-shadow: 0 4px 16px rgba(37,99,235,0.35);
+      cursor: pointer;
+      border: none;
+    }
+    .scroll-top.show { opacity: 1; transform: translateY(0); pointer-events: auto; }
+
+    /* ---- Mobile ---- */
+    @media (max-width: 480px) {
+      .hdr { padding: 0 1rem; }
+      .wrap { padding: 1.25rem 1rem 2rem; }
+      .hero { padding: 2.5rem 1rem 2rem; }
+      .grid { grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }
+      .card { padding: 1rem 0.75rem 0.875rem; }
+      .card-logo { width: 40px; height: 40px; margin-bottom: 0.5rem; }
+      .card-ticker { font-size: 0.8125rem; }
+      .card-name { font-size: 0.6875rem; }
+      .card-price { font-size: 0.875rem; }
+      .stats { gap: 1.5rem; }
     }
   </style>
 </head>
@@ -200,127 +365,200 @@
 <body>
 
   <!-- Header -->
-  <header class="f24-header">
-    <div class="f24-logo">
-      <svg width="28" height="28" viewBox="0 0 32 32" fill="none">
-        <rect width="32" height="32" rx="8" fill="#2563eb"/>
-        <text x="8" y="23" fill="white" font-family="Inter,sans-serif" font-weight="800" font-size="20">F</text>
-      </svg>
-      <span class="f24-logo-text">Freedom<span>24</span></span>
+  <header class="hdr">
+    <div class="hdr-logo">
+      <svg width="26" height="26" viewBox="0 0 32 32"><rect width="32" height="32" rx="8" fill="#2563eb"/><text x="8" y="23" fill="#fff" font-family="Inter,sans-serif" font-weight="800" font-size="20">F</text></svg>
+      Freedom<span>24</span>
     </div>
-    <a href="index.html" class="f24-back">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg>
+    <a href="index.html" class="hdr-back">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg>
       Portfolio Battle
     </a>
   </header>
 
-  <!-- Content -->
-  <div class="f24-content">
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-eyebrow">&#127873; Season 1 Prize Pool</div>
+    <h1>Which Stock Will You Get?</h1>
+    <p class="hero-sub">Each coupon is exchanged for one randomly selected stock from the list below. Higher-value stocks have a lower probability of selection.</p>
+  </section>
 
-    <h1 class="f24-title">Which stock will I get?</h1>
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <div class="stat-val" id="sTotal">53</div>
+      <div class="stat-lbl">Stocks</div>
+    </div>
+    <div class="stat">
+      <div class="stat-val" id="sMin">$0.18</div>
+      <div class="stat-lbl">Min Price</div>
+    </div>
+    <div class="stat">
+      <div class="stat-val" id="sMax">$1,082</div>
+      <div class="stat-lbl">Max Price</div>
+    </div>
+    <div class="stat">
+      <div class="stat-val">&#127482;&#127480;</div>
+      <div class="stat-lbl">Exchange</div>
+    </div>
+  </div>
 
-    <div class="f24-info">
-      Since the stock is randomly selected, the gift can be <strong>any of the following securities</strong>. Please note that higher-value securities are allocated with a <strong>lower probability</strong> than lower-value securities.
+  <!-- Main -->
+  <div class="wrap">
+    <!-- Search -->
+    <div class="search-bar">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="text" id="q" placeholder="Search ticker or company...">
+    </div>
+    <div class="results-info" id="rInfo"></div>
+
+    <!-- Cards grid -->
+    <div class="grid" id="grid"></div>
+    <div class="empty" id="empty" style="display:none">
+      <div class="empty-icon">&#128269;</div>
+      <div>No stocks match your search</div>
     </div>
 
-    <!-- Stock list (flowing inline, like the original) -->
-    <div class="f24-stock-list" id="stockList"></div>
-
-    <hr class="f24-separator">
-
-    <div class="f24-disclaimer">
-      <p>The gift stock is selected at random from the list above via a weighted random algorithm. Participants cannot choose the issuer. The probability of receiving a particular stock is inversely proportional to its market value.</p>
-      <p>Prices shown are indicative and may differ at the time of allocation. All securities are traded on US exchanges.</p>
+    <!-- Note -->
+    <div class="note-box">
+      <strong>&#9888;&#65039; Probability notice:</strong> The gift stock is selected at random via a <strong>weighted algorithm</strong>. The probability of receiving a particular stock is inversely proportional to its market value. Participants cannot choose the issuer.
     </div>
 
-    <div class="f24-legal">
-      <p>Terms and conditions apply. See <a href="javascript:void(0)" onclick="document.getElementById('termsModal') && document.getElementById('termsModal').showModal()">Appendix 11 to the General Terms of Business</a> for full details of the promotion.</p>
+    <div class="footer-text">
+      <p>Prices are indicative and may differ at allocation. All securities are US-listed.</p>
       <p>&copy; Freedom Finance Europe Ltd. All rights reserved.</p>
     </div>
 
-    <div class="f24-bottom-link">
+    <div class="bottom-back">
       <a href="index.html">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg>
         Back to Portfolio Battle
       </a>
     </div>
   </div>
 
+  <!-- Scroll top -->
+  <button class="scroll-top" id="scrollTop">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="18 15 12 9 6 15"/></svg>
+  </button>
+
   <script>
     var STOCKS = [
-      { ticker: 'AAL.US', company: 'American Airlines Group, Inc.', price: 12.80 },
-      { ticker: 'AHT.US', company: 'Ashford Hospitality Trust Inc.', price: 2.99 },
-      { ticker: 'AMWL.US', company: 'American Well Corp-Class A', price: 8.23 },
-      { ticker: 'ATEN.US', company: 'A10 Networks Inc', price: 28.01 },
-      { ticker: 'BA.US', company: 'Boeing Company', price: 238.62 },
-      { ticker: 'BAC.US', company: 'Bank of America Corp', price: 50.55 },
-      { ticker: 'BB.US', company: 'BlackBerry Ltd', price: 6.21 },
-      { ticker: 'BLK.US', company: 'BlackRock Inc', price: 1082.00 },
-      { ticker: 'CCL.US', company: 'Carnival Corp Ltd', price: 25.44 },
-      { ticker: 'CLSK.US', company: 'CleanSpark Inc', price: 13.19 },
-      { ticker: 'CTRA.US', company: 'Coterra Energy Inc', price: 32.48 },
-      { ticker: 'CVX.US', company: 'Chevron Corp.', price: 184.81 },
-      { ticker: 'DIS.US', company: 'Walt Disney Co.', price: 104.87 },
-      { ticker: 'DKNG.US', company: 'DraftKings Inc', price: 24.54 },
-      { ticker: 'DM.US', company: 'Desktop Metal', price: 5.09 },
-      { ticker: 'EQNR.US', company: 'Equinor ASA', price: 38.26 },
-      { ticker: 'ESPR.US', company: 'Esperion Therapeutics Inc', price: 3.14 },
-      { ticker: 'F.US', company: 'Ford Motor', price: 12.08 },
-      { ticker: 'FCEL.US', company: 'FuelCell Energy Inc', price: 16.41 },
-      { ticker: 'HD.US', company: 'Home Depot', price: 311.30 },
-      { ticker: 'HOOD.US', company: 'Robinhood Markets Inc', price: 80.61 },
-      { ticker: 'HUYA.US', company: 'Huya Inc.', price: 3.28 },
-      { ticker: 'HYLN.US', company: 'Hyliion Holdings Corp', price: 2.71 },
-      { ticker: 'INTC.US', company: 'Intel Corp.', price: 128.96 },
-      { ticker: 'JNJ.US', company: 'Johnson & Johnson', price: 221.63 },
-      { ticker: 'JPM.US', company: 'JPMorgan Chase & Co.', price: 299.98 },
-      { ticker: 'KO.US', company: 'Coca Cola Co.', price: 78.62 },
-      { ticker: 'LOGC.US', company: 'ContextLogic Inc - A', price: 8.74 },
-      { ticker: 'LPL.US', company: 'LG Display Co Ltd', price: 4.38 },
-      { ticker: 'MCD.US', company: "McDonald's Corp.", price: 274.56 },
-      { ticker: 'MOMO.US', company: 'Hello Group Inc', price: 6.23 },
-      { ticker: 'MRK.US', company: 'Merck & Co.', price: 111.41 },
-      { ticker: 'MSFT.US', company: 'Microsoft Corp.', price: 412.53 },
-      { ticker: 'NFLX.US', company: 'Netflix Inc.', price: 85.33 },
-      { ticker: 'NKE.US', company: 'Nike Inc.', price: 42.50 },
-      { ticker: 'NKLA.US', company: 'Nikola Corp', price: 0.18 },
-      { ticker: 'NNOX.US', company: 'Nano-X Imaging Ltd', price: 1.64 },
-      { ticker: 'OUST.US', company: 'Ouster Inc', price: 26.96 },
-      { ticker: 'PFE.US', company: 'Pfizer Inc.', price: 25.78 },
-      { ticker: 'PG.US', company: 'Procter & Gamble', price: 143.00 },
-      { ticker: 'PLTR.US', company: 'Palantir Technologies Inc', price: 135.88 },
-      { ticker: 'PTON.US', company: 'Peloton Interactive', price: 5.31 },
-      { ticker: 'ROOT.US', company: 'Root Inc', price: 57.04 },
-      { ticker: 'SHEL.US', company: 'Shell plc', price: 85.36 },
-      { ticker: 'SNAP.US', company: 'Snap Inc', price: 5.71 },
-      { ticker: 'SPCE.US', company: 'Virgin Galactic Holdings Inc', price: 2.93 },
-      { ticker: 'T.US', company: 'AT&T Inc', price: 24.87 },
-      { ticker: 'TSLA.US', company: 'Tesla Motors Inc', price: 444.51 },
-      { ticker: 'UNH.US', company: 'United Health Group Inc.', price: 383.70 },
-      { ticker: 'UWMC.US', company: 'UWM Holdings Corp', price: 3.37 },
-      { ticker: 'WMT.US', company: 'Wal-Mart Stores', price: 127.33 },
-      { ticker: 'XOM.US', company: 'Exxon Mobil Corp.', price: 149.40 },
-      { ticker: 'ZETA.US', company: 'Zeta Global Holdings Corp', price: 16.52 }
+      { t:'AAL', c:'American Airlines Group, Inc.', p:12.80 },
+      { t:'AHT', c:'Ashford Hospitality Trust Inc.', p:2.99 },
+      { t:'AMWL', c:'American Well Corp-Class A', p:8.23 },
+      { t:'ATEN', c:'A10 Networks Inc', p:28.01 },
+      { t:'BA', c:'Boeing Company', p:238.62 },
+      { t:'BAC', c:'Bank of America Corp', p:50.55 },
+      { t:'BB', c:'BlackBerry Ltd', p:6.21 },
+      { t:'BLK', c:'BlackRock Inc', p:1082.00 },
+      { t:'CCL', c:'Carnival Corp Ltd', p:25.44 },
+      { t:'CLSK', c:'CleanSpark Inc', p:13.19 },
+      { t:'CTRA', c:'Coterra Energy Inc', p:32.48 },
+      { t:'CVX', c:'Chevron Corp.', p:184.81 },
+      { t:'DIS', c:'Walt Disney Co.', p:104.87 },
+      { t:'DKNG', c:'DraftKings Inc', p:24.54 },
+      { t:'DM', c:'Desktop Metal', p:5.09 },
+      { t:'EQNR', c:'Equinor ASA', p:38.26 },
+      { t:'ESPR', c:'Esperion Therapeutics Inc', p:3.14 },
+      { t:'F', c:'Ford Motor', p:12.08 },
+      { t:'FCEL', c:'FuelCell Energy Inc', p:16.41 },
+      { t:'HD', c:'Home Depot', p:311.30 },
+      { t:'HOOD', c:'Robinhood Markets Inc', p:80.61 },
+      { t:'HUYA', c:'Huya Inc.', p:3.28 },
+      { t:'HYLN', c:'Hyliion Holdings Corp', p:2.71 },
+      { t:'INTC', c:'Intel Corp.', p:128.96 },
+      { t:'JNJ', c:'Johnson & Johnson', p:221.63 },
+      { t:'JPM', c:'JPMorgan Chase & Co.', p:299.98 },
+      { t:'KO', c:'Coca Cola Co.', p:78.62 },
+      { t:'LOGC', c:'ContextLogic Inc - A', p:8.74 },
+      { t:'LPL', c:'LG Display Co Ltd', p:4.38 },
+      { t:'MCD', c:"McDonald's Corp.", p:274.56 },
+      { t:'MOMO', c:'Hello Group Inc', p:6.23 },
+      { t:'MRK', c:'Merck & Co.', p:111.41 },
+      { t:'MSFT', c:'Microsoft Corp.', p:412.53 },
+      { t:'NFLX', c:'Netflix Inc.', p:85.33 },
+      { t:'NKE', c:'Nike Inc.', p:42.50 },
+      { t:'NKLA', c:'Nikola Corp', p:0.18 },
+      { t:'NNOX', c:'Nano-X Imaging Ltd', p:1.64 },
+      { t:'OUST', c:'Ouster Inc', p:26.96 },
+      { t:'PFE', c:'Pfizer Inc.', p:25.78 },
+      { t:'PG', c:'Procter & Gamble', p:143.00 },
+      { t:'PLTR', c:'Palantir Technologies Inc', p:135.88 },
+      { t:'PTON', c:'Peloton Interactive', p:5.31 },
+      { t:'ROOT', c:'Root Inc', p:57.04 },
+      { t:'SHEL', c:'Shell plc', p:85.36 },
+      { t:'SNAP', c:'Snap Inc', p:5.71 },
+      { t:'SPCE', c:'Virgin Galactic Holdings Inc', p:2.93 },
+      { t:'T', c:'AT&T Inc', p:24.87 },
+      { t:'TSLA', c:'Tesla Motors Inc', p:444.51 },
+      { t:'UNH', c:'United Health Group Inc.', p:383.70 },
+      { t:'UWMC', c:'UWM Holdings Corp', p:3.37 },
+      { t:'WMT', c:'Wal-Mart Stores', p:127.33 },
+      { t:'XOM', c:'Exxon Mobil Corp.', p:149.40 },
+      { t:'ZETA', c:'Zeta Global Holdings Corp', p:16.52 }
     ];
 
-    function formatPrice(p) {
-      if (p >= 1000) return '$' + p.toLocaleString('en-US', { maximumFractionDigits: 0 });
+    var maxP = Math.max.apply(null, STOCKS.map(function(s){ return s.p; }));
+
+    function fmt(p) {
+      if (p >= 1000) return '$' + p.toLocaleString('en-US',{maximumFractionDigits:0});
+      if (p < 1) return '$' + p.toFixed(2);
       return '$' + p.toFixed(2);
     }
 
-    function renderStocks() {
-      var list = document.getElementById('stockList');
-      list.innerHTML = STOCKS.map(function(s) {
-        var iconUrl = 'https://tradernet.com/logos/get-logo-by-ticker?ticker=' + s.ticker.replace('.US', '').toLowerCase();
-        return '<span class="f24-stock-item">' +
-          '<img class="f24-stock-icon" src="' + iconUrl + '" alt="" onerror="this.style.display=\'none\'">' +
-          '<span class="f24-stock-ticker">' + s.company + '</span> ' +
-          '<span class="f24-stock-price">(' + formatPrice(s.price) + ')</span>' +
-        '</span>';
+    function render() {
+      var q = document.getElementById('q').value.toLowerCase();
+      var list = STOCKS.filter(function(s){
+        if (!q) return true;
+        return s.t.toLowerCase().indexOf(q) !== -1 || s.c.toLowerCase().indexOf(q) !== -1;
+      });
+
+      // Sort by price descending (premium first)
+      list.sort(function(a,b){ return b.p - a.p; });
+
+      var grid = document.getElementById('grid');
+      var empty = document.getElementById('empty');
+      var info = document.getElementById('rInfo');
+
+      if (!list.length) {
+        grid.innerHTML = '';
+        empty.style.display = '';
+        info.textContent = '0 results';
+        return;
+      }
+      empty.style.display = 'none';
+      info.textContent = list.length + ' of ' + STOCKS.length + ' stocks';
+
+      grid.innerHTML = list.map(function(s){
+        var pct = ((s.p / maxP) * 100).toFixed(1);
+        var tier = s.p >= 200 ? 'gold' : '';
+        var priceClass = s.p >= 200 ? ' premium' : '';
+        var logoUrl = 'https://tradernet.com/logos/get-logo-by-ticker?ticker=' + s.t.toLowerCase();
+
+        return '<div class="card" data-tier="' + tier + '">' +
+          '<img class="card-logo" src="' + logoUrl + '" alt="' + s.t + '" ' +
+            'onerror="this.outerHTML=\'<div class=\\\'card-logo fallback\\\'>' + s.t[0] + '</div>\'">' +
+          '<div class="card-ticker">' + s.t + ' <span class="exch">.US</span></div>' +
+          '<div class="card-name">' + s.c + '</div>' +
+          '<div class="card-price' + priceClass + '">' + fmt(s.p) + '</div>' +
+          '<div class="card-prob"><div class="card-prob-fill" style="width:' + pct + '%"></div></div>' +
+          '<div class="card-prob-label">' + (s.p >= 200 ? 'Low prob.' : s.p >= 50 ? 'Medium' : 'Higher prob.') + '</div>' +
+        '</div>';
       }).join('');
     }
 
-    renderStocks();
+    document.getElementById('q').addEventListener('input', render);
+
+    // Scroll top
+    var sb = document.getElementById('scrollTop');
+    window.addEventListener('scroll', function(){ sb.classList.toggle('show', scrollY > 400); });
+    sb.addEventListener('click', function(){ scrollTo({top:0,behavior:'smooth'}); });
+
+    // Update stat count
+    document.getElementById('sTotal').textContent = STOCKS.length;
+
+    render();
   </script>
 </body>
 </html>
