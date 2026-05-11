@@ -32,22 +32,44 @@
   prizeObs.observe(showcase);
 })();
 
-// Lottie cursor follower on prizes section
+// Click-spawned confetti on prizes section
 (function() {
   var section = document.querySelector('.prizes-section');
-  var lottie = document.getElementById('prizeLottie');
-  if (!section || !lottie) return;
-  // Only on hover-capable devices
-  if (window.matchMedia('(hover: none)').matches) return;
+  if (!section) return;
+  var LOTTIE_SRC = 'https://lottie.host/0e8f8fbb-a4c2-4156-a03a-519d241c2df4/iJbQKH43Sq.lottie';
+  var MAX_ACTIVE = 20; // prevent too many DOM nodes
+  var active = [];
 
-  section.addEventListener('mouseenter', function() {
-    section.classList.add('lottie-active');
-  });
-  section.addEventListener('mouseleave', function() {
-    section.classList.remove('lottie-active');
-  });
-  section.addEventListener('mousemove', function(e) {
-    lottie.style.left = e.clientX + 'px';
-    lottie.style.top = e.clientY + 'px';
+  section.addEventListener('click', function(e) {
+    // Don't fire on interactive elements (links, buttons)
+    if (e.target.closest('a, button')) return;
+
+    // Clean up limit
+    while (active.length >= MAX_ACTIVE) {
+      var old = active.shift();
+      if (old.parentNode) old.parentNode.removeChild(old);
+    }
+
+    var el = document.createElement('dotlottie-wc');
+    el.setAttribute('src', LOTTIE_SRC);
+    el.setAttribute('autoplay', '');
+    el.className = 'prize-confetti';
+    el.style.left = e.clientX + 'px';
+    el.style.top = e.clientY + 'px';
+
+    // Random slight scale variation for visual variety
+    var scale = 0.85 + Math.random() * 0.35;
+    el.style.transform = 'translate(-50%, -50%) scale(' + scale.toFixed(2) + ')';
+
+    section.appendChild(el);
+    active.push(el);
+
+    // Fade out after animation plays (~1.2s) then remove
+    setTimeout(function() { el.classList.add('fade-out'); }, 900);
+    setTimeout(function() {
+      if (el.parentNode) el.parentNode.removeChild(el);
+      var idx = active.indexOf(el);
+      if (idx !== -1) active.splice(idx, 1);
+    }, 1500);
   });
 })();
