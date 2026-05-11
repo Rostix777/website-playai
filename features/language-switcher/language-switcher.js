@@ -128,3 +128,45 @@ if (manualChoice) {
     updateLangUI(match[1]);
   }
 }
+
+// --- Google Translate DOM-mutation guard ---
+// GT injects inline style "top:…px; position:relative" on <body> and
+// inserts banner/overlay iframes. A MutationObserver reverts those
+// changes so CSS animations are not disrupted by layout shifts.
+(function() {
+  function cleanGTBody() {
+    if (document.body.style.top && document.body.style.top !== '0px') {
+      document.body.style.top = '0px';
+    }
+    if (document.body.style.position === 'relative') {
+      document.body.style.position = '';
+    }
+  }
+  function hideGTUI() {
+    document.querySelectorAll('.skiptranslate, iframe.goog-te-banner-frame, .goog-te-spinner-pos, #goog-gt-tt').forEach(function(el) {
+      if (el.style.display !== 'none') {
+        el.style.display = 'none';
+        el.style.visibility = 'hidden';
+        el.style.height = '0';
+      }
+    });
+  }
+  // Run immediately
+  cleanGTBody();
+  hideGTUI();
+  // Observe body attribute changes + child additions
+  var gtObs = new MutationObserver(function(mutations) {
+    var needClean = false;
+    for (var i = 0; i < mutations.length; i++) {
+      var m = mutations[i];
+      if (m.type === 'attributes' && m.target === document.body) needClean = true;
+      if (m.type === 'childList' && m.addedNodes.length) needClean = true;
+    }
+    if (needClean) {
+      cleanGTBody();
+      hideGTUI();
+    }
+  });
+  gtObs.observe(document.body, { attributes: true, attributeFilter: ['style', 'class'], childList: true });
+  gtObs.observe(document.documentElement, { childList: true });
+})();

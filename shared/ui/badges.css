@@ -31,4 +31,6 @@
   border-radius: 50%;
   background: var(--negative);
   animation: pulse-dot 1.5s ease-in-out infinite;
+  will-change: opacity, box-shadow;
+  contain: strict;
 }

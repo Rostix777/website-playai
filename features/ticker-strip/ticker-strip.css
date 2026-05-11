@@ -10,6 +10,8 @@
   display: flex;
   animation: scroll-x 40s linear infinite;
   width: max-content;
+  will-change: transform;
+  contain: layout style;
 }
 .tickers-track:hover { animation-play-state: paused; }
 .tickers-disclaimer {

@@ -20,7 +20,16 @@ function renderTickerStrip() {
       '<span class="ticker-change ' + cls + '">' + sign + pcp.toFixed(2) + '%</span>' +
     '</div>';
   }).join('');
-  track.innerHTML = items + items;
+  var html = items + items;
+  // Avoid innerHTML replacement if content hasn't changed — prevents animation restart
+  if (track.dataset.lastHtml === html) return;
+  // Pause animation, update content, restart to preserve smooth scroll
+  track.style.animation = 'none';
+  track.innerHTML = html;
+  track.dataset.lastHtml = html;
+  // Force reflow then restore animation
+  void track.offsetWidth;
+  track.style.animation = '';
 }
 
 async function fetchTickerQuote(ticker) {
