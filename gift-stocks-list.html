@@ -24,22 +24,6 @@
     a { color: #2563eb; text-decoration: none; }
     a:hover { text-decoration: underline; }
 
-    /* Header */
-    .hdr {
-      background: #fff;
-      border-bottom: 1px solid #dcdcdc;
-      padding: 0 2rem;
-      height: 56px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      position: sticky; top: 0; z-index: 100;
-    }
-    .hdr-logo { display: flex; align-items: center; gap: 0.5rem; font-weight: 700; font-size: 1rem; color: #222; }
-    .hdr-logo span { color: #2563eb; }
-    .hdr-back { font-size: 0.8125rem; font-weight: 500; color: #666; display: inline-flex; align-items: center; gap: 0.375rem; }
-    .hdr-back:hover { color: #72BF44; text-decoration: none; }
-
     /* Hero */
     .hero {
       background: #fff;
@@ -70,7 +54,20 @@
     }
     .search-wrap input:focus { border-color: #72BF44; }
     .search-wrap input::placeholder { color: #aaa; }
-    .r-info { font-size: 0.75rem; color: #aaa; }
+    .filter-btns { display: flex; gap: 0.375rem; flex-wrap: wrap; }
+    .f-btn {
+      display: inline-flex; align-items: center; gap: 0.25rem;
+      padding: 0.4rem 0.75rem;
+      font: inherit; font-size: 0.75rem; font-weight: 500;
+      background: #fff; border: 1px solid #dcdcdc; border-radius: 6px;
+      color: #666; cursor: pointer; transition: all 0.15s;
+      white-space: nowrap;
+    }
+    .f-btn:hover { border-color: #72BF44; color: #222; }
+    .f-btn.active { background: #72BF44; border-color: #72BF44; color: #fff; }
+    .f-btn svg { transition: transform 0.2s; }
+    .f-btn.desc svg { transform: rotate(180deg); }
+    .r-info { font-size: 0.75rem; color: #aaa; margin-left: auto; }
 
     /* Grid */
     .grid-wrap { max-width: 1280px; margin: 1rem auto 0; padding: 0 1.25rem; }
@@ -235,24 +232,6 @@
     .disclaimer {
       font-size: 0.6875rem; color: #aaa; line-height: 1.7; text-align: center; margin-bottom: 1.5rem;
     }
-    .docs { text-align: center; margin-bottom: 1.5rem; }
-    .docs-title { font-size: 0.875rem; font-weight: 700; color: #222; margin-bottom: 0.75rem; }
-    .docs-list { display: flex; flex-direction: column; gap: 0.375rem; align-items: center; }
-    .doc-link {
-      display: inline-flex; align-items: center; gap: 0.375rem;
-      font-size: 0.75rem; font-weight: 500; color: #666;
-      padding: 0.4rem 1rem; border: 1px solid #dcdcdc; border-radius: 6px; background: #fff;
-    }
-    .doc-link:hover { border-color: #72BF44; color: #222; text-decoration: none; }
-    .doc-link svg { color: #aaa; flex-shrink: 0; }
-    .docs-copy { font-size: 0.625rem; color: #ccc; margin-top: 0.75rem; }
-    .bottom-back { text-align: center; }
-    .bottom-back a {
-      display: inline-flex; align-items: center; gap: 0.5rem;
-      font-size: 0.875rem; font-weight: 700; color: #fff;
-      background: #72BF44; padding: 0.625rem 1.5rem; border-radius: 5px;
-    }
-    .bottom-back a:hover { background: #5fa536; text-decoration: none; }
 
     .empty { text-align: center; padding: 3rem 1rem; color: #aaa; }
     .empty-icon { font-size: 2.5rem; margin-bottom: 0.5rem; }
@@ -270,7 +249,6 @@
     .scroll-top.show { opacity: 1; transform: translateY(0); pointer-events: auto; }
 
     @media (max-width: 640px) {
-      .hdr { padding: 0 1rem; }
       .toolbar, .grid-wrap, .foot-wrap { padding-left: 0.75rem; padding-right: 0.75rem; }
       .hero { padding: 1.5rem 1rem; }
       .hero h1 { font-size: 1.25rem; }
@@ -287,17 +265,6 @@
 </head>
 
 <body>
-  <header class="hdr">
-    <div class="hdr-logo">
-      <svg width="24" height="24" viewBox="0 0 32 32"><rect width="32" height="32" rx="8" fill="#2563eb"/><text x="8" y="23" fill="#fff" font-family="Roboto,sans-serif" font-weight="900" font-size="20">F</text></svg>
-      Freedom<span>24</span>
-    </div>
-    <a href="index.html" class="hdr-back">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg>
-      Portfolio Battle
-    </a>
-  </header>
-
   <div class="hero">
     <h1>Which stock will I get?</h1>
     <p class="hero-sub">Each coupon = one randomly selected stock. Higher-value securities have lower probability.</p>
@@ -307,6 +274,16 @@
     <div class="search-wrap">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
       <input type="text" id="q" placeholder="Search ticker or company...">
+    </div>
+    <div class="filter-btns">
+      <button class="f-btn active desc" id="fPrice" title="Sort by price">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 3 18 9"/><line x1="12" y1="3" x2="12" y2="21"/></svg>
+        Price
+      </button>
+      <button class="f-btn" id="fAZ" title="Sort alphabetically">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 3 18 9"/><line x1="12" y1="3" x2="12" y2="21"/></svg>
+        A — Z
+      </button>
     </div>
     <div class="r-info" id="rInfo"></div>
   </div>
@@ -325,26 +302,6 @@
     </div>
     <div class="disclaimer">
       <p>Since the stock is randomly selected, program participants may receive different stocks. Prices shown are indicative and may differ at the time of allocation. The price of received stocks may fluctuate depending on market dynamics. All securities are traded on US exchanges.</p>
-    </div>
-    <div class="docs">
-      <div class="docs-title">Terms and conditions</div>
-      <div class="docs-list">
-        <a href="https://freedom24.com/download/documents/1062/General_Terms_of_Business_30042026" target="_blank" rel="noopener" class="doc-link">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-          General Terms of Business
-        </a>
-        <a href="https://freedom24.com/download/documents/1056/Appendix_11_Public_Offer_Agreement_28042026" target="_blank" rel="noopener" class="doc-link">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-          Appendix 11 &mdash; Public Offer Agreement
-        </a>
-      </div>
-      <p class="docs-copy">&copy; Freedom Finance Europe Ltd. All rights reserved.</p>
-    </div>
-    <div class="bottom-back">
-      <a href="index.html">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg>
-        Back to Portfolio Battle
-      </a>
     </div>
   </div>
 
@@ -455,13 +412,21 @@
       '</svg>';
     }
 
+    var sortKey = 'price';
+    var sortDir = 'desc'; // default: expensive first
+
     function render() {
       var q = document.getElementById('q').value.toLowerCase();
       var list = STOCKS.filter(function(s){
         if (!q) return true;
         return s.t.toLowerCase().indexOf(q) !== -1 || s.c.toLowerCase().indexOf(q) !== -1;
       });
-      list.sort(function(a,b){ return b.p - a.p; });
+
+      list.sort(function(a,b){
+        var mul = sortDir === 'asc' ? 1 : -1;
+        if (sortKey === 'price') return (a.p - b.p) * mul;
+        return a.c.localeCompare(b.c) * mul;
+      });
 
       var grid = document.getElementById('grid');
       var empty = document.getElementById('empty');
@@ -501,6 +466,24 @@
     }
 
     document.getElementById('q').addEventListener('input', render);
+
+    // Sort buttons
+    function setSort(key) {
+      if (sortKey === key) {
+        sortDir = sortDir === 'desc' ? 'asc' : 'desc';
+      } else {
+        sortKey = key;
+        sortDir = key === 'price' ? 'desc' : 'asc';
+      }
+      document.querySelectorAll('.f-btn').forEach(function(b){ b.classList.remove('active','desc'); });
+      var btn = key === 'price' ? document.getElementById('fPrice') : document.getElementById('fAZ');
+      btn.classList.add('active');
+      if (sortDir === 'desc') btn.classList.add('desc');
+      render();
+    }
+    document.getElementById('fPrice').addEventListener('click', function(){ setSort('price'); });
+    document.getElementById('fAZ').addEventListener('click', function(){ setSort('alpha'); });
+
     var sb = document.getElementById('scrollTop');
     window.addEventListener('scroll', function(){ sb.classList.toggle('show', scrollY > 400); });
     sb.addEventListener('click', function(){ scrollTo({top:0,behavior:'smooth'}); });
