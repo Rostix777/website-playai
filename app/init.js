@@ -18,3 +18,18 @@ document.addEventListener('keydown', function(e) {
     closeMobileMenu();
   }
 });
+
+// Hash-based modal routing (back/forward browser navigation)
+window.addEventListener('hashchange', function() {
+  var hash = window.location.hash;
+  if (hash === '#stocks') {
+    openTickersModal();
+  } else {
+    if (document.getElementById('tickersModal').classList.contains('open')) closeTickersModal();
+  }
+  if (hash === '#terms') {
+    openTermsModal();
+  } else {
+    if (document.getElementById('termsModal').classList.contains('open')) closeTermsModal();
+  }
+});

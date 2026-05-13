@@ -172,16 +172,27 @@ const tickers = [
 function openTickersModal() {
   document.getElementById('tickersModal').classList.add('open');
   document.body.style.overflow = 'hidden';
+  if (window.location.hash !== '#stocks') {
+    history.pushState(null, '', '#stocks');
+  }
   filterTickers();
 }
 function closeTickersModal() {
   document.getElementById('tickersModal').classList.remove('open');
   document.body.style.overflow = '';
+  if (window.location.hash === '#stocks') {
+    history.pushState(null, '', window.location.pathname + window.location.search);
+  }
 }
 document.getElementById('tickersModal').addEventListener('click', function(e) {
   if (e.target === this) closeTickersModal();
 });
+// Support legacy query param
 if (new URLSearchParams(window.location.search).get('tickers') === 'open') {
+  openTickersModal();
+}
+// Open via hash on load
+if (window.location.hash === '#stocks') {
   openTickersModal();
 }
 
