@@ -35,9 +35,15 @@ function applyHeroState(state) {
     if (el) el.classList.toggle('state-hide', isClosed);
   });
 
-  // Leaderboard: hide for participant (it's in hero), show for closed & new_user
+  // Leaderboard: show only for participant (in hero) and closed; hide for new_user
   var lbSection = document.getElementById('leaderboard');
-  if (lbSection) lbSection.classList.toggle('state-hide', state === 'participant');
+  if (lbSection) lbSection.classList.toggle('state-hide', state === 'participant' || state === 'new_user');
+
+  // Leaderboard nav links: hide when leaderboard section is hidden
+  var lbHidden = state === 'new_user';
+  document.querySelectorAll('.nav-leaderboard').forEach(function(el) {
+    el.classList.toggle('state-hide', lbHidden);
+  });
 
   // Reorder sections for closed state: hero → coupons → faq → leaderboard
   var orderMap = { 'hero': 1, 'coupons': 2, 'faq': 3, 'leaderboard': 4 };
