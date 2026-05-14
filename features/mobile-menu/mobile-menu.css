@@ -32,6 +32,9 @@
   border-radius: var(--radius);
   transition: all 0.2s;
 }
+.mobile-nav a.btn-primary {
+  color: var(--primary-fg);
+}
 .mobile-nav a:hover, .mobile-nav a:active {
   color: var(--fg);
   background: rgba(255,255,255,0.04);
