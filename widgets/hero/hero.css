@@ -223,28 +223,10 @@
   border: 2px solid transparent;
   background-origin: border-box;
   background-clip: padding-box, border-box;
-  animation: border-spin 3s linear infinite;
-}
-.winner-gold {
   background-image:
     linear-gradient(var(--card), var(--card)),
     conic-gradient(from var(--border-angle), var(--gold), #e8c96a, #fff8dc, var(--gold), #d4a520, var(--gold));
-}
-.winner-silver {
-  background-image:
-    linear-gradient(var(--card), var(--card)),
-    conic-gradient(from var(--border-angle), var(--silver), #d4d8dc, #f0f2f4, var(--silver), #a8b0b4, var(--silver));
-}
-.winner-bronze {
-  background-image:
-    linear-gradient(var(--card), var(--card)),
-    conic-gradient(from var(--border-angle), var(--bronze), #c9925c, #e8c9a0, var(--bronze), #a06830, var(--bronze));
-}
-.winner-4th,
-.winner-5th {
-  background-image:
-    linear-gradient(var(--card), var(--card)),
-    conic-gradient(from var(--border-angle), var(--primary), #04c464, #80ffc8, var(--primary), #029e50, var(--primary));
+  animation: border-spin 3s linear infinite;
 }
 
 /* Conditional sections visibility */
