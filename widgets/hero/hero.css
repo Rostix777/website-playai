@@ -163,10 +163,10 @@
   margin-bottom: 2rem;
 }
 @media (max-width: 768px) {
-  .closed-podium { grid-template-columns: repeat(3, 1fr); }
-}
-@media (max-width: 480px) {
   .closed-podium { grid-template-columns: repeat(2, 1fr); }
+  .closed-podium .closed-winner-card:first-child {
+    grid-column: 1 / -1;
+  }
 }
 
 .closed-winner-card {
