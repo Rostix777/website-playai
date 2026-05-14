@@ -250,6 +250,22 @@
 /* Conditional sections visibility */
 .state-hide { display: none !important; }
 
+/* Season closed: reorder visible sections */
+body.season-closed {
+  display: flex;
+  flex-direction: column;
+}
+body.season-closed > * { order: 10; }
+body.season-closed > .scroll-progress { order: 0; }
+body.season-closed > .site-header { order: 0; }
+body.season-closed > .mobile-nav { order: 0; }
+body.season-closed > #hero { order: 1; }
+body.season-closed > #coupons { order: 2; }
+body.season-closed > #faq { order: 3; }
+body.season-closed > #leaderboard { order: 4; }
+body.season-closed > .fun-facts-section { order: 5; }
+body.season-closed > .site-footer { order: 99; }
+
 /* Hero Stats */
 .hero-stats {
   display: grid;

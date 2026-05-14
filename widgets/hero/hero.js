@@ -11,6 +11,8 @@ function getHeroState() {
 }
 
 function applyHeroState(state) {
+  var isClosed = state === 'closed';
+
   document.querySelectorAll('[data-hero-state]').forEach(function(el) {
     el.classList.toggle('active', el.dataset.heroState === state);
   });
@@ -19,19 +21,35 @@ function applyHeroState(state) {
   var headerStatus = document.getElementById('headerStatus');
   if (headerStatus) headerStatus.style.display = (state === 'participant') ? 'flex' : (state === 'new_user' ? 'flex' : 'none');
 
-  // Leaderboard preview section: hide for participant (it's in hero) and closed
+  // Sections to hide when season is closed
+  var closedHideIds = ['benefits', 'how-it-works', 'prizes', 'transparency', 'join'];
+  closedHideIds.forEach(function(id) {
+    var el = document.getElementById(id);
+    if (el) el.classList.toggle('state-hide', isClosed);
+  });
+
+  // Also hide by selector for elements without IDs
+  var closedHideSelectors = ['.fomo-banner', '.ticker-strip', '.final-cta', '.ask-ai-section', '.sticky-cta'];
+  closedHideSelectors.forEach(function(sel) {
+    var el = document.querySelector(sel);
+    if (el) el.classList.toggle('state-hide', isClosed);
+  });
+
+  // Leaderboard: hide for participant (it's in hero), show for closed & new_user
   var lbSection = document.getElementById('leaderboard');
   if (lbSection) lbSection.classList.toggle('state-hide', state === 'participant');
 
-  // Benefits & How It Works: hide for closed
-  var benefits = document.getElementById('benefits');
-  var howItWorks = document.getElementById('how-it-works');
-  if (benefits) benefits.classList.toggle('state-hide', state === 'closed');
-  if (howItWorks) howItWorks.classList.toggle('state-hide', state === 'closed');
+  // Reorder sections for closed state: hero → coupons → faq → leaderboard
+  var orderMap = { 'hero': 1, 'coupons': 2, 'faq': 3, 'leaderboard': 4 };
+  Object.keys(orderMap).forEach(function(id) {
+    var el = document.getElementById(id);
+    if (el) el.style.order = isClosed ? orderMap[id] : '';
+  });
 
-  // FOMO banner text update for closed
-  var fomoBanner = document.querySelector('.fomo-banner');
-  if (fomoBanner && state === 'closed') fomoBanner.classList.add('state-hide');
+  // Main content wrapper needs flex for order to work
+  var main = document.querySelector('main') || document.getElementById('hero').parentElement;
+  // We use body-level class to enable flex ordering via CSS
+  document.body.classList.toggle('season-closed', isClosed);
 
   // Set cookie on any CTA click (mark as returning user)
   document.querySelectorAll('.btn-primary').forEach(function(btn) {
