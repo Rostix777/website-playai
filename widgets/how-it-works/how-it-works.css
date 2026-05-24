@@ -13,6 +13,11 @@
 .timeline-step {
   position: relative;
   padding: 1.75rem;
+  display: flex;
+  flex-direction: column;
+}
+@media (min-width: 1024px) {
+  .timeline-step { min-height: 420px; }
 }
 .step-number {
   font-family: 'JetBrains Mono', monospace;
@@ -31,6 +36,7 @@
   font-size: 0.875rem;
   color: var(--muted-fg);
   line-height: 1.65;
+  flex: 1;
 }
 .step-creative {
   margin-top: 1rem;
@@ -45,6 +51,8 @@
   height: auto;
   border-radius: var(--radius);
   display: block;
+  max-height: 140px;
+  object-fit: contain;
 }
 .step-creative span {
   font-size: 0.6875rem;

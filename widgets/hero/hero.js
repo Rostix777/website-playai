@@ -39,10 +39,13 @@ function applyHeroState(state) {
   var lbSection = document.getElementById('leaderboard');
   if (lbSection) lbSection.classList.toggle('state-hide', state === 'participant' || state === 'new_user');
 
-  // Leaderboard nav links: hide when leaderboard section is hidden
+  // Leaderboard nav links: hide when new_user; point to hero block when participant
   var lbHidden = state === 'new_user';
   document.querySelectorAll('.nav-leaderboard').forEach(function(el) {
     el.classList.toggle('state-hide', lbHidden);
+    if (el.tagName === 'A') {
+      el.setAttribute('href', state === 'participant' ? '#hero' : '#leaderboard');
+    }
   });
 
   // Reorder sections for closed state: hero → coupons → faq → leaderboard
