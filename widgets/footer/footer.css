@@ -63,7 +63,7 @@
 /* App store badges */
 .footer-app-badges {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   gap: 0.5rem;
   margin-top: 1rem;
 }
@@ -72,10 +72,10 @@
   padding: 0;
 }
 .footer-app-badges img {
-  height: 36px;
+  height: 29px;
   width: auto;
   display: block;
-  border-radius: 6px;
+  border-radius: 5px;
   transition: opacity 0.2s;
 }
 .footer-app-badges a:hover img {
