@@ -176,17 +176,38 @@
   border-radius: var(--radius-lg);
   overflow: hidden;
 }
-.closed-winner-medal {
-  font-size: 2rem;
-  line-height: 1;
-  margin-bottom: 0.5rem;
+.closed-winner-place {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.75rem;
 }
-.winner-4th .closed-winner-medal,
-.winner-5th .closed-winner-medal {
-  font-family: 'Outfit', 'Inter', system-ui, sans-serif;
-  font-weight: 900;
-  font-size: 1.75rem;
+.winner-4th .closed-winner-place,
+.winner-5th .closed-winner-place {
   color: var(--muted-fg);
+}
+.closed-winner-avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  margin: 0 auto 0.75rem;
+  overflow: hidden;
+  border: 2px solid var(--gold);
+  box-shadow: 0 0 16px color-mix(in srgb, var(--gold) 25%, transparent);
+}
+.winner-4th .closed-winner-avatar,
+.winner-5th .closed-winner-avatar {
+  border-color: color-mix(in srgb, var(--primary) 40%, transparent);
+  box-shadow: none;
+}
+.closed-winner-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 .closed-winner-name {
   font-weight: 700;
