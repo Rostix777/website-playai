@@ -39,7 +39,7 @@
   flex: 1;
 }
 .step-creative {
-  margin-top: 1rem;
+  margin-bottom: 1rem;
   border-radius: var(--radius);
   overflow: hidden;
   display: flex;
