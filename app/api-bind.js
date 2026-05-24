@@ -38,9 +38,51 @@
   }
 
   // ---------- HELPERS ----------
+  // Country name → ISO 3166-1 alpha-2 mapping
+  var COUNTRY_MAP = {
+    'afghanistan':'AF','albania':'AL','algeria':'DZ','andorra':'AD','angola':'AO',
+    'argentina':'AR','armenia':'AM','australia':'AU','austria':'AT','azerbaijan':'AZ',
+    'bahrain':'BH','bangladesh':'BD','belarus':'BY','belgium':'BE','bolivia':'BO',
+    'bosnia and herzegovina':'BA','brazil':'BR','brunei':'BN','bulgaria':'BG',
+    'cambodia':'KH','cameroon':'CM','canada':'CA','chile':'CL','china':'CN',
+    'colombia':'CO','costa rica':'CR','croatia':'HR','cuba':'CU','cyprus':'CY',
+    'czech republic':'CZ','czechia':'CZ','denmark':'DK','dominican republic':'DO',
+    'ecuador':'EC','egypt':'EG','el salvador':'SV','estonia':'EE','ethiopia':'ET',
+    'finland':'FI','france':'FR','georgia':'GE','germany':'DE','ghana':'GH',
+    'greece':'GR','guatemala':'GT','honduras':'HN','hong kong':'HK','hungary':'HU',
+    'iceland':'IS','india':'IN','indonesia':'ID','iran':'IR','iraq':'IQ',
+    'ireland':'IE','israel':'IL','italy':'IT','jamaica':'JM','japan':'JP',
+    'jordan':'JO','kazakhstan':'KZ','kenya':'KE','korea':'KR','south korea':'KR',
+    'kuwait':'KW','kyrgyzstan':'KG','latvia':'LV','lebanon':'LB','libya':'LY',
+    'liechtenstein':'LI','lithuania':'LT','luxembourg':'LU','malaysia':'MY',
+    'maldives':'MV','malta':'MT','mexico':'MX','moldova':'MD','monaco':'MC',
+    'mongolia':'MN','montenegro':'ME','morocco':'MA','myanmar':'MM',
+    'netherlands':'NL','new zealand':'NZ','nigeria':'NG','north macedonia':'MK',
+    'norway':'NO','oman':'OM','pakistan':'PK','panama':'PA','paraguay':'PY',
+    'peru':'PE','philippines':'PH','poland':'PL','portugal':'PT','qatar':'QA',
+    'romania':'RO','russia':'RU','saudi arabia':'SA','senegal':'SN','serbia':'RS',
+    'singapore':'SG','slovakia':'SK','slovenia':'SI','south africa':'ZA',
+    'spain':'ES','sri lanka':'LK','sweden':'SE','switzerland':'CH','taiwan':'TW',
+    'tajikistan':'TJ','tanzania':'TZ','thailand':'TH','tunisia':'TN','turkey':'TR',
+    'turkmenistan':'TM','ukraine':'UA','united arab emirates':'AE','uae':'AE',
+    'united kingdom':'GB','uk':'GB','united states':'US','usa':'US',
+    'uruguay':'UY','uzbekistan':'UZ','venezuela':'VE','vietnam':'VN'
+  };
+
+  // Resolve country_code: accepts ISO code ("KZ") or full name ("Kazakhstan")
+  function resolveCountryCode(input) {
+    if (!input) return null;
+    var s = input.trim();
+    // Already an ISO code
+    if (s.length === 2 && s === s.toUpperCase()) return s;
+    // Lookup by name
+    return COUNTRY_MAP[s.toLowerCase()] || null;
+  }
+
   // Convert ISO 3166-1 alpha-2 code to emoji flag (e.g. "DE" → 🇩🇪)
-  function countryFlag(code) {
-    if (!code || code.length !== 2) return '';
+  function countryFlag(input) {
+    var code = resolveCountryCode(input);
+    if (!code) return '';
     var cp1 = 0x1F1E6 + code.charCodeAt(0) - 65;
     var cp2 = 0x1F1E6 + code.charCodeAt(1) - 65;
     return String.fromCodePoint(cp1, cp2);
@@ -66,7 +108,7 @@
       changeHTML = '<span class="lb-change down">&#9660; ' + Math.abs(p.rank_change) + '</span>';
     }
 
-    var flag = countryFlag(p.country_code);
+    var flag = countryFlag(p.country_code || p.country);
     var flagHTML = flag ? '<span class="lb-flag">' + flag + '</span>' : '';
 
     var valueTD = compact ? '' : '<td><span class="lb-value">$' + p.portfolio_value.toLocaleString() + '</span></td>';

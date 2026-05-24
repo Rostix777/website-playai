@@ -35,7 +35,7 @@ Leaderboard и winners отдают только безопасные публи
 - `display_name`: формируется только на backend из public profile полей как `first_name + " " + первая буква last_name + "."`; fallback — `Anonymous`.
 - `user_id`: opaque public id из `portfolio_battle_public_profiles.public_user_id` или детерминированный HMAC-derived id.
 - `avatar_url`: signed CDN URL с TTL 1 час из `avatar_object_key`, либо `null`, если signing не настроен.
-- `country_code`: ISO 3166-1 alpha-2 код страны резиденства участника (e.g. `"DE"`, `"ES"`, `"PL"`), либо `null`. Источник: `portfolio_battle_public_profiles.country_code`, заполняется из KYC-данных аккаунта Freedom Finance. Не является PII — это страна резиденства, а не гражданство или точное местоположение.
+- `country_code`: страна резиденства участника, либо `null`. Допустимые форматы: ISO 3166-1 alpha-2 код (`"DE"`, `"KZ"`) или полное англоязычное название (`"Germany"`, `"Kazakhstan"`). Фронтенд нормализует оба формата в emoji-флаг. Источник: `portfolio_battle_public_profiles.country_code`, заполняется из KYC-данных аккаунта Freedom Finance. Не является PII — это страна резиденства, а не гражданство или точное местоположение.
 
 ## Эндпоинты
 
