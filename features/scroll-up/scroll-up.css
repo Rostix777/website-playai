@@ -21,7 +21,7 @@
   transition: opacity 0.4s ease, transform 0.4s ease, border-color 0.3s, color 0.3s, box-shadow 0.3s;
 }
 .scroll-up-btn.visible {
-  opacity: 0.5;
+  opacity: 0.7;
   pointer-events: auto;
   transform: translateY(0);
 }

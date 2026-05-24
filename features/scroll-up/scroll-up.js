@@ -5,22 +5,24 @@
 
   // Collect all visible sections
   function getVisibleSections() {
-    var sections = document.querySelectorAll('main > section, .hero');
+    var all = document.querySelectorAll('section[id]');
     var visible = [];
-    sections.forEach(function(s) {
-      if (s.offsetParent !== null && !s.classList.contains('state-hide')) {
-        visible.push(s);
-      }
+    all.forEach(function(s) {
+      // Skip hidden sections
+      if (s.classList.contains('state-hide')) return;
+      if (s.style.display === 'none') return;
+      if (s.offsetHeight === 0) return;
+      visible.push(s);
     });
     return visible;
   }
 
-  // Find which section is currently in view (topmost visible)
+  // Find which section the user is currently viewing
   function getCurrentSectionIndex(sections) {
-    var scrollY = window.scrollY + window.innerHeight * 0.3;
+    var scrollY = window.scrollY + 120; // offset for header
     var idx = 0;
     for (var i = sections.length - 1; i >= 0; i--) {
-      if (sections[i].offsetTop <= scrollY) {
+      if (sections[i].getBoundingClientRect().top + window.scrollY <= scrollY) {
         idx = i;
         break;
       }
@@ -42,6 +44,7 @@
   // Scroll to previous section on click
   btn.addEventListener('click', function() {
     var sections = getVisibleSections();
+    if (!sections.length) return;
     var current = getCurrentSectionIndex(sections);
     var target = Math.max(0, current - 1);
     sections[target].scrollIntoView({ behavior: 'smooth', block: 'start' });
