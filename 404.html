@@ -213,7 +213,7 @@
   <h1 class="error-title">This trade didn't go through.</h1>
   <p class="error-text">The page you're looking for has been delisted. But the market is still open&nbsp;&mdash; get back in the game.</p>
   <div class="ctas">
-    <a href="./" class="btn btn-primary">Back to Game &rarr;</a>
+    <a href="/website-playai/" class="btn btn-primary" id="homeLink">Back to Game &rarr;</a>
     <a href="https://tap.freedom24.com/to/chat/ai?text=play&utm_source=ai_game_site&utm_medium=web&utm_campaign=portfolio_battle_s1&utm_content=404" target="_blank" rel="noopener" class="btn btn-secondary">Play Now</a>
   </div>
 </div>
@@ -223,6 +223,16 @@
 </div>
 
 <script>
+// Auto-detect home URL (works on any domain)
+(function() {
+  var link = document.getElementById('homeLink');
+  if (link) {
+    // On custom domain (play.freedom24.com) → "/", on GitHub Pages → "/website-playai/"
+    var isGitHub = location.hostname.indexOf('github.io') !== -1;
+    link.href = isGitHub ? '/website-playai/' : '/';
+  }
+})();
+
 // Generate floating particles
 (function() {
   var container = document.getElementById('particles');
