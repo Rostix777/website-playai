@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /icon/
+
+Sitemap: https://play.freedom24.com/sitemap.xml
