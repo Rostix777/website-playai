@@ -32,6 +32,7 @@
 @import '../features/tickers-modal/tickers-modal.css';
 @import '../features/fun-facts/fun-facts.css';
 @import '../features/dev-toolbar/dev-toolbar.css';
+@import '../features/scroll-up/scroll-up.css';
 
 /* --- WIDGETS --- */
 @import '../widgets/header/header.css';

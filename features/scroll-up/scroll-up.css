@@ -1,0 +1,54 @@
+.scroll-up-btn {
+  position: fixed;
+  bottom: 2rem;
+  left: 2rem;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid color-mix(in srgb, var(--border) 60%, transparent);
+  background: color-mix(in srgb, var(--card) 85%, transparent);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: var(--muted-fg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 90;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(12px);
+  transition: opacity 0.4s ease, transform 0.4s ease, border-color 0.3s, color 0.3s, box-shadow 0.3s;
+}
+.scroll-up-btn.visible {
+  opacity: 0.5;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+.scroll-up-btn:hover {
+  opacity: 1;
+  border-color: color-mix(in srgb, var(--primary) 40%, transparent);
+  color: var(--primary);
+  box-shadow: 0 0 20px color-mix(in srgb, var(--primary) 12%, transparent);
+}
+.scroll-up-btn svg {
+  width: 18px;
+  height: 18px;
+  transition: transform 0.3s ease;
+}
+.scroll-up-btn:hover svg {
+  transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+  .scroll-up-btn {
+    bottom: 5.5rem;
+    left: 1rem;
+    width: 38px;
+    height: 38px;
+  }
+  .scroll-up-btn svg {
+    width: 16px;
+    height: 16px;
+  }
+}
