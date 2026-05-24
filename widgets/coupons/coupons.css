@@ -13,8 +13,14 @@
   position: relative;
 }
 .coupon-icon {
-  font-size: 2rem;
   margin-bottom: 0.75rem;
+  display: flex;
+  justify-content: center;
+}
+.coupon-icon img {
+  width: 48px;
+  height: 48px;
+  border-radius: 10px;
 }
 .coupon-title {
   font-weight: 600;

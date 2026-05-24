@@ -1,0 +1,17 @@
+<svg width="59" height="59" viewBox="0 0 59 59" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="59" height="59" rx="8" fill="#00E673"/>
+<rect x="15" y="15" width="29" height="29" rx="3" stroke="white" stroke-width="2"/>
+<rect x="21" y="21" width="17" height="17" rx="1.4" stroke="white" stroke-width="2"/>
+<path d="M21 44V50" stroke="white" stroke-width="2" stroke-linecap="round"/>
+<path d="M21 9V15" stroke="white" stroke-width="2" stroke-linecap="round"/>
+<path d="M50 21L44 21" stroke="white" stroke-width="2" stroke-linecap="round"/>
+<path d="M15 21L9 21" stroke="white" stroke-width="2" stroke-linecap="round"/>
+<path d="M39 44V50" stroke="white" stroke-width="2" stroke-linecap="round"/>
+<path d="M39 9V15" stroke="white" stroke-width="2" stroke-linecap="round"/>
+<path d="M50 39L44 39" stroke="white" stroke-width="2" stroke-linecap="round"/>
+<path d="M15 39L9 39" stroke="white" stroke-width="2" stroke-linecap="round"/>
+<path d="M30 44V50" stroke="white" stroke-width="2" stroke-linecap="round"/>
+<path d="M30 9V15" stroke="white" stroke-width="2" stroke-linecap="round"/>
+<path d="M50 30L44 30" stroke="white" stroke-width="2" stroke-linecap="round"/>
+<path d="M15 30L9 30" stroke="white" stroke-width="2" stroke-linecap="round"/>
+</svg>

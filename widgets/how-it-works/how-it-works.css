@@ -35,13 +35,16 @@
 .step-creative {
   margin-top: 1rem;
   border-radius: var(--radius);
-  border: 1px dashed color-mix(in srgb, var(--primary) 20%, transparent);
-  background: color-mix(in srgb, var(--primary) 2%, transparent);
-  padding: 1.25rem;
-  min-height: 80px;
+  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+.step-creative img {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius);
+  display: block;
 }
 .step-creative span {
   font-size: 0.6875rem;
