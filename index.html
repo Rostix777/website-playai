@@ -1128,6 +1128,22 @@
 <!-- app (loaded last) -->
 <script src="app/init.js" defer></script>
 
+<!-- CarrotQuest Chat Widget -->
+<script>
+(function(){
+  function t(t,e){return function(){window.carrotquest.push([t,e,arguments])}}
+  if("undefined"==typeof carrotquest){var e=document.createElement("script");
+  e.type="text/javascript";e.async=!0;
+  e.src="https://cdn.carrotquest.app/api.min.js";
+  document.getElementsByTagName("head")[0].appendChild(e);
+  window.carrotquest=[];window.carrotquest.settings={};
+  for(var n="connect hierarchicalConnect authRecovery onReady addCallback removeCallback trackEvent identify auth onsuccess track click DOM impression trackMessageInteraction".split(" "),a=0;a<n.length;a++)carrotquest[n[a]]=t(n[a],n)}
+  window.carrotquest.connect("21645-e3b18d11d863ffb232733c3fd9");
+})();
+</script>
+<link rel="preconnect" href="https://api.carrotquest.app">
+<link rel="preconnect" href="https://cdn.carrotquest.app">
+
 <!-- Google Translate -->
 <div id="google_translate_element"></div>
 <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" async></script>
