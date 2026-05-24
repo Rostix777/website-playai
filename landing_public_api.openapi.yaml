@@ -1,0 +1,459 @@
+openapi: 3.1.0
+info:
+  title: Portfolio Battle Landing Public API
+  version: 1.0.0
+servers:
+  - url: https://play.freedomf24.com/api/v1
+    description: Production
+  - url: https://staging.play.freedomf24.com/api/v1
+    description: Staging
+security: []
+paths:
+  /seasons/current:
+    get:
+      summary: Get current public season
+      parameters:
+        - $ref: "#/components/parameters/Lang"
+        - name: include_counts
+          in: query
+          schema:
+            type: boolean
+            default: true
+      responses:
+        "200":
+          description: Current season
+          headers:
+            Cache-Control:
+              $ref: "#/components/headers/CacheControl"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Season"
+        default:
+          $ref: "#/components/responses/Error"
+  /leaderboard:
+    get:
+      summary: Get public leaderboard
+      parameters:
+        - $ref: "#/components/parameters/SeasonId"
+        - $ref: "#/components/parameters/Lang"
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 5
+        - name: snapshot_at
+          in: query
+          schema:
+            type: string
+            format: date-time
+      responses:
+        "200":
+          description: Leaderboard
+          headers:
+            Cache-Control:
+              $ref: "#/components/headers/CacheControl"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LeaderboardResponse"
+        default:
+          $ref: "#/components/responses/Error"
+  /winners:
+    get:
+      summary: Get season winners
+      parameters:
+        - $ref: "#/components/parameters/SeasonId"
+        - $ref: "#/components/parameters/Lang"
+      responses:
+        "200":
+          description: Winners
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WinnersResponse"
+        default:
+          $ref: "#/components/responses/Error"
+  /tickers/allowed:
+    get:
+      summary: Get allowed tradable tickers
+      parameters:
+        - $ref: "#/components/parameters/SeasonId"
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 3000
+            default: 1000
+        - name: cursor
+          in: query
+          schema:
+            type: string
+            pattern: "^[0-9]+$"
+        - name: include_performance
+          in: query
+          schema:
+            type: boolean
+            default: false
+      responses:
+        "200":
+          description: Allowed tickers
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TickersResponse"
+        default:
+          $ref: "#/components/responses/Error"
+  /cache/invalidate:
+    post:
+      summary: Invalidate landing cache
+      security:
+        - ServiceBearer: []
+      parameters:
+        - name: X-Webhook-Timestamp
+          in: header
+          schema:
+            type: string
+        - name: X-Webhook-Signature
+          in: header
+          schema:
+            type: string
+            pattern: "^sha256=[a-f0-9]{64}$"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CacheInvalidateRequest"
+      responses:
+        "202":
+          description: Accepted
+          headers:
+            Cache-Control:
+              $ref: "#/components/headers/CacheControl"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CacheInvalidateResponse"
+        default:
+          $ref: "#/components/responses/Error"
+  /offer:
+    get:
+      summary: Get versioned official Promotion Rules
+      parameters:
+        - $ref: "#/components/parameters/SeasonId"
+        - $ref: "#/components/parameters/Lang"
+        - name: version
+          in: query
+          schema:
+            type: string
+        - name: format
+          in: query
+          schema:
+            type: string
+            enum: [markdown, html, text]
+            default: markdown
+      responses:
+        "200":
+          description: Offer text
+          headers:
+            ETag:
+              schema:
+                type: string
+            Cache-Control:
+              $ref: "#/components/headers/CacheControl"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OfferResponse"
+        default:
+          $ref: "#/components/responses/Error"
+components:
+  securitySchemes:
+    ServiceBearer:
+      type: http
+      scheme: bearer
+  headers:
+    CacheControl:
+      schema:
+        type: string
+  parameters:
+    SeasonId:
+      name: season_id
+      in: query
+      schema:
+        type: string
+        pattern: "^s[0-9]+-[0-9]{4}$"
+    Lang:
+      name: lang
+      in: query
+      schema:
+        type: string
+        enum: [en, ru]
+        default: en
+  responses:
+    Error:
+      description: Error
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorResponse"
+  schemas:
+    RewardGridItem:
+      type: object
+      required: [rank, coupons]
+      properties:
+        rank:
+          type: integer
+          minimum: 1
+          maximum: 5
+        coupons:
+          type: integer
+          enum: [40, 25, 15, 10, 5]
+    Season:
+      type: object
+      required:
+        - season_id
+        - game_id
+        - name
+        - status
+        - starts_at
+        - ends_at
+        - server_time
+        - initial_balance
+        - currency
+        - prize_pool_coupons
+        - reward_grid
+      properties:
+        season_id:
+          type: string
+        game_id:
+          type: string
+        slug:
+          type: [string, "null"]
+        name:
+          type: string
+        status:
+          type: string
+          enum: [scheduled, registration_open, active, completed, cancelled]
+        registration_status:
+          type: string
+          enum: [open, closed]
+        starts_at:
+          type: [string, "null"]
+          format: date-time
+        ends_at:
+          type: [string, "null"]
+          format: date-time
+        server_time:
+          type: string
+          format: date-time
+        initial_balance:
+          type: number
+        currency:
+          type: string
+        participants_total:
+          type: [integer, "null"]
+        leaderboard_update_interval_seconds:
+          type: integer
+        prize_pool_coupons:
+          type: integer
+          const: 95
+        reward_grid:
+          type: array
+          items:
+            $ref: "#/components/schemas/RewardGridItem"
+        offer_version:
+          type: [string, "null"]
+        lang:
+          type: string
+    PublicParticipant:
+      type: object
+      required:
+        - rank
+        - user_id
+        - display_name
+        - avatar_url
+        - country_code
+        - profit_loss_percent
+        - portfolio_value
+        - currency
+        - rank_change
+      properties:
+        rank:
+          type: integer
+        user_id:
+          type: string
+        display_name:
+          type: string
+        avatar_url:
+          type: [string, "null"]
+          format: uri
+        country_code:
+          type: [string, "null"]
+          pattern: "^[A-Z]{2}$"
+          description: "ISO 3166-1 alpha-2 country code of participant residency"
+          examples: ["DE", "ES", "PL", "GR"]
+        profit_loss_percent:
+          type: number
+        portfolio_value:
+          type: number
+        currency:
+          type: string
+        rank_change:
+          type: [integer, "null"]
+    LeaderboardResponse:
+      type: object
+      required: [season_id, snapshot_at, updated_at, participants_total, top, last_place]
+      properties:
+        season_id:
+          type: string
+        snapshot_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        participants_total:
+          type: integer
+        top:
+          type: array
+          items:
+            $ref: "#/components/schemas/PublicParticipant"
+        last_place:
+          anyOf:
+            - $ref: "#/components/schemas/PublicParticipant"
+            - type: "null"
+    WinnersResponse:
+      type: object
+      required: [season_id, status, winners]
+      properties:
+        season_id:
+          type: string
+        status:
+          type: string
+          enum: [not_final, final]
+        finalized_at:
+          type: [string, "null"]
+          format: date-time
+        winners:
+          type: array
+          maxItems: 5
+          items:
+            allOf:
+              - $ref: "#/components/schemas/PublicParticipant"
+              - type: object
+                required: [coupons, reward_status]
+                properties:
+                  coupons:
+                    type: integer
+                    enum: [40, 25, 15, 10, 5]
+                  reward_status:
+                    type: string
+                    enum: [pending, granted, failed, cancelled, not_calculated]
+    Ticker:
+      type: object
+      required: [ticker, name, exchange, currency, performance]
+      properties:
+        ticker:
+          type: string
+        name:
+          type: [string, "null"]
+        exchange:
+          type: [string, "null"]
+        currency:
+          type: [string, "null"]
+        performance:
+          anyOf:
+            - type: "null"
+            - type: object
+              properties:
+                1d:
+                  type: [number, "null"]
+                1w:
+                  type: [number, "null"]
+                1m:
+                  type: [number, "null"]
+                1y:
+                  type: [number, "null"]
+    TickersResponse:
+      type: object
+      required: [season_id, total, next_cursor, items, performance_as_of]
+      properties:
+        season_id:
+          type: string
+        total:
+          type: integer
+        next_cursor:
+          type: [string, "null"]
+        items:
+          type: array
+          items:
+            $ref: "#/components/schemas/Ticker"
+        performance_as_of:
+          type: [string, "null"]
+          format: date-time
+    CacheInvalidateRequest:
+      type: object
+      required: [targets]
+      properties:
+        season_id:
+          type: [string, "null"]
+        targets:
+          type: array
+          minItems: 1
+          items:
+            type: string
+            enum: [season, leaderboard, winners, tickers, offer, all]
+        reason:
+          type: [string, "null"]
+    CacheInvalidateResponse:
+      type: object
+      required: [accepted, invalidated, request_id]
+      properties:
+        accepted:
+          type: boolean
+        invalidated:
+          type: array
+          items:
+            type: string
+        request_id:
+          type: string
+    OfferResponse:
+      type: object
+      required: [season_id, version, lang, effective_from, content_type, content, sha256]
+      properties:
+        season_id:
+          type: string
+        version:
+          type: string
+        lang:
+          type: string
+        effective_from:
+          type: [string, "null"]
+          format: date-time
+        content_type:
+          type: string
+        content:
+          type: string
+        sha256:
+          type: string
+    ErrorResponse:
+      type: object
+      required: [error]
+      properties:
+        error:
+          type: object
+          required: [code, message, request_id, details]
+          properties:
+            code:
+              type: string
+            message:
+              type: string
+            request_id:
+              type: string
+            details:
+              type: object

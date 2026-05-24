@@ -37,6 +37,15 @@
     }
   }
 
+  // ---------- HELPERS ----------
+  // Convert ISO 3166-1 alpha-2 code to emoji flag (e.g. "DE" → 🇩🇪)
+  function countryFlag(code) {
+    if (!code || code.length !== 2) return '';
+    var cp1 = 0x1F1E6 + code.charCodeAt(0) - 65;
+    var cp2 = 0x1F1E6 + code.charCodeAt(1) - 65;
+    return String.fromCodePoint(cp1, cp2);
+  }
+
   // ---------- LEADERBOARD ----------
   function renderLeaderboardRow(p, compact) {
     var rankText = p.rank;
@@ -57,7 +66,8 @@
       changeHTML = '<span class="lb-change down">&#9660; ' + Math.abs(p.rank_change) + '</span>';
     }
 
-    var flagHTML = ''; // API doesn't provide country flags in current contract
+    var flag = countryFlag(p.country_code);
+    var flagHTML = flag ? '<span class="lb-flag">' + flag + '</span>' : '';
 
     var valueTD = compact ? '' : '<td><span class="lb-value">$' + p.portfolio_value.toLocaleString() + '</span></td>';
 
