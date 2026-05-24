@@ -61,6 +61,11 @@ var PB_API = (function() {
       return fetchJSON('/offer', { format: format || 'html' });
     },
 
+    // GET /disclaimer
+    getDisclaimer: function() {
+      return fetchJSON('/disclaimer');
+    },
+
     // Check if API is reachable
     ping: function() {
       return fetchJSON('/seasons/current', { include_counts: false })

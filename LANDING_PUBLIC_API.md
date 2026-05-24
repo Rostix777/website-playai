@@ -266,6 +266,43 @@ Cache: `public, max-age=3600, s-maxage=86400, stale-while-revalidate=86400`
 }
 ```
 
+### `GET /disclaimer`
+
+Возвращает юридический disclaimer для footer лендинга. Текст должен совпадать с disclaimer на основном сайте freedom24.com.
+
+Query-параметры:
+
+- `lang`: `en` или `ru`, по умолчанию `en`
+
+Cache: `public, max-age=3600, s-maxage=86400, stale-while-revalidate=86400`
+
+Ответ:
+
+```json
+{
+  "lang": "en",
+  "sections": [
+    {
+      "type": "company_disclaimer",
+      "content": "Information and analytical services and materials are provided by Freedom Finance Europe Ltd..."
+    },
+    {
+      "type": "risk_disclosure",
+      "content": "Freedom Finance Europe Ltd provides financial services within the European Union under CIF license 275/15..."
+    },
+    {
+      "type": "access_restriction",
+      "content": "Access to this site is possible worldwide. However, none of the products and services..."
+    },
+    {
+      "type": "us_persons_restriction",
+      "content": "For the avoidance of doubt, all information on this site is not addressed to..."
+    }
+  ],
+  "updated_at": "2026-05-11T00:00:00Z"
+}
+```
+
 ## Источники Данных
 
 | Поле ответа | Текущий источник | Что отсутствует / нужна ли миграция |

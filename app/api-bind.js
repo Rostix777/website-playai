@@ -212,6 +212,17 @@
     if (typeof filterTickers === 'function') filterTickers();
   }
 
+  // ---------- DISCLAIMER ----------
+  function applyDisclaimer(data) {
+    if (!data.sections || !data.sections.length) return;
+    var legalEl = document.getElementById('footerLegalText');
+    if (!legalEl) return;
+    var html = data.sections.map(function(s) {
+      return '<p>' + s.content + '</p>';
+    }).join('');
+    legalEl.innerHTML = html;
+  }
+
   // ---------- INIT ----------
   // Try API, fall back silently to hardcoded data
   PB_API.getSeason()
@@ -229,6 +240,9 @@
         }),
         PB_API.getTickers(1000).then(applyTickers).catch(function(e) {
           console.warn('[PB API] Tickers unavailable:', e.message);
+        }),
+        PB_API.getDisclaimer().then(applyDisclaimer).catch(function(e) {
+          console.warn('[PB API] Disclaimer unavailable, using fallback:', e.message);
         })
       ]);
     })
