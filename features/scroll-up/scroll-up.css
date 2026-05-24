@@ -1,7 +1,7 @@
 .scroll-up-btn {
   position: fixed;
   bottom: 2rem;
-  left: 2rem;
+  right: 2rem;
   width: 44px;
   height: 44px;
   border-radius: 50%;
@@ -43,7 +43,7 @@
 @media (max-width: 768px) {
   .scroll-up-btn {
     bottom: 5.5rem;
-    left: 1rem;
+    right: 1rem;
     width: 38px;
     height: 38px;
   }
