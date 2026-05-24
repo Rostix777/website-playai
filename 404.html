@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>404 — Page Not Found | AI Investment Challenge</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#06d6a0">
+<link rel="icon" type="image/png" href="freedom_ai_transparent_320.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Outfit:wght@500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg: #0a0f0d;
+    --fg: #e8ede9;
+    --primary: #06d6a0;
+    --muted-fg: #6b7f72;
+    --card: #111916;
+    --border: #1a2620;
+  }
+
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--fg);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 2rem;
+    overflow: hidden;
+    position: relative;
+  }
+
+  /* Background glow */
+  .glow {
+    position: absolute;
+    width: 500px; height: 500px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(6, 214, 160, 0.08) 0%, transparent 70%);
+    filter: blur(80px);
+    pointer-events: none;
+  }
+  .glow-1 { top: -150px; right: -100px; }
+  .glow-2 { bottom: -200px; left: -150px; width: 400px; height: 400px; }
+
+  .container {
+    position: relative;
+    z-index: 1;
+    max-width: 520px;
+  }
+
+  /* Glitch-style 404 number */
+  .error-code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: clamp(6rem, 20vw, 10rem);
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: -0.04em;
+    background: linear-gradient(135deg, var(--primary), #7bf1a8, var(--primary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    position: relative;
+    margin-bottom: 1.5rem;
+    user-select: none;
+    animation: flicker 4s ease-in-out infinite;
+  }
+  .error-code::after {
+    content: '404';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    background: linear-gradient(135deg, rgba(6, 214, 160, 0.15), transparent);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: blur(8px);
+  }
+
+  @keyframes flicker {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.85; }
+    52% { opacity: 1; }
+    54% { opacity: 0.9; }
+    56% { opacity: 1; }
+  }
+
+  /* Terminal-style label */
+  .error-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--primary);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    opacity: 0.7;
+  }
+  .error-label::before {
+    content: '> ';
+    opacity: 0.5;
+  }
+
+  .error-title {
+    font-family: 'Outfit', 'Inter', system-ui, sans-serif;
+    font-size: clamp(1.5rem, 4vw, 2rem);
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+  }
+
+  .error-text {
+    font-size: 0.9375rem;
+    color: var(--muted-fg);
+    line-height: 1.7;
+    margin-bottom: 2.5rem;
+  }
+
+  /* CTA buttons */
+  .ctas {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    border-radius: 10px;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.25s ease;
+    cursor: pointer;
+    border: none;
+  }
+  .btn-primary {
+    background: var(--primary);
+    color: #0a0f0d;
+  }
+  .btn-primary:hover {
+    background: #08e8ad;
+    box-shadow: 0 0 24px rgba(6, 214, 160, 0.3);
+    transform: translateY(-1px);
+  }
+  .btn-secondary {
+    background: var(--card);
+    color: var(--fg);
+    border: 1px solid var(--border);
+  }
+  .btn-secondary:hover {
+    border-color: rgba(6, 214, 160, 0.3);
+    background: rgba(6, 214, 160, 0.06);
+  }
+
+  /* Footer */
+  .footer-mini {
+    position: absolute;
+    bottom: 1.5rem;
+    font-size: 0.75rem;
+    color: var(--muted-fg);
+    z-index: 1;
+  }
+  .footer-mini a {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .footer-mini a:hover { text-decoration: underline; }
+
+  /* Floating particles */
+  .particles {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 0;
+  }
+  .particle {
+    position: absolute;
+    width: 3px; height: 3px;
+    border-radius: 50%;
+    background: var(--primary);
+    opacity: 0;
+    animation: float-up linear infinite;
+  }
+  @keyframes float-up {
+    0% { opacity: 0; transform: translateY(0) scale(1); }
+    10% { opacity: 0.4; }
+    90% { opacity: 0.1; }
+    100% { opacity: 0; transform: translateY(-100vh) scale(0.3); }
+  }
+</style>
+</head>
+<body>
+
+<div class="glow glow-1"></div>
+<div class="glow glow-2"></div>
+
+<div class="particles" id="particles"></div>
+
+<div class="container">
+  <div class="error-code">404</div>
+  <div class="error-label">page_not_found</div>
+  <h1 class="error-title">This trade didn't go through.</h1>
+  <p class="error-text">The page you're looking for has been delisted. But the market is still open&nbsp;&mdash; get back in the game.</p>
+  <div class="ctas">
+    <a href="./" class="btn btn-primary">Back to Game &rarr;</a>
+    <a href="https://tap.freedom24.com/to/chat/ai?text=play&utm_source=ai_game_site&utm_medium=web&utm_campaign=portfolio_battle_s1&utm_content=404" target="_blank" rel="noopener" class="btn btn-secondary">Play Now</a>
+  </div>
+</div>
+
+<div class="footer-mini">
+  &copy; 2026 <a href="https://www.freedomfinance.eu" target="_blank" rel="noopener">Freedom Finance Europe Ltd</a>
+</div>
+
+<script>
+// Generate floating particles
+(function() {
+  var container = document.getElementById('particles');
+  for (var i = 0; i < 20; i++) {
+    var p = document.createElement('div');
+    p.className = 'particle';
+    p.style.left = Math.random() * 100 + '%';
+    p.style.animationDuration = (6 + Math.random() * 8) + 's';
+    p.style.animationDelay = Math.random() * 6 + 's';
+    p.style.width = p.style.height = (2 + Math.random() * 3) + 'px';
+    container.appendChild(p);
+  }
+})();
+</script>
+
+</body>
+</html>
