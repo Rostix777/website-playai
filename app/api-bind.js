@@ -187,10 +187,12 @@
 
     var html = '';
     data.winners.forEach(function(w, i) {
-      var avatarSrc = w.avatar_url || 'https://i.pravatar.cc/96?img=' + (i * 5 + 1);
+      var avatarInner = w.avatar_url
+        ? '<img src="' + w.avatar_url + '" alt="' + w.display_name + '">'
+        : (w.display_name !== 'Anonymous' ? w.display_name.replace(/[^A-Z]/g, '').slice(0, 2) : '??');
       html += '<div class="closed-winner-card glass ' + (placeClasses[i] || 'winner-5th') + '">' +
         '<div class="closed-winner-place">' + (placeLabels[i] || (i + 1) + 'th place') + '</div>' +
-        '<div class="closed-winner-avatar"><img src="' + avatarSrc + '" alt="' + w.display_name + '"></div>' +
+        '<div class="closed-winner-avatar">' + avatarInner + '</div>' +
         '<div class="closed-winner-name">' + w.display_name + '</div>' +
         '<div class="closed-winner-return font-mono">+' + w.profit_loss_percent.toFixed(2) + '%</div>' +
         '<div class="closed-winner-prize">' + (w.coupons || couponsLabels[i]) + ' stocks</div>' +

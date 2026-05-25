@@ -32,6 +32,12 @@
   background: rgba(255,255,255,0.1);
   border-color: rgba(255,255,255,0.2);
 }
+/* Focus states for keyboard accessibility */
+.btn:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
 @media (max-width: 640px) {
   .btn { width: 100%; padding: 1rem; font-size: 1rem; }
 }

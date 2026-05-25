@@ -1,0 +1,17 @@
+{
+  "name": "AI Investment Challenge | Portfolio Battle",
+  "short_name": "AI Game",
+  "description": "Build your portfolio. Outsmart the market. Win real stocks.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#090b0c",
+  "theme_color": "#06d6a0",
+  "icons": [
+    {
+      "src": "freedom_ai_transparent_320.png",
+      "sizes": "320x320",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

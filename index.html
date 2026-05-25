@@ -31,6 +31,7 @@
 <!-- Favicon -->
 <link rel="icon" type="image/png" href="freedom_ai_transparent_320.png">
 <link rel="apple-touch-icon" href="freedom_ai_transparent_320.png">
+<link rel="manifest" href="manifest.json">
 
 <!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -38,11 +39,12 @@
 <link rel="dns-prefetch" href="https://lottie.host">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Outfit:wght@500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
-<!-- Styles -->
-<link rel="stylesheet" href="app/styles.css">
+<!-- Styles (bundled: 1 request instead of 30+ @import waterfall) -->
+<link rel="stylesheet" href="app/styles.bundle.css">
+<!-- Dev: use app/styles.css for unbundled @import version -->
 
 <!-- Lottie (deferred) -->
-<script src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.9.10/dist/dotlottie-wc.js" type="module"></script>
+<script src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.9.10/dist/dotlottie-wc.js" type="module" integrity="sha384-JLDiMGB/MX5z4PUF+xCEpKtpmoaiSs+tylERQmweKA6AGjuLft585Ijh/YVVZ440" crossorigin="anonymous"></script>
 
 <!-- Structured Data: Organization -->
 <script type="application/ld+json">
@@ -120,6 +122,9 @@
 </script>
 </head>
 <body>
+
+<!-- Skip Link (accessibility) -->
+<a href="#hero" class="skip-link">Skip to main content</a>
 
 <!-- Background -->
 <div class="gradient-bg"></div>
@@ -266,31 +271,31 @@
           <tbody>
             <tr>
               <td><span class="lb-rank">1</span></td>
-              <td><div class="lb-player"><span class="lb-avatar"><img src="https://i.pravatar.cc/72?img=1" alt="AK"></span><span class="lb-name">Alexandra K.</span><span class="lb-flag">&#127465;&#127466;</span></div></td>
+              <td><div class="lb-player"><span class="lb-avatar">AK</span><span class="lb-name">Alexandra K.</span><span class="lb-flag">&#127465;&#127466;</span></div></td>
               <td><span class="lb-return positive">+18.42%</span></td>
               <td><span class="lb-change same">&mdash;</span></td>
             </tr>
             <tr>
               <td><span class="lb-rank">2</span></td>
-              <td><div class="lb-player"><span class="lb-avatar"><img src="https://i.pravatar.cc/72?img=8" alt="MR"></span><span class="lb-name">Marcos R.</span><span class="lb-flag">&#127466;&#127480;</span></div></td>
+              <td><div class="lb-player"><span class="lb-avatar">MR</span><span class="lb-name">Marcos R.</span><span class="lb-flag">&#127466;&#127480;</span></div></td>
               <td><span class="lb-return positive">+15.87%</span></td>
               <td><span class="lb-change up">&#9650; 3</span></td>
             </tr>
             <tr>
               <td><span class="lb-rank">3</span></td>
-              <td><div class="lb-player"><span class="lb-avatar"><img src="https://i.pravatar.cc/72?img=11" alt="JW"></span><span class="lb-name">Jakub W.</span><span class="lb-flag">&#127477;&#127473;</span></div></td>
+              <td><div class="lb-player"><span class="lb-avatar">JW</span><span class="lb-name">Jakub W.</span><span class="lb-flag">&#127477;&#127473;</span></div></td>
               <td><span class="lb-return positive">+14.23%</span></td>
               <td><span class="lb-change down">&#9660; 1</span></td>
             </tr>
             <tr>
               <td><span class="lb-rank">4</span></td>
-              <td><div class="lb-player"><span class="lb-avatar"><img src="https://i.pravatar.cc/72?img=15" alt="NP"></span><span class="lb-name">Nikos P.</span><span class="lb-flag">&#127468;&#127479;</span></div></td>
+              <td><div class="lb-player"><span class="lb-avatar">NP</span><span class="lb-name">Nikos P.</span><span class="lb-flag">&#127468;&#127479;</span></div></td>
               <td><span class="lb-return positive">+12.56%</span></td>
               <td><span class="lb-change up">&#9650; 12</span></td>
             </tr>
             <tr>
               <td><span class="lb-rank">5</span></td>
-              <td><div class="lb-player"><span class="lb-avatar"><img src="https://i.pravatar.cc/72?img=20" alt="LM"></span><span class="lb-name">Lena M.</span><span class="lb-flag">&#127465;&#127466;</span></div></td>
+              <td><div class="lb-player"><span class="lb-avatar">LM</span><span class="lb-name">Lena M.</span><span class="lb-flag">&#127465;&#127466;</span></div></td>
               <td><span class="lb-return positive">+11.89%</span></td>
               <td><span class="lb-change down">&#9660; 2</span></td>
             </tr>
@@ -322,35 +327,35 @@
       <div class="closed-podium">
         <div class="closed-winner-card glass winner-gold">
           <div class="closed-winner-place">1st place</div>
-          <div class="closed-winner-avatar"><img src="https://i.pravatar.cc/96?img=1" alt="Alexandra K."></div>
+          <div class="closed-winner-avatar">AK</div>
           <div class="closed-winner-name">Alexandra K.</div>
           <div class="closed-winner-return font-mono">+18.42%</div>
           <div class="closed-winner-prize">40 stocks</div>
         </div>
         <div class="closed-winner-card glass winner-silver">
           <div class="closed-winner-place">2nd place</div>
-          <div class="closed-winner-avatar"><img src="https://i.pravatar.cc/96?img=8" alt="Marcos R."></div>
+          <div class="closed-winner-avatar">MR</div>
           <div class="closed-winner-name">Marcos R.</div>
           <div class="closed-winner-return font-mono">+15.87%</div>
           <div class="closed-winner-prize">25 stocks</div>
         </div>
         <div class="closed-winner-card glass winner-bronze">
           <div class="closed-winner-place">3rd place</div>
-          <div class="closed-winner-avatar"><img src="https://i.pravatar.cc/96?img=11" alt="Jakub W."></div>
+          <div class="closed-winner-avatar">JW</div>
           <div class="closed-winner-name">Jakub W.</div>
           <div class="closed-winner-return font-mono">+14.23%</div>
           <div class="closed-winner-prize">15 stocks</div>
         </div>
         <div class="closed-winner-card glass winner-4th">
           <div class="closed-winner-place">4th place</div>
-          <div class="closed-winner-avatar"><img src="https://i.pravatar.cc/96?img=15" alt="Nikos P."></div>
+          <div class="closed-winner-avatar">NP</div>
           <div class="closed-winner-name">Nikos P.</div>
           <div class="closed-winner-return font-mono">+12.56%</div>
           <div class="closed-winner-prize">10 stocks</div>
         </div>
         <div class="closed-winner-card glass winner-5th">
           <div class="closed-winner-place">5th place</div>
-          <div class="closed-winner-avatar"><img src="https://i.pravatar.cc/96?img=20" alt="Lena M."></div>
+          <div class="closed-winner-avatar">LM</div>
           <div class="closed-winner-name">Lena M.</div>
           <div class="closed-winner-return font-mono">+11.89%</div>
           <div class="closed-winner-prize">5 stocks</div>
@@ -680,35 +685,35 @@
         <tbody>
           <tr>
             <td><span class="lb-rank">1</span></td>
-            <td><div class="lb-player"><span class="lb-avatar"><img src="https://i.pravatar.cc/72?img=1" alt="AK"></span><span class="lb-name">Alexandra K.</span><span class="lb-flag">&#127465;&#127466;</span></div></td>
+            <td><div class="lb-player"><span class="lb-avatar">AK</span><span class="lb-name">Alexandra K.</span><span class="lb-flag">&#127465;&#127466;</span></div></td>
             <td><span class="lb-return positive">+18.42%</span></td>
             <td><span class="lb-change same">&mdash;</span></td>
             <td><span class="lb-value">$29,605</span></td>
           </tr>
           <tr>
             <td><span class="lb-rank">2</span></td>
-            <td><div class="lb-player"><span class="lb-avatar"><img src="https://i.pravatar.cc/72?img=8" alt="MR"></span><span class="lb-name">Marcos R.</span><span class="lb-flag">&#127466;&#127480;</span></div></td>
+            <td><div class="lb-player"><span class="lb-avatar">MR</span><span class="lb-name">Marcos R.</span><span class="lb-flag">&#127466;&#127480;</span></div></td>
             <td><span class="lb-return positive">+15.87%</span></td>
             <td><span class="lb-change up">&#9650; 3</span></td>
             <td><span class="lb-value">$28,967</span></td>
           </tr>
           <tr>
             <td><span class="lb-rank">3</span></td>
-            <td><div class="lb-player"><span class="lb-avatar"><img src="https://i.pravatar.cc/72?img=11" alt="JW"></span><span class="lb-name">Jakub W.</span><span class="lb-flag">&#127477;&#127473;</span></div></td>
+            <td><div class="lb-player"><span class="lb-avatar">JW</span><span class="lb-name">Jakub W.</span><span class="lb-flag">&#127477;&#127473;</span></div></td>
             <td><span class="lb-return positive">+14.23%</span></td>
             <td><span class="lb-change down">&#9660; 1</span></td>
             <td><span class="lb-value">$28,557</span></td>
           </tr>
           <tr>
             <td><span class="lb-rank">4</span></td>
-            <td><div class="lb-player"><span class="lb-avatar"><img src="https://i.pravatar.cc/72?img=15" alt="NP"></span><span class="lb-name">Nikos P.</span><span class="lb-flag">&#127468;&#127479;</span></div></td>
+            <td><div class="lb-player"><span class="lb-avatar">NP</span><span class="lb-name">Nikos P.</span><span class="lb-flag">&#127468;&#127479;</span></div></td>
             <td><span class="lb-return positive">+12.56%</span></td>
             <td><span class="lb-change up">&#9650; 12</span></td>
             <td><span class="lb-value">$28,140</span></td>
           </tr>
           <tr>
             <td><span class="lb-rank">5</span></td>
-            <td><div class="lb-player"><span class="lb-avatar"><img src="https://i.pravatar.cc/72?img=20" alt="LM"></span><span class="lb-name">Lena M.</span><span class="lb-flag">&#127465;&#127466;</span></div></td>
+            <td><div class="lb-player"><span class="lb-avatar">LM</span><span class="lb-name">Lena M.</span><span class="lb-flag">&#127465;&#127466;</span></div></td>
             <td><span class="lb-return positive">+11.89%</span></td>
             <td><span class="lb-change down">&#9660; 2</span></td>
             <td><span class="lb-value">$27,972</span></td>
@@ -937,7 +942,7 @@
         <a href="https://freedom24.com/documents" target="_blank" rel="noopener">Documents</a>
 
         <div class="footer-app-badges">
-          <a href="https://freedom24.com/images/2022/footer/logo_appmobile/googleplay.svg" target="_blank" rel="noopener" aria-label="Google Play">
+          <a href="https://play.google.com/store/apps/details?id=online.freedom" target="_blank" rel="noopener" aria-label="Google Play">
             <img src="https://freedom24.com/images/2022/footer/logo_appmobile/googleplay.svg" alt="Get it on Google Play" loading="lazy">
           </a>
           <a href="https://freedom24.onelink.me/pHBR?c=pfu8166716&campaign=pfu8166716" target="_blank" rel="noopener" aria-label="App Store">
@@ -1116,6 +1121,7 @@
 <!-- features -->
 <script src="features/scroll-progress/scroll-progress.js" defer></script>
 <script src="features/scroll-up/scroll-up.js" defer></script>
+<script src="features/cookie-consent/cookie-consent.js" defer></script>
 <script src="features/mobile-menu/mobile-menu.js" defer></script>
 
 <!-- widgets (hero must load before countdown since countdown uses getHeroState) -->

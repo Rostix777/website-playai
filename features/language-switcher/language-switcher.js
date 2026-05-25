@@ -21,7 +21,6 @@ var LANGS = [
   {code:'tg',short:'TJ',cc:'tj',label:'Тоҷикӣ'},
   {code:'uk',short:'UA',cc:'ua',label:'Українська'},
   {code:'hy',short:'AM',cc:'am',label:'Հայերեն'},
-  {code:'ar',short:'AR',cc:'sa',label:'العربية'},
   {code:'zh-CN',short:'CN',cc:'cn',label:'中文'}
 ];
 
