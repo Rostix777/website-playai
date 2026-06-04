@@ -228,17 +228,16 @@
         <p class="hero-note">No deposit required. No fees. The earlier you join, the more time you have to climb the leaderboard.</p>
       </div>
 
-      <!-- KEY VISUAL PLACEHOLDER -->
-      <div class="hero-visual">
-        <div class="hero-visual-placeholder">
-          <svg class="icon" viewBox="0 0 64 64" fill="none" stroke="var(--primary)" stroke-width="1.5">
-            <rect x="4" y="8" width="56" height="48" rx="4"/>
-            <path d="M4 20h56M24 8v48"/>
-            <circle cx="44" cy="38" r="8"/>
-            <path d="M36 46l4-4 6 6 10-10"/>
-          </svg>
-          <p>Key Visual Goes Here</p>
-          <span class="label">creative placeholder &middot; hero visual</span>
+      <!-- KEY VISUAL: Crown + Coins Parallax -->
+      <div class="hero-visual hero-kv">
+        <div class="hero-kv-scene" id="heroKvScene">
+          <!-- Layer order: 1=bottom → 6=top (coin_05 behind all) -->
+          <img src="Heroblock_img/billions_portfolio_battle_KV_T1_crown_coin_05 (0-00-00-00) 1.png" alt="" class="hero-kv-layer" data-parallax-speed="0.15" data-parallax-rotate="-12">
+          <img src="Heroblock_img/billions_portfolio_battle_KV_T1_crown_coin_04 (0-00-00-00) 1.png" alt="" class="hero-kv-layer" data-parallax-speed="0.22" data-parallax-rotate="10">
+          <img src="Heroblock_img/billions_portfolio_battle_KV_T1_crown_crown (0-00-00-00) 1.png" alt="Golden Crown" class="hero-kv-layer hero-kv-crown" data-parallax-speed="0.04">
+          <img src="Heroblock_img/billions_portfolio_battle_KV_T1_crown_coin_01 (0-00-00-00) 1.png" alt="" class="hero-kv-layer" data-parallax-speed="0.10" data-parallax-rotate="5">
+          <img src="Heroblock_img/billions_portfolio_battle_KV_T1_crown_coin_03 (0-00-00-00) 1.png" alt="" class="hero-kv-layer" data-parallax-speed="0.18" data-parallax-rotate="-6">
+          <img src="Heroblock_img/billions_portfolio_battle_KV_T1_crown_coin_02 (0-00-00-00) 1.png" alt="" class="hero-kv-layer" data-parallax-speed="0.12" data-parallax-rotate="8">
         </div>
       </div>
     </div>
@@ -1121,6 +1120,7 @@
 <!-- features -->
 <script src="features/scroll-progress/scroll-progress.js" defer></script>
 <script src="features/scroll-up/scroll-up.js" defer></script>
+<script src="features/hero-parallax/hero-parallax.js" defer></script>
 <script src="features/cookie-consent/cookie-consent.js" defer></script>
 <script src="features/mobile-menu/mobile-menu.js" defer></script>
 
