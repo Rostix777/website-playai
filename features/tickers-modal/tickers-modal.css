@@ -12,7 +12,8 @@
 }
 .tickers-search:focus { border-color: var(--primary); }
 .tickers-search::placeholder { color: var(--muted-fg); }
-.ticker-list { max-height: 55vh; overflow-y: auto; }
+/* scroll handled by .modal-body — no double scrollbar */
+.ticker-list { }
 .ticker-row {
   display: grid;
   grid-template-columns: 1fr auto auto;

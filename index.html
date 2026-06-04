@@ -369,19 +369,19 @@
     <!-- Hero Stats (all states) -->
     <div class="hero-stats">
       <div class="stat-card glass">
-        <div class="stat-value">95</div>
+        <div class="stat-value notranslate" translate="no">95</div>
         <div class="stat-label" data-i18n-ru="stat-stocks">Real Gift Stocks</div>
       </div>
       <div class="stat-card glass">
-        <div class="stat-value">$25K</div>
+        <div class="stat-value notranslate" translate="no">$25K</div>
         <div class="stat-label" data-i18n-ru="stat-capital">Virtual Starting Capital</div>
       </div>
       <div class="stat-card glass">
-        <div class="stat-value">TOP 5</div>
+        <div class="stat-value notranslate" translate="no">TOP&nbsp;5</div>
         <div class="stat-label" data-i18n-ru="stat-top5">Win Real Shares</div>
       </div>
       <div class="stat-card glass">
-        <div class="stat-value font-mono" id="stat-participants">4,823</div>
+        <div class="stat-value font-mono notranslate" translate="no" id="stat-participants">4,823</div>
         <div class="stat-label" data-i18n-ru="stat-players">Active Players</div>
       </div>
     </div>
@@ -1100,14 +1100,14 @@
 <div class="modal-overlay" id="tickersModal">
   <div class="modal-content">
     <div class="modal-header">
-      <h2>Available Stocks</h2>
+      <h2 data-i18n-ru="modal-tickers-title">Available Stocks for Trading</h2>
       <button class="modal-close" onclick="closeTickersModal()" aria-label="Close">&times;</button>
     </div>
-    <div class="modal-body">
-      <input type="text" class="tickers-search" id="tickerSearch" placeholder="Search by ticker or company name&hellip;" oninput="filterTickers()">
+    <div class="modal-body modal-body--tickers">
+      <input type="text" class="tickers-search" id="tickerSearch" placeholder="Search by ticker or company name&hellip;" data-i18n-ru-placeholder="tickerSearchPlaceholder" oninput="filterTickers()">
       <div class="tickers-count" id="tickersCount"></div>
       <div class="ticker-list notranslate" translate="no" id="tickerList"></div>
-      <p class="modal-disclaimer">Live market data is informational only. Does not constitute investment advice.</p>
+      <p class="modal-disclaimer" data-i18n-ru="modal-tickers-disclaimer">Live market data is informational only. Does not constitute investment advice.</p>
     </div>
   </div>
 </div>

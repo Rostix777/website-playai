@@ -158,6 +158,10 @@
     'faq-a-choose': 'Нет. Подарочные акции выбираются случайным образом из утверждённого списка на freedom24.com/gift-stocks-list. Более дорогие бумаги выпадают реже. Распределение автоматическое и взвешенное.',
     'faq-a-gambling': 'Нет. Акция не является лотереей, азартной игрой или игрой на удачу в соответствии с законодательством Кипра. Победители определяются по объективным критериям эффективности, а не случайным образом.',
 
+    // Tickers modal
+    'modal-tickers-title': 'Доступные акции для торговли',
+    'modal-tickers-disclaimer': 'Рыночные данные в реальном времени носят исключительно информационный характер. Не являются инвестиционной рекомендацией.',
+
     // Fun fact
     'fun-fact-title': 'Интересный факт',
 
@@ -236,7 +240,21 @@
     'faq-q-winners', 'faq-q-prizes', 'faq-q-choose', 'faq-q-gambling'
   ];
 
+  // Placeholder translations (inputs with data-i18n-ru-placeholder)
+  var RU_PLACEHOLDERS = {
+    'tickerSearchPlaceholder': 'Поиск по тикеру или названию компании…'
+  };
+
   function applyDirect(dict) {
+    // Handle placeholder translations
+    var inputs = document.querySelectorAll('[data-i18n-ru-placeholder]');
+    inputs.forEach(function(el) {
+      var key = el.getAttribute('data-i18n-ru-placeholder');
+      if (RU_PLACEHOLDERS[key]) {
+        el.placeholder = RU_PLACEHOLDERS[key];
+      }
+    });
+
     var els = document.querySelectorAll('[data-i18n-ru]');
     var count = 0;
     els.forEach(function(el) {

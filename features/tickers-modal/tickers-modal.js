@@ -200,7 +200,10 @@ function filterTickers() {
   var q = (document.getElementById('tickerSearch').value || '').toLowerCase();
   var filtered = q ? tickers.filter(function(t) { return t.t.toLowerCase().includes(q) || t.n.toLowerCase().includes(q); }) : tickers;
   var list = document.getElementById('tickerList');
-  document.getElementById('tickersCount').textContent = filtered.length + ' of ' + tickers.length + ' stocks available';
+  var isRu = document.cookie.indexOf('pb_lang_manual=ru') !== -1 || document.cookie.indexOf('googtrans=/en/ru') !== -1;
+  document.getElementById('tickersCount').textContent = isRu
+    ? ('В наличии ' + filtered.length + ' из ' + tickers.length + ' акций.')
+    : (filtered.length + ' of ' + tickers.length + ' stocks available.');
   list.innerHTML = filtered.map(function(t) {
     return '<div class="ticker-row">' +
       '<div class="ticker-info"><strong>' + t.t + '</strong> <span>' + t.n + '</span></div>' +
