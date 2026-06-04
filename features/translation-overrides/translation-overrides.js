@@ -35,7 +35,7 @@
 
     // Section headers
     'section-benefits-eyebrow': 'Зачем играть?',
-    'section-benefits-title': 'Построена для амбициозных',
+    'section-benefits-title': 'Почему стоит участвовать',
     'section-howitworks-eyebrow': 'Начните за 2 минуты',
     'section-howitworks-title': 'Как это работает',
     'section-prizes-eyebrow': 'Реальные награды',
