@@ -19,16 +19,17 @@ function updateCountdown() {
   }
 
   // Header compact countdown
+  var isRu = (document.cookie.indexOf('pb_lang_manual=ru') !== -1 || document.cookie.indexOf('googtrans=/en/ru') !== -1);
   var hc = document.getElementById('headerCountdown');
   if (hc) {
-    if (state === 'new_user') hc.textContent = 'starts ' + d + 'd ' + h + 'h';
-    else if (state === 'participant') hc.textContent = 'ends ' + d + 'd ' + h + 'h';
-    else hc.textContent = 'ended';
+    if (state === 'new_user') hc.textContent = (isRu ? 'через ' : 'starts ') + d + 'd ' + h + 'h';
+    else if (state === 'participant') hc.textContent = (isRu ? 'через ' : 'ends ') + d + 'd ' + h + 'h';
+    else hc.textContent = isRu ? 'завершён' : 'ended';
   }
 
   // Participant inline countdown
   var lci = document.getElementById('liveCountdownInline');
-  if (lci) lci.textContent = 'in ' + d + 'd ' + h + 'h ' + m + 'm';
+  if (lci) lci.textContent = d + 'd ' + h + 'h ' + m + 'm';
 }
 
 updateCountdown();
