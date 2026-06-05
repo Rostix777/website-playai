@@ -1,4 +1,4 @@
-// Fun-fact carousel
+// Fun-fact carousel — renders all cards, swipeable on mobile
 var funFacts = [
   { icon: '\u{1F435}', text: 'In 1999, a chimpanzee named Raven outperformed 6,000 professional brokers by throwing darts. Her portfolio gained 213%.', punch: 'Think you can beat a chimp? Prove it.', textRu: 'В 1999 году шимпанзе по имени Рэйвен обошла 6 000 профессиональных брокеров, бросая дротики. Её портфель вырос на 213%.', punchRu: 'Думаете, сможете обыграть обезьяну? Докажите.' },
   { icon: '\u{1F4B0}', text: "Warren Buffett made 99% of his wealth after his 50th birthday.", punch: "You've got time. But why wait?", textRu: 'Уоррен Баффетт заработал 99% своего состояния после 50 лет.', punchRu: 'У вас есть время. Но зачем ждать?' },
@@ -16,33 +16,25 @@ var funFacts = [
   { icon: '\u{1F916}', text: "Today, AI-powered hedge funds manage over $1 trillion. You're playing with the same kind of tools — for free.", punch: 'Use the edge.', textRu: 'Сегодня AI-хедж-фонды управляют более $1 трлн. Вы играете с теми же инструментами — бесплатно.', punchRu: 'Используйте преимущество.' },
   { icon: '\u{1F3C6}', text: "Jesse Livermore made $100M shorting the 1929 crash. In today's money: $1.7B.", punch: 'Same logic works in 2026.', textRu: 'Джесси Ливермор заработал $100 млн, играя на понижение во время краха 1929 года. В пересчёте на сегодня: $1,7 млрд.', punchRu: 'Та же логика работает и в 2026 году.' }
 ];
-var currentFact = 0;
-var factIcon = document.getElementById('funFactIcon');
-var factText = document.getElementById('funFactText');
-var factDots = document.getElementById('factDots');
 
-funFacts.forEach(function(_, i) {
-  var dot = document.createElement('button');
-  dot.className = 'fact-dot' + (i === 0 ? ' active' : '');
-  dot.setAttribute('aria-label', 'Go to fact ' + (i + 1));
-  dot.onclick = function() { goToFact(i); };
-  factDots.appendChild(dot);
-});
+(function() {
+  var isRu = document.cookie.indexOf('pb_lang_manual=ru') !== -1 || document.cookie.indexOf('googtrans=/en/ru') !== -1;
+  var carousel = document.getElementById('funFactsCarousel');
+  if (!carousel) return;
 
-function isRuActive() {
-  return document.cookie.indexOf('pb_lang_manual=ru') !== -1 || document.cookie.indexOf('googtrans=/en/ru') !== -1;
-}
-function renderFact(idx) {
-  var f = funFacts[idx];
-  var ru = isRuActive() && f.textRu;
-  factIcon.textContent = f.icon;
-  factText.innerHTML = (ru ? f.textRu : f.text) + ' <em>' + (ru ? f.punchRu : f.punch) + '</em>';
-  factDots.querySelectorAll('.fact-dot').forEach(function(d, i) {
-    d.classList.toggle('active', i === idx);
+  // Render all cards
+  var html = '';
+  funFacts.forEach(function(f) {
+    var t = (isRu && f.textRu) ? f.textRu : f.text;
+    var p = (isRu && f.punchRu) ? f.punchRu : f.punch;
+    var title = isRu ? 'Интересный факт' : 'Fun Fact';
+    html += '<div class="fun-fact-card glass">' +
+      '<div class="fun-fact-icon">' + f.icon + '</div>' +
+      '<div>' +
+        '<div class="fun-fact-title">' + title + '</div>' +
+        '<p class="fun-fact-text">' + t + ' <em>' + p + '</em></p>' +
+      '</div>' +
+    '</div>';
   });
-}
-function goToFact(idx) { currentFact = idx; renderFact(idx); }
-function nextFact() { currentFact = (currentFact + 1) % funFacts.length; renderFact(currentFact); }
-function prevFact() { currentFact = (currentFact - 1 + funFacts.length) % funFacts.length; renderFact(currentFact); }
-renderFact(0);
-setInterval(nextFact, 8000);
+  carousel.innerHTML = html;
+})();

@@ -1,14 +1,35 @@
 .fun-facts-section { padding: 3rem 0; }
+
+/* Carousel container */
+.fun-facts-carousel {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  overflow-y: hidden;
+  gap: 1rem;
+  padding-bottom: 0.5rem;
+  scrollbar-width: none;
+}
+.fun-facts-carousel::-webkit-scrollbar { display: none; }
+
+/* Cards */
 .fun-fact-card {
-  max-width: 640px;
-  margin: 0 auto;
+  flex: 0 0 85%;
+  scroll-snap-align: center;
+  min-width: 0;
   padding: 2rem;
   display: flex;
   gap: 1rem;
   align-items: flex-start;
-  min-height: 140px;
-  transition: opacity 0.4s, transform 0.4s;
 }
+@media (min-width: 640px) {
+  .fun-fact-card { flex: 0 0 480px; }
+}
+@media (min-width: 1024px) {
+  .fun-fact-card { flex: 0 0 540px; }
+}
+
 .fun-fact-icon {
   font-size: 1.5rem;
   flex-shrink: 0;
@@ -26,40 +47,4 @@
 .fun-fact-text em {
   color: var(--fg);
   font-style: italic;
-}
-.fact-controls {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 1rem;
-  margin-top: 1.5rem;
-}
-.fact-controls button {
-  color: var(--muted-fg);
-  font-size: 1.25rem;
-  padding: 0.25rem 0.5rem;
-  border-radius: var(--radius);
-  transition: color 0.2s, background 0.2s;
-}
-.fact-controls button:hover {
-  color: var(--fg);
-  background: rgba(255,255,255,0.06);
-}
-.fact-dots {
-  display: flex;
-  gap: 6px;
-  align-items: center;
-}
-.fact-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--muted);
-  transition: all 0.3s;
-  padding: 0;
-}
-.fact-dot.active {
-  background: var(--primary);
-  width: 24px;
-  border-radius: 4px;
 }

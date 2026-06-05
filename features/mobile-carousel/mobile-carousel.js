@@ -4,7 +4,7 @@
     if (window.innerWidth >= 640) return;
     if (document.querySelector('.mobile-carousel')) return;
 
-    var SELECTORS = ['.benefits-grid', '.prizes-layout', '.transparency-grid'];
+    var SELECTORS = ['.benefits-grid', '.prizes-layout', '.transparency-grid', '.fun-facts-carousel'];
 
     SELECTORS.forEach(function(sel) {
       var grid = document.querySelector(sel);
