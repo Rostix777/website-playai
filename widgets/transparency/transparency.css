@@ -14,14 +14,15 @@
 .transparency-card h4 { font-size: 1rem; font-weight: 700; margin-bottom: 0.5rem; }
 .transparency-card p { font-size: 0.875rem; color: var(--muted-fg); line-height: 1.6; }
 
-/* Tie-breaker */
+/* Tie-breaker — inside grid, spans full width on desktop */
 .tiebreaker-card {
   padding: 1.5rem 2rem;
   display: flex;
   align-items: flex-start;
   gap: 1rem;
-  max-width: 640px;
-  margin: 1.5rem auto 0;
+}
+@media (min-width: 640px) {
+  .tiebreaker-card { grid-column: 1 / -1; max-width: 640px; margin: 0 auto; }
 }
 .tiebreaker-card .icon { flex-shrink: 0; }
 .tiebreaker-card .icon img { width: 48px; height: 48px; border-radius: 10px; }
