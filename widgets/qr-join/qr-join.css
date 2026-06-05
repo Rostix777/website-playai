@@ -39,10 +39,7 @@
   font-family: 'JetBrains Mono', monospace;
 }
 
-/* Mobile tap-to-play */
+/* Mobile tap-to-play — hidden, sticky CTA handles this */
 .mobile-play-block {
-  text-align: center;
-}
-@media (min-width: 768px) {
-  .mobile-play-block { display: none; }
+  display: none;
 }

@@ -1,5 +1,5 @@
 /* Auto-generated CSS bundle — do not edit manually */
-/* Built: 2026-06-05T00:43:32Z */
+/* Built: 2026-06-05T00:49:46Z */
 
 /* === reset.css === */
 /* ======== RESET & BASE ======== */
@@ -2073,12 +2073,9 @@ body.season-closed main > .fun-facts-section { order: 5; }
   font-family: 'JetBrains Mono', monospace;
 }
 
-/* Mobile tap-to-play */
+/* Mobile tap-to-play — hidden, sticky CTA handles this */
 .mobile-play-block {
-  text-align: center;
-}
-@media (min-width: 768px) {
-  .mobile-play-block { display: none; }
+  display: none;
 }
 
 /* === faq.css === */
