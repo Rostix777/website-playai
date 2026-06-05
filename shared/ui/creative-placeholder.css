@@ -23,6 +23,10 @@
   font-size: 0.8125rem;
   color: var(--muted-fg);
 }
+/* Hide on mobile */
+@media (max-width: 639px) {
+  .creative-placeholder { display: none; }
+}
 .creative-placeholder .cp-size {
   font-family: 'JetBrains Mono', monospace;
   font-size: 0.625rem;

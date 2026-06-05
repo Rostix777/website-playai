@@ -26,7 +26,9 @@
         dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
         dot.setAttribute('aria-label', 'Slide ' + (i + 1));
         dot.onclick = function() {
-          cards[i].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+          var cw = cards[0].offsetWidth;
+          var g = parseInt(getComputedStyle(grid).gap) || 16;
+          grid.scrollTo({ left: i * (cw + g), behavior: 'smooth' });
         };
         dotsWrap.appendChild(dot);
       });
