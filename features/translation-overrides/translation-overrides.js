@@ -109,7 +109,7 @@
     // Coupons
     'coupon-pool-title': 'Реальные подарочные акции',
     'coupon-pool-text': 'Каждый купон — это одна случайно выбранная акция публичной компании. Она будет зачислена напрямую на ваш счёт Freedom Finance. Реальная. Доступная для торговли. Ваша.',
-    'coupon-disclaimer': 'Один купон — это одна случайно выбранная подарочная акция из утверждённого списка на freedom24.com/gift-stocks-list. После зачисления акция становится вашей: её можно держать в портфеле, продать или использовать для дальнейшего формирования портфеля.',
+    'coupon-disclaimer': 'Один купон — это одна случайно выбранная подарочная акция из утверждённого списка на <a href="gift-stocks-list.html" target="_blank" rel="noopener" style="color:var(--primary); text-decoration:underline;">freedom24.com/gift-stocks-list</a>. После зачисления акция становится вашей: её можно держать в портфеле, продать или использовать для дальнейшего формирования портфеля.',
     'reward-flow-title': 'Начисление наград',
     'reward-step-1': 'Вы финишируете в первой пятёрке.',
     'reward-step-1-sub': 'Итоговая таблица лидеров зафиксирована.',
@@ -230,6 +230,9 @@
   }
 
   // Elements where we must preserve a child (e.g. countdown span, dot spans, links)
+  // Elements where translation contains HTML (links etc) — use innerHTML
+  var REPLACE_HTML = ['coupon-disclaimer'];
+
   // Only for elements where we replace text nodes but keep child elements (spans, SVGs, links)
   var PRESERVE_CHILDREN = [
     'hero-subtitle-live', 'ticker-disclaimer-text',
@@ -265,7 +268,11 @@
       el.classList.add('notranslate');
       el.setAttribute('translate', 'no');
 
-      if (PRESERVE_CHILDREN.indexOf(key) !== -1) {
+      if (REPLACE_HTML.indexOf(key) !== -1) {
+        // HTML replacement — translation contains markup (links etc)
+        el.innerHTML = dict[key];
+        count++;
+      } else if (PRESERVE_CHILDREN.indexOf(key) !== -1) {
         // Replace only text nodes, keep child elements (countdown spans, links)
         for (var i = 0; i < el.childNodes.length; i++) {
           if (el.childNodes[i].nodeType === 3 && el.childNodes[i].textContent.trim()) {
