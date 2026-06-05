@@ -75,14 +75,14 @@
     'step-3-title': 'Соберите портфель',
     'step-3-text': 'Выбирайте из примерно 1 000 акций, доступных в боте. Покупайте. Продавайте. Шортите. Рынок работает. Ваши действия отслеживаются. Таблица лидеров обновляется каждые 3 часа.',
     'step-4-title': 'Выиграйте акции',
-    'step-4-text': 'Сезон заканчивается 11 июня 2026 года. Финальный рейтинг зафиксирован. 95 реальных подарочных акций разделят участники из TOP 5: победитель получит 40. Купоны зачисляются на ваш счёт Freedom Finance.',
+    'step-4-text': 'Сезон заканчивается <span class="season-end-date notranslate" translate="no">{SEASON_END}</span>. Финальный рейтинг зафиксирован. 95 реальных подарочных акций разделят участники из TOP 5: победитель получит 40. Купоны зачисляются на ваш счёт Freedom Finance.',
     'step-1-cta': 'Открыть счёт ',
     'step-2-cta': 'Открыть бота ',
     'step-3-cta': 'Играть ',
     'step-4-cta': 'Призы ',
 
     // Prizes
-    'prizes-desc': 'Каждый купон — одна случайно выбранная акция публичной компании, зачисленная на ваш счёт Freedom Finance. Сезон завершается 11 июня 2026. TOP 5 делят 95 акций: победитель получает 40.',
+    'prizes-desc': 'Каждый купон — одна случайно выбранная акция публичной компании, зачисленная на ваш счёт Freedom Finance. Сезон завершается {SEASON_END}. TOP 5 делят 95 акций: победитель получает 40.',
     'prize-1st': '1-е — 40 акций',
     'prize-2nd': '2-е — 25 акций',
     'prize-3rd': '3-е — 15 акций',
@@ -231,7 +231,7 @@
 
   // Elements where we must preserve a child (e.g. countdown span, dot spans, links)
   // Elements where translation contains HTML (links etc) — use innerHTML
-  var REPLACE_HTML = ['coupon-disclaimer'];
+  var REPLACE_HTML = ['coupon-disclaimer', 'step-4-text'];
 
   // Only for elements where we replace text nodes but keep child elements (spans, SVGs, links)
   var PRESERVE_CHILDREN = [
@@ -326,6 +326,26 @@
     return count;
   }
 
+  // Format season date for current language
+  var RU_MONTHS = ['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря'];
+  var EN_MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+
+  function formatDate(ts, lang) {
+    var d = new Date(ts);
+    if (lang === 'ru') return d.getUTCDate() + ' ' + RU_MONTHS[d.getUTCMonth()] + ' ' + d.getUTCFullYear() + ' года';
+    return EN_MONTHS[d.getUTCMonth()] + ' ' + d.getUTCDate() + ', ' + d.getUTCFullYear();
+  }
+
+  function resolvePlaceholders(text, lang) {
+    if (text.indexOf('{SEASON_END}') !== -1 && window.SEASON_END) {
+      text = text.replace('{SEASON_END}', formatDate(window.SEASON_END, lang));
+    }
+    if (text.indexOf('{SEASON_START}') !== -1 && window.SEASON_START) {
+      text = text.replace('{SEASON_START}', formatDate(window.SEASON_START, lang));
+    }
+    return text;
+  }
+
   function applyAll() {
     if (isProcessing) return;
     isProcessing = true;
@@ -335,7 +355,14 @@
 
     if (!config) { isProcessing = false; return; }
 
-    var d = applyDirect(config.direct);
+    // Resolve date placeholders in direct translations
+    var resolved = {};
+    var keys = Object.keys(config.direct);
+    for (var k = 0; k < keys.length; k++) {
+      resolved[keys[k]] = resolvePlaceholders(config.direct[keys[k]], lang);
+    }
+
+    var d = applyDirect(resolved);
     var f = applyFuzzy(config.fuzzy);
 
     if (d + f > 0) {

@@ -2,6 +2,39 @@
 // Fetches data from API and updates DOM. Falls back silently to hardcoded data.
 
 (function() {
+  // ---------- DATE FORMATTING ----------
+  var EN_MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+
+  function formatDateEN(ts) {
+    var d = new Date(ts);
+    return EN_MONTHS[d.getUTCMonth()] + ' ' + d.getUTCDate() + ', ' + d.getUTCFullYear();
+  }
+
+  function updateSeasonDates() {
+    if (window.SEASON_END) {
+      document.querySelectorAll('.season-end-date').forEach(function(el) {
+        el.textContent = formatDateEN(window.SEASON_END);
+      });
+    }
+    if (window.SEASON_START) {
+      document.querySelectorAll('.season-start-date').forEach(function(el) {
+        el.textContent = formatDateEN(window.SEASON_START);
+      });
+    }
+    // Also update structured data
+    var ldJson = document.querySelectorAll('script[type="application/ld+json"]');
+    ldJson.forEach(function(el) {
+      try {
+        var data = JSON.parse(el.textContent);
+        if (data['@type'] === 'Event') {
+          if (window.SEASON_START) data.startDate = new Date(window.SEASON_START).toISOString();
+          if (window.SEASON_END) data.endDate = new Date(window.SEASON_END).toISOString();
+          el.textContent = JSON.stringify(data);
+        }
+      } catch(e) {}
+    });
+  }
+
   // ---------- SEASON ----------
   function applySeason(data) {
     // Update hero state from server-side status
@@ -20,6 +53,9 @@
 
     // Use server time instead of client time for accuracy
     if (data.server_time) window.PB_SERVER_TIME_OFFSET = new Date(data.server_time).getTime() - Date.now();
+
+    // Update visible date text from API
+    updateSeasonDates();
 
     // Re-apply hero state if it changed
     if (typeof applyHeroState === 'function') applyHeroState(newState);
