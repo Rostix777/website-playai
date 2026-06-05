@@ -17,6 +17,7 @@
 @import '../shared/ui/section-headers.css';
 @import '../shared/ui/modals.css';
 @import '../shared/ui/creative-placeholder.css';
+@import '../shared/ui/carousel.css';
 
 /* --- ENTITIES --- */
 @import '../entities/player/player.css';

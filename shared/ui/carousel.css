@@ -1,0 +1,54 @@
+/* ======== MOBILE CARD CAROUSEL ======== */
+/* Converts grid containers to horizontal scroll-snap carousels on mobile.
+   Add .mobile-carousel to the grid container via JS. */
+
+@media (max-width: 639px) {
+  .mobile-carousel {
+    display: flex !important;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    gap: 1rem;
+    padding-bottom: 0.5rem;
+    scrollbar-width: none;          /* Firefox */
+  }
+  .mobile-carousel::-webkit-scrollbar { display: none; }
+
+  .mobile-carousel > * {
+    flex: 0 0 85%;
+    scroll-snap-align: center;
+    min-width: 0;
+  }
+
+  /* Prize cards slightly narrower */
+  .mobile-carousel.prizes-layout > * {
+    flex: 0 0 72%;
+  }
+}
+
+/* Carousel dots */
+.carousel-dots {
+  display: none;
+}
+@media (max-width: 639px) {
+  .carousel-dots {
+    display: flex;
+    justify-content: center;
+    gap: 0.375rem;
+    padding: 0.75rem 0 0.25rem;
+  }
+  .carousel-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--border);
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .carousel-dot.active {
+    background: var(--primary);
+    transform: scale(1.25);
+  }
+}
