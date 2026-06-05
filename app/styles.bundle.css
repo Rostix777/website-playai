@@ -1,5 +1,5 @@
 /* Auto-generated CSS bundle — do not edit manually */
-/* Built: 2026-06-05T00:53:08Z */
+/* Built: 2026-06-05T00:55:07Z */
 
 /* === reset.css === */
 /* ======== RESET & BASE ======== */
@@ -1031,7 +1031,6 @@ body > .skiptranslate { display: none !important; }
   justify-content: space-between;
   height: 100%;
   flex-wrap: nowrap;
-  overflow: hidden;
 }
 .header-logo {
   display: flex;
