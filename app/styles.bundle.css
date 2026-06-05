@@ -1,5 +1,5 @@
 /* Auto-generated CSS bundle — do not edit manually */
-/* Built: 2026-06-04T23:58:19Z */
+/* Built: 2026-06-05T00:03:41Z */
 
 /* === reset.css === */
 /* ======== RESET & BASE ======== */
@@ -1557,7 +1557,7 @@ body.season-closed main > .fun-facts-section { order: 5; }
 .prize-pool-sub {
   font-size: 0.9375rem;
   color: var(--muted-fg);
-  max-width: 480px;
+  max-width: 620px;
   margin: 0 auto 2rem;
   position: relative;
 }
