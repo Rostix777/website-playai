@@ -12,7 +12,8 @@
     gap: 1rem;
     padding-bottom: 0.5rem;
     scrollbar-width: none;          /* Firefox */
-    touch-action: pan-x;            /* block vertical swipe inside carousel */
+    /* overflow-y: hidden prevents vertical bounce inside carousel,
+       but touch-action stays default so page scroll still works */
   }
   .mobile-carousel::-webkit-scrollbar { display: none; }
 

@@ -1,5 +1,5 @@
 /* Auto-generated CSS bundle — do not edit manually */
-/* Built: 2026-06-05T00:39:34Z */
+/* Built: 2026-06-05T00:43:32Z */
 
 /* === reset.css === */
 /* ======== RESET & BASE ======== */
@@ -415,7 +415,8 @@ section {
     gap: 1rem;
     padding-bottom: 0.5rem;
     scrollbar-width: none;          /* Firefox */
-    touch-action: pan-x;            /* block vertical swipe inside carousel */
+    /* overflow-y: hidden prevents vertical bounce inside carousel,
+       but touch-action stays default so page scroll still works */
   }
   .mobile-carousel::-webkit-scrollbar { display: none; }
 
