@@ -1,5 +1,5 @@
 /* Auto-generated CSS bundle — do not edit manually */
-/* Built: 2026-06-05T00:36:30Z */
+/* Built: 2026-06-05T00:39:34Z */
 
 /* === reset.css === */
 /* ======== RESET & BASE ======== */
@@ -1045,6 +1045,7 @@ body > .skiptranslate { display: none !important; }
   justify-content: space-between;
   height: 100%;
   flex-wrap: nowrap;
+  overflow: hidden;
 }
 .header-logo {
   display: flex;
@@ -1088,6 +1089,15 @@ body > .skiptranslate { display: none !important; }
   display: none;
   align-items: center;
   gap: 0.625rem;
+}
+/* Force hide on small mobile — JS sets inline display:flex which overflows header */
+@media (max-width: 479px) {
+  .header-status { display: none !important; }
+}
+@media (min-width: 480px) and (max-width: 767px) {
+  .header-status { gap: 0.375rem; }
+  .header-status .badge { font-size: 0.5625rem !important; padding: 0.1875rem 0.5rem !important; }
+  .header-countdown { font-size: 0.6875rem; min-width: 4em; }
 }
 @media (min-width: 1024px) {
   .header-status { display: flex; }
