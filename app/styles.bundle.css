@@ -1,5 +1,5 @@
 /* Auto-generated CSS bundle — do not edit manually */
-/* Built: 2026-06-05T00:31:48Z */
+/* Built: 2026-06-05T00:36:30Z */
 
 /* === reset.css === */
 /* ======== RESET & BASE ======== */
@@ -409,11 +409,13 @@ section {
   .mobile-carousel {
     display: flex !important;
     overflow-x: auto;
+    overflow-y: hidden;
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
     gap: 1rem;
     padding-bottom: 0.5rem;
     scrollbar-width: none;          /* Firefox */
+    touch-action: pan-x;            /* block vertical swipe inside carousel */
   }
   .mobile-carousel::-webkit-scrollbar { display: none; }
 

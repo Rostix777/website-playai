@@ -6,11 +6,13 @@
   .mobile-carousel {
     display: flex !important;
     overflow-x: auto;
+    overflow-y: hidden;
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
     gap: 1rem;
     padding-bottom: 0.5rem;
     scrollbar-width: none;          /* Firefox */
+    touch-action: pan-x;            /* block vertical swipe inside carousel */
   }
   .mobile-carousel::-webkit-scrollbar { display: none; }
 
