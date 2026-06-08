@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>Portfolio Battle</title>
+<style>
+@font-face{font-family:'CoFoSans';src:url('fonts/CoFoSans-Regular-Trial.otf') format('opentype');font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:'CoFoSans';src:url('fonts/CoFoSans-Medium-Trial.otf') format('opentype');font-weight:500;font-style:normal;font-display:swap}
+@font-face{font-family:'CoFoSans';src:url('fonts/CoFoSans-Bold-Trial.otf') format('opentype');font-weight:700;font-style:normal;font-display:swap}
+@font-face{font-family:'CoFoSans';src:url('fonts/CoFoSans-Black-Trial.otf') format('opentype');font-weight:900;font-style:normal;font-display:swap}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#090b0c;--fg:#f9fbfb;--card:#161b1d;
+  --muted-fg:#9ca8ab;--border:rgba(255,255,255,.10);
+  --primary:#05df72;--primary-fg:#090b0c;--ring:#00c950;
+  --negative:#ff6467;--gold:#f5c542;
+  --radius:.625rem;--radius-lg:.875rem;--radius-xl:1.25rem;
+}
+html,body{
+  height:100%;width:100%;overflow:hidden;
+  background:var(--bg);color:var(--fg);
+  font-family:'CoFoSans',system-ui,sans-serif;
+  -webkit-font-smoothing:antialiased;
+  -webkit-tap-highlight-color:transparent;
+  user-select:none;
+}
+.screen{
+  position:absolute;inset:0;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  padding:24px 20px;text-align:center;
+  opacity:0;pointer-events:none;
+  transition:opacity .4s ease,transform .4s ease;
+  transform:translateY(20px);
+}
+.screen.active{opacity:1;pointer-events:auto;transform:translateY(0)}
+
+.bg-glow{
+  position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:
+    radial-gradient(ellipse 60% 50% at 50% 0%,rgba(5,223,114,.08),transparent),
+    radial-gradient(ellipse 40% 40% at 80% 100%,rgba(0,201,80,.05),transparent);
+}
+
+h1{font-family:'CoFoSans',sans-serif;font-weight:900;line-height:1.1}
+h2{font-family:'CoFoSans',sans-serif;font-weight:800;line-height:1.15}
+
+.hero-amount{
+  font-family:'CoFoSans',sans-serif;font-weight:900;
+  font-size:clamp(48px,12vw,72px);
+  background:linear-gradient(135deg,var(--primary),var(--gold));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+.hero-sub{color:var(--muted-fg);font-size:clamp(14px,3.5vw,17px);margin:12px 0 32px;line-height:1.5}
+
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  padding:16px 32px;border-radius:var(--radius);border:none;cursor:pointer;
+  font-family:'CoFoSans',sans-serif;font-weight:700;font-size:16px;
+  transition:all .2s ease;width:100%;max-width:320px;
+}
+.btn-primary{
+  background:var(--primary);color:var(--primary-fg);
+  box-shadow:0 0 24px rgba(5,223,114,.3);
+}
+.btn-primary:active{transform:scale(.97);box-shadow:0 0 40px rgba(5,223,114,.5)}
+
+.btn-glass{
+  background:rgba(255,255,255,.06);color:var(--fg);
+  border:1px solid var(--border);
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+}
+.btn-glass:active{background:rgba(255,255,255,.12)}
+
+.hero-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:6px 14px;border-radius:20px;font-size:12px;font-weight:700;
+  background:rgba(5,223,114,.1);border:1px solid rgba(5,223,114,.25);
+  color:var(--primary);margin-bottom:20px;letter-spacing:.5px;
+}
+.hero-badge .dot{
+  width:6px;height:6px;border-radius:50%;background:var(--primary);
+  animation:pulse-dot 1.5s ease infinite;
+}
+@keyframes pulse-dot{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(5,223,114,.4)}50%{opacity:.7;box-shadow:0 0 0 6px rgba(5,223,114,0)}}
+
+.hero-title{font-size:clamp(22px,5.5vw,28px);margin-bottom:4px}
+
+.strategy-cards{display:flex;flex-direction:column;gap:12px;width:100%;max-width:340px;margin:24px 0}
+.strategy-card{
+  display:flex;align-items:center;gap:14px;
+  padding:16px 18px;border-radius:var(--radius-lg);cursor:pointer;
+  background:var(--card);border:1.5px solid var(--border);
+  text-align:left;transition:all .2s ease;
+}
+.strategy-card:active{border-color:var(--primary);background:rgba(5,223,114,.06)}
+.strategy-card .icon{font-size:28px;flex-shrink:0}
+.strategy-card .label{font-weight:700;font-size:15px;margin-bottom:2px}
+.strategy-card .desc{font-size:12px;color:var(--muted-fg);line-height:1.4}
+
+.timer-bar{
+  width:100%;max-width:340px;height:4px;border-radius:2px;
+  background:rgba(255,255,255,.08);margin-bottom:20px;overflow:hidden;
+}
+.timer-fill{height:100%;background:var(--primary);border-radius:2px;transition:width .3s linear}
+.timer-fill.danger{background:var(--negative)}
+
+.budget-display{
+  font-family:'CoFoSans',sans-serif;font-weight:800;
+  font-size:clamp(28px,7vw,36px);margin-bottom:4px;
+}
+.budget-label{font-size:12px;color:var(--muted-fg);margin-bottom:16px}
+
+.stocks-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:10px;
+  width:100%;max-width:340px;margin-bottom:16px;
+}
+.stock-card{
+  padding:14px 12px;border-radius:var(--radius);cursor:pointer;
+  background:var(--card);border:1.5px solid var(--border);
+  text-align:center;transition:all .15s ease;position:relative;
+  overflow:hidden;
+}
+.stock-card:active{transform:scale(.96)}
+.stock-card.selected{border-color:var(--primary);background:rgba(5,223,114,.08)}
+.stock-card .ticker{font-weight:800;font-size:15px;margin-bottom:2px}
+.stock-card .name{font-size:11px;color:var(--muted-fg);margin-bottom:6px}
+.stock-card .change{font-size:13px;font-weight:700}
+.stock-card .change.up{color:var(--primary)}
+.stock-card .change.down{color:var(--negative)}
+.stock-card .alloc{
+  position:absolute;bottom:0;left:0;right:0;
+  padding:4px;font-size:11px;font-weight:700;
+  background:var(--primary);color:var(--primary-fg);
+  transform:translateY(100%);transition:transform .2s ease;
+}
+.stock-card.selected .alloc{transform:translateY(0)}
+
+.mini-chart{display:flex;align-items:flex-end;gap:2px;height:24px;justify-content:center;margin-bottom:6px}
+.mini-chart .bar{width:4px;border-radius:2px;background:var(--primary);opacity:.5;transition:height .3s ease}
+
+.result-circle{
+  width:160px;height:160px;border-radius:50%;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  border:3px solid var(--primary);margin-bottom:24px;position:relative;
+}
+.result-circle::before{
+  content:'';position:absolute;inset:-8px;border-radius:50%;
+  border:1px solid rgba(5,223,114,.15);
+}
+.result-pct{font-family:'CoFoSans',sans-serif;font-weight:900;font-size:40px}
+.result-label{font-size:11px;color:var(--muted-fg);margin-top:2px}
+.result-amount{
+  font-family:'CoFoSans',sans-serif;font-weight:800;
+  font-size:clamp(24px,6vw,32px);margin-bottom:4px;
+}
+.result-sub{font-size:13px;color:var(--muted-fg);margin-bottom:28px;line-height:1.5}
+
+.portfolio-row{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:10px 14px;background:var(--card);border-radius:var(--radius);
+  width:100%;max-width:340px;margin-bottom:6px;font-size:13px;
+}
+.portfolio-row .stock-name{font-weight:700}
+.portfolio-row .stock-result.up{color:var(--primary)}
+.portfolio-row .stock-result.down{color:var(--negative)}
+
+.cta-icon{font-size:48px;margin-bottom:16px}
+.cta-title{font-size:clamp(24px,6vw,30px);margin-bottom:8px}
+.cta-sub{font-size:14px;color:var(--muted-fg);line-height:1.5;margin-bottom:32px;max-width:300px}
+.cta-features{
+  display:flex;flex-direction:column;gap:10px;
+  width:100%;max-width:300px;margin-bottom:28px;text-align:left;
+}
+.cta-feature{display:flex;align-items:center;gap:10px;font-size:13px;font-weight:600}
+.cta-feature .check{color:var(--primary);font-size:16px;font-weight:900}
+
+.cta-link{
+  display:inline-block;margin-top:16px;
+  font-size:13px;color:var(--muted-fg);
+  text-decoration:underline;text-underline-offset:3px;
+  transition:color .2s ease;
+}
+.cta-link:active{color:var(--fg)}
+
+@keyframes fade-up{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+.anim-fade-up{animation:fade-up .5s ease both}
+.anim-d1{animation-delay:.1s}.anim-d2{animation-delay:.2s}
+.anim-d3{animation-delay:.3s}.anim-d4{animation-delay:.4s}
+.anim-d5{animation-delay:.5s}.anim-d6{animation-delay:.6s}
+
+.confetti-particle{
+  position:fixed;width:8px;height:8px;border-radius:2px;
+  pointer-events:none;z-index:100;
+}
+</style>
+</head>
+<body>
+<div class="bg-glow"></div>
+
+<!-- SCREEN 1: HERO -->
+<div class="screen active" id="s-hero">
+  <div class="hero-badge anim-fade-up"><span class="dot"></span> <span data-i18n="heroBadge"></span></div>
+  <h1 class="hero-title anim-fade-up anim-d1" data-i18n="heroTitle1"></h1>
+  <h1 class="hero-title anim-fade-up anim-d2" style="margin-bottom:16px" data-i18n="heroTitle2"></h1>
+  <div class="hero-amount anim-fade-up anim-d3">$25,000</div>
+  <p class="hero-sub anim-fade-up anim-d4" data-i18n="heroSub"></p>
+  <button class="btn btn-primary anim-fade-up anim-d5" onclick="goTo('s-strategy')" data-i18n="heroBtn"></button>
+</div>
+
+<!-- SCREEN 2: STRATEGY -->
+<div class="screen" id="s-strategy">
+  <h2 style="font-size:clamp(20px,5vw,24px);margin-bottom:6px" data-i18n="stratTitle"></h2>
+  <p style="font-size:13px;color:var(--muted-fg);margin-bottom:4px" data-i18n="stratSub"></p>
+  <div class="strategy-cards">
+    <div class="strategy-card" onclick="pickStrategy('aggressive', this)">
+      <span class="icon">🚀</span>
+      <div><div class="label" data-i18n="stratAggName"></div><div class="desc" data-i18n="stratAggDesc"></div></div>
+    </div>
+    <div class="strategy-card" onclick="pickStrategy('balanced', this)">
+      <span class="icon">⚖️</span>
+      <div><div class="label" data-i18n="stratBalName"></div><div class="desc" data-i18n="stratBalDesc"></div></div>
+    </div>
+    <div class="strategy-card" onclick="pickStrategy('conservative', this)">
+      <span class="icon">🛡️</span>
+      <div><div class="label" data-i18n="stratConName"></div><div class="desc" data-i18n="stratConDesc"></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- SCREEN 3: STOCK PICKER -->
+<div class="screen" id="s-stocks">
+  <div class="timer-bar"><div class="timer-fill" id="timer-fill" style="width:100%"></div></div>
+  <div class="budget-display" id="budget-display">$25,000</div>
+  <div class="budget-label" data-i18n="stocksLabel"></div>
+  <div class="stocks-grid" id="stocks-grid"></div>
+  <button class="btn btn-primary" id="btn-invest" onclick="finishInvesting()" style="opacity:.4;pointer-events:none" data-i18n="stocksBtn"></button>
+</div>
+
+<!-- SCREEN 4: RESULTS -->
+<div class="screen" id="s-results">
+  <div class="result-circle">
+    <div class="result-pct" id="result-pct">+0%</div>
+    <div class="result-label" data-i18n="resultLabel"></div>
+  </div>
+  <div class="result-amount" id="result-amount">$25,000</div>
+  <p class="result-sub" id="result-sub"></p>
+  <div id="portfolio-rows"></div>
+  <div style="height:16px"></div>
+  <button class="btn btn-primary" onclick="goTo('s-cta')" data-i18n="resultBtn"></button>
+</div>
+
+<!-- SCREEN 5: CTA -->
+<div class="screen" id="s-cta">
+  <div class="cta-icon">🏆</div>
+  <h2 class="cta-title">Portfolio Battle</h2>
+  <p class="cta-sub" data-i18n="ctaSub"></p>
+  <div class="cta-features">
+    <div class="cta-feature"><span class="check">✓</span> <span data-i18n="ctaF1"></span></div>
+    <div class="cta-feature"><span class="check">✓</span> <span data-i18n="ctaF2"></span></div>
+    <div class="cta-feature"><span class="check">✓</span> <span data-i18n="ctaF3"></span></div>
+  </div>
+  <button class="btn btn-primary" onclick="openApp()" data-i18n="ctaBtn"></button>
+  <div style="height:10px"></div>
+  <button class="btn btn-glass" onclick="replayGame()" data-i18n="ctaReplay"></button>
+  <a href="https://play.freedom24.com" target="_blank" class="cta-link" data-i18n="ctaLink"></a>
+</div>
+
+<script>
+const I18N = {
+  ru: {
+    heroBadge: 'PORTFOLIO BATTLE',
+    heroTitle1: 'Выиграй реальные акции.',
+    heroTitle2: 'Бесплатно.',
+    heroSub: 'Проверь себя как инвестор —\nсобери портфель за 30 секунд',
+    heroBtn: 'Начать игру',
+    stratTitle: 'Какой ты инвестор?',
+    stratSub: 'Выбери стратегию',
+    stratAggName: 'Агрессивный',
+    stratAggDesc: 'Высокий риск, высокая доходность. Растущие акции технологических компаний.',
+    stratBalName: 'Сбалансированный',
+    stratBalDesc: 'Микс роста и стабильности. Big Tech + дивидендные акции.',
+    stratConName: 'Консервативный',
+    stratConDesc: 'Защита капитала. Акции крупнейших и надёжных компаний.',
+    stocksLabel: 'Распредели бюджет — нажимай на акции',
+    stocksBtn: 'Инвестировать',
+    resultLabel: 'доходность',
+    resultBtn: 'Играть в Portfolio Battle',
+    resultWin: 'Отличный результат! Ты заработал ${amount} за одну игру',
+    resultLose: 'Рынок непредсказуем! Потеря ${amount} — но это опыт',
+    ctaSub: 'Готов проверить себя по-настоящему?\nСоревнуйся с другими и выигрывай реальные акции',
+    ctaF1: '$25,000 виртуального капитала',
+    ctaF2: 'Реальные акции в призах',
+    ctaF3: 'Бесплатное участие',
+    ctaBtn: 'Присоединиться бесплатно',
+    ctaReplay: 'Играть ещё раз',
+    ctaLink: 'Узнать больше на play.freedom24.com'
+  },
+  en: {
+    heroBadge: 'PORTFOLIO BATTLE',
+    heroTitle1: 'Win real stocks.',
+    heroTitle2: 'For free.',
+    heroSub: 'Test yourself as an investor —\nbuild a portfolio in 30 seconds',
+    heroBtn: 'Start playing',
+    stratTitle: 'What kind of investor are you?',
+    stratSub: 'Choose your strategy',
+    stratAggName: 'Aggressive',
+    stratAggDesc: 'High risk, high reward. Fast-growing tech stocks.',
+    stratBalName: 'Balanced',
+    stratBalDesc: 'Mix of growth and stability. Big Tech + dividend stocks.',
+    stratConName: 'Conservative',
+    stratConDesc: 'Capital protection. Blue-chip stocks from the biggest companies.',
+    stocksLabel: 'Allocate your budget — tap the stocks',
+    stocksBtn: 'Invest',
+    resultLabel: 'return',
+    resultBtn: 'Play Portfolio Battle',
+    resultWin: 'Great result! You earned ${amount} in one game',
+    resultLose: 'Markets are unpredictable! Lost ${amount} — but that\'s experience',
+    ctaSub: 'Ready to test yourself for real?\nCompete with others and win real stocks',
+    ctaF1: '$25,000 virtual capital',
+    ctaF2: 'Real stocks as prizes',
+    ctaF3: 'Free to participate',
+    ctaBtn: 'Join for free',
+    ctaReplay: 'Play again',
+    ctaLink: 'Learn more at play.freedom24.com'
+  }
+};
+
+let lang = 'ru';
+
+function detectLang() {
+  try {
+    if (window.GameCenterApi && window.GameCenterApi.gameLaunchConfig) {
+      const cfg = window.GameCenterApi.gameLaunchConfig.clientConfig;
+      if (cfg && cfg.placeholders && cfg.placeholders.lang) {
+        return cfg.placeholders.lang.substring(0, 2);
+      }
+    }
+  } catch(e) {}
+  const params = new URLSearchParams(window.location.search);
+  if (params.get('lang')) return params.get('lang').substring(0, 2);
+  const browserLang = (navigator.language || 'en').substring(0, 2);
+  return browserLang;
+}
+
+function t(key) { return (I18N[lang] || I18N['en'])[key] || (I18N['en'][key] || key); }
+
+function applyI18n() {
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    const text = t(key);
+    if (text.includes('\n')) { el.innerHTML = text.replace(/\n/g, '<br>'); }
+    else { el.textContent = text; }
+  });
+}
+
+const STOCKS_DATA = {
+  aggressive: [
+    {ticker:'TSLA',name:'Tesla',change:'+18.4%',pct:18.4,bars:[3,5,4,7,6,8,9]},
+    {ticker:'NVDA',name:'Nvidia',change:'+24.1%',pct:24.1,bars:[2,4,3,5,7,6,9]},
+    {ticker:'COIN',name:'Coinbase',change:'-8.2%',pct:-8.2,bars:[8,6,7,5,3,4,2]},
+    {ticker:'PLTR',name:'Palantir',change:'+31.5%',pct:31.5,bars:[2,3,4,5,6,7,9]},
+    {ticker:'MSTR',name:'MicroStrategy',change:'+12.7%',pct:12.7,bars:[4,3,5,6,5,7,8]},
+    {ticker:'SOFI',name:'SoFi',change:'-3.1%',pct:-3.1,bars:[6,5,7,4,5,3,4]}
+  ],
+  balanced: [
+    {ticker:'AAPL',name:'Apple',change:'+9.2%',pct:9.2,bars:[4,5,5,6,6,7,7]},
+    {ticker:'MSFT',name:'Microsoft',change:'+11.8%',pct:11.8,bars:[4,5,5,6,7,7,8]},
+    {ticker:'GOOGL',name:'Alphabet',change:'+7.5%',pct:7.5,bars:[5,5,6,5,6,7,7]},
+    {ticker:'AMZN',name:'Amazon',change:'+14.3%',pct:14.3,bars:[3,4,5,6,6,7,8]},
+    {ticker:'JPM',name:'JPMorgan',change:'+5.1%',pct:5.1,bars:[5,5,6,6,6,6,7]},
+    {ticker:'JNJ',name:'Johnson&J',change:'-1.4%',pct:-1.4,bars:[6,6,5,6,5,5,5]}
+  ],
+  conservative: [
+    {ticker:'BRK.B',name:'Berkshire',change:'+6.8%',pct:6.8,bars:[5,5,5,6,6,6,7]},
+    {ticker:'KO',name:'Coca-Cola',change:'+2.9%',pct:2.9,bars:[5,5,6,5,6,6,6]},
+    {ticker:'PG',name:'Procter&G',change:'+3.2%',pct:3.2,bars:[5,6,5,6,6,6,6]},
+    {ticker:'JNJ',name:'Johnson&J',change:'+4.1%',pct:4.1,bars:[5,5,5,6,6,6,6]},
+    {ticker:'WMT',name:'Walmart',change:'+5.7%',pct:5.7,bars:[4,5,5,6,5,6,7]},
+    {ticker:'XOM',name:'Exxon',change:'+4.5%',pct:4.5,bars:[4,5,5,6,5,6,6]}
+  ]
+};
+
+let currentScreen = 's-hero';
+let strategy = 'balanced';
+let budget = 25000;
+let allocations = {};
+let stocks = [];
+let timerInterval = null;
+let timeLeft = 30;
+
+function init() {
+  const detected = detectLang();
+  lang = I18N[detected] ? detected : 'en';
+  applyI18n();
+}
+
+function goTo(id) {
+  const prev = document.getElementById(currentScreen);
+  const next = document.getElementById(id);
+  prev.classList.remove('active');
+  next.classList.add('active');
+  currentScreen = id;
+  if (id === 's-stocks') startStockPicker();
+}
+
+function pickStrategy(s, el) {
+  strategy = s;
+  document.querySelectorAll('.strategy-card').forEach(c => c.style.borderColor = '');
+  if (el) el.closest('.strategy-card').style.borderColor = 'var(--primary)';
+  setTimeout(() => goTo('s-stocks'), 300);
+}
+
+function startStockPicker() {
+  stocks = STOCKS_DATA[strategy];
+  budget = 25000;
+  allocations = {};
+  timeLeft = 30;
+  updateBudget();
+  renderStocks();
+  startTimer();
+}
+
+function renderStocks() {
+  const grid = document.getElementById('stocks-grid');
+  grid.innerHTML = '';
+  stocks.forEach((s, i) => {
+    const isUp = s.pct >= 0;
+    const bars = s.bars.map(h => `<div class="bar" style="height:${h * 2.5}px;${!isUp ? 'background:var(--negative)' : ''}"></div>`).join('');
+    grid.innerHTML += `
+      <div class="stock-card anim-fade-up anim-d${i+1}" id="sc-${i}" onclick="toggleStock(${i})">
+        <div class="ticker">${s.ticker}</div>
+        <div class="name">${s.name}</div>
+        <div class="mini-chart">${bars}</div>
+        <div class="change ${isUp ? 'up' : 'down'}">${s.change}</div>
+        <div class="alloc" id="alloc-${i}">$0</div>
+      </div>`;
+  });
+}
+
+function toggleStock(i) {
+  const card = document.getElementById('sc-' + i);
+  const key = stocks[i].ticker;
+  if (allocations[key]) {
+    budget += allocations[key];
+    delete allocations[key];
+    card.classList.remove('selected');
+  } else {
+    const amount = getSmartAlloc();
+    if (amount <= 0) return;
+    allocations[key] = amount;
+    budget -= amount;
+    card.classList.add('selected');
+  }
+  document.getElementById('alloc-' + i).textContent = '$' + (allocations[key] || 0).toLocaleString();
+  updateBudget();
+}
+
+function getSmartAlloc() {
+  const selected = Object.keys(allocations).length;
+  const remaining = 6 - selected;
+  if (remaining <= 0) return 0;
+  return Math.min(budget, Math.round(budget / Math.max(remaining, 1) / 500) * 500) || Math.min(budget, 5000);
+}
+
+function updateBudget() {
+  document.getElementById('budget-display').textContent = '$' + budget.toLocaleString();
+  const btn = document.getElementById('btn-invest');
+  const invested = Object.keys(allocations).length > 0;
+  btn.style.opacity = invested ? '1' : '.4';
+  btn.style.pointerEvents = invested ? 'auto' : 'none';
+}
+
+function startTimer() {
+  clearInterval(timerInterval);
+  const fill = document.getElementById('timer-fill');
+  fill.classList.remove('danger');
+  timerInterval = setInterval(() => {
+    timeLeft--;
+    const pct = (timeLeft / 30) * 100;
+    fill.style.width = pct + '%';
+    if (timeLeft <= 10) fill.classList.add('danger');
+    if (timeLeft <= 0) {
+      clearInterval(timerInterval);
+      if (Object.keys(allocations).length > 0) finishInvesting();
+      else autoInvest();
+    }
+  }, 1000);
+}
+
+function autoInvest() {
+  const perStock = Math.floor(25000 / 3 / 500) * 500;
+  for (let i = 0; i < 3 && i < stocks.length; i++) {
+    allocations[stocks[i].ticker] = perStock;
+    budget -= perStock;
+    document.getElementById('sc-' + i).classList.add('selected');
+    document.getElementById('alloc-' + i).textContent = '$' + perStock.toLocaleString();
+  }
+  setTimeout(() => finishInvesting(), 500);
+}
+
+function finishInvesting() {
+  clearInterval(timerInterval);
+  goTo('s-results');
+  setTimeout(() => showResults(), 50);
+}
+
+function showResults() {
+  let totalReturn = 0;
+  let totalInvested = 0;
+  const rows = document.getElementById('portfolio-rows');
+  rows.innerHTML = '';
+
+  Object.keys(allocations).forEach(ticker => {
+    const stock = stocks.find(s => s.ticker === ticker);
+    const amount = allocations[ticker];
+    const rng = (Math.random() - 0.3) * 8;
+    const ret = stock.pct + rng;
+    const profit = Math.round(amount * ret / 100);
+    totalReturn += profit;
+    totalInvested += amount;
+    const isUp = profit >= 0;
+    rows.innerHTML += `
+      <div class="portfolio-row anim-fade-up">
+        <span class="stock-name">${ticker}</span>
+        <span>$${amount.toLocaleString()}</span>
+        <span class="stock-result ${isUp ? 'up' : 'down'}">${isUp ? '+' : ''}$${profit.toLocaleString()}</span>
+      </div>`;
+  });
+
+  const finalAmount = totalInvested + totalReturn;
+  const pctReturn = ((totalReturn / totalInvested) * 100).toFixed(1);
+  const isUp = totalReturn >= 0;
+
+  animateValue('result-pct', 0, parseFloat(pctReturn), 1200, v => `${v >= 0 ? '+' : ''}${v.toFixed(1)}%`);
+  animateValue('result-amount', totalInvested, finalAmount, 1200, v => `$${Math.round(v).toLocaleString()}`);
+
+  const circle = document.querySelector('.result-circle');
+  circle.style.borderColor = isUp ? 'var(--primary)' : 'var(--negative)';
+
+  const amountStr = '$' + Math.abs(totalReturn).toLocaleString();
+  document.getElementById('result-sub').textContent = isUp
+    ? t('resultWin').replace('${amount}', amountStr)
+    : t('resultLose').replace('${amount}', amountStr);
+
+  if (isUp) spawnConfetti();
+}
+
+function animateValue(id, start, end, duration, fmt) {
+  const el = document.getElementById(id);
+  const startTime = performance.now();
+  function tick(now) {
+    const t = Math.min((now - startTime) / duration, 1);
+    const ease = 1 - Math.pow(1 - t, 3);
+    const val = start + (end - start) * ease;
+    el.textContent = fmt(val);
+    if (t < 1) requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+}
+
+function spawnConfetti() {
+  const colors = ['#05df72','#f5c542','#00c950','#ff6467','#f9fbfb'];
+  for (let i = 0; i < 30; i++) {
+    const p = document.createElement('div');
+    p.className = 'confetti-particle';
+    p.style.background = colors[i % colors.length];
+    p.style.left = Math.random() * 100 + 'vw';
+    p.style.top = '-10px';
+    p.style.width = (4 + Math.random() * 6) + 'px';
+    p.style.height = (4 + Math.random() * 6) + 'px';
+    p.style.borderRadius = Math.random() > .5 ? '50%' : '2px';
+    document.body.appendChild(p);
+    const dur = 1500 + Math.random() * 1500;
+    const xDrift = (Math.random() - .5) * 120;
+    p.animate([
+      {transform:'translateY(0) translateX(0) rotate(0deg)',opacity:1},
+      {transform:`translateY(${window.innerHeight + 20}px) translateX(${xDrift}px) rotate(${Math.random()*720}deg)`,opacity:0}
+    ],{duration:dur,easing:'cubic-bezier(.25,.46,.45,.94)'});
+    setTimeout(() => p.remove(), dur);
+  }
+}
+
+function openApp() {
+  const url = 'https://tap.freedom24.com/to/chat/ai?text=play&utm_source=ai_game_site&utm_medium=web&utm_campaign=portfolio_battle_s1';
+  try {
+    if (window.GameCenterApi) {
+      window.GameCenterApi.openUrl({url, closeGameReader:true});
+    } else {
+      window.open(url,'_blank');
+    }
+  } catch(e) {
+    window.open(url,'_blank');
+  }
+}
+
+function replayGame() {
+  goTo('s-hero');
+}
+
+init();
+</script>
+</body>
+</html>

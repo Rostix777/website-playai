@@ -12,7 +12,7 @@
   text-align: center;
 }
 .creative-placeholder .cp-label {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'CoFoSans', monospace;
   font-size: 0.6875rem;
   color: color-mix(in srgb, var(--primary) 50%, transparent);
   letter-spacing: 0.1em;
@@ -28,7 +28,7 @@
   .creative-placeholder { display: none; }
 }
 .creative-placeholder .cp-size {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'CoFoSans', monospace;
   font-size: 0.625rem;
   color: var(--muted-fg);
   margin-top: 0.375rem;

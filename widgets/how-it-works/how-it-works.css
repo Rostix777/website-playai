@@ -20,7 +20,7 @@
   .timeline-step { min-height: 420px; }
 }
 .step-number {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'CoFoSans', monospace;
   font-size: 0.75rem;
   font-weight: 600;
   color: var(--primary);
@@ -57,7 +57,7 @@
 .step-creative span {
   font-size: 0.6875rem;
   color: var(--muted-fg);
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'CoFoSans', monospace;
   letter-spacing: 0.05em;
 }
 .step-cta {

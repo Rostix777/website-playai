@@ -31,19 +31,6 @@
   font-size: 0.8125rem;
   color: var(--muted-fg);
 }
-.coupon-arrow {
-  display: none;
-  position: absolute;
-  right: -0.75rem;
-  top: 50%;
-  transform: translateY(-50%);
-  color: color-mix(in srgb, var(--primary) 40%, transparent);
-  font-size: 1.25rem;
-}
-@media (min-width: 768px) {
-  .coupon-arrow { display: block; }
-  .coupon-step:last-child .coupon-arrow { display: none; }
-}
 .coupons-note {
   text-align: center;
   font-size: 0.8125rem;

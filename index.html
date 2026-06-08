@@ -33,11 +33,11 @@
 <link rel="apple-touch-icon" href="freedom_ai_transparent_320.png">
 <link rel="manifest" href="manifest.json">
 
-<!-- Fonts -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Fonts (CoFoSans — locally hosted, see app/styles.bundle.css @font-face) -->
 <link rel="dns-prefetch" href="https://lottie.host">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Outfit:wght@500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="preload" href="fonts/CoFoSans-Regular-Trial.otf" as="font" type="font/otf" crossorigin>
+<link rel="preload" href="fonts/CoFoSans-Bold-Trial.otf" as="font" type="font/otf" crossorigin>
+<link rel="preload" href="fonts/CoFoSans-Black-Trial.otf" as="font" type="font/otf" crossorigin>
 
 <!-- Styles (bundled: 1 request instead of 30+ @import waterfall) -->
 <link rel="stylesheet" href="app/styles.bundle.css">
@@ -180,7 +180,7 @@
   <a href="#leaderboard" onclick="closeMobileMenu()" class="nav-leaderboard">Leaderboard</a>
   <a href="#faq" onclick="closeMobileMenu()">FAQ</a>
   <a href="https://freedom24.com/apps/?utm_campaign=product_rostix&utm_source=ai_game_site&utm_medium=web&utm_content=mobile_nav" target="_blank" rel="noopener" onclick="closeMobileMenu()" class="btn btn-secondary">Get the App</a>
-  <a href="https://tap.freedom24.com/to/chat/ai?text=play&utm_source=ai_game_site&utm_medium=web&utm_campaign=portfolio_battle_s1&utm_content=mobile_nav" target="_blank" rel="noopener" onclick="closeMobileMenu()" class="btn btn-primary" style="margin-top: 0.5rem;">Play &rarr;</a>
+  <a href="https://tap.freedom24.com/to/chat/ai?text=play&utm_source=ai_game_site&utm_medium=web&utm_campaign=portfolio_battle_s1&utm_content=mobile_nav" target="_blank" rel="noopener" onclick="closeMobileMenu()" class="btn btn-primary" style="margin-top: 0.5rem;">Play</a>
 </nav>
 
 <main>
@@ -221,8 +221,8 @@
         <p class="hero-description" data-i18n-ru="hero-desc-new">Build your portfolio. Outsmart the market. Win real stocks deposited to your Freedom&nbsp;Finance account. No deposits. No fees. Just your strategy vs. real market data.</p>
 
         <div class="hero-ctas">
-          <a href="https://tap.freedom24.com/to/chat/ai?text=play&utm_source=ai_game_site&utm_medium=web&utm_campaign=portfolio_battle_s1&utm_content=hero" target="_blank" rel="noopener" class="btn btn-primary" data-i18n-ru="hero-cta-join">Join the Battle &rarr;</a>
-          <a href="#how-it-works" class="btn btn-secondary" data-i18n-ru="hero-cta-howitworks">How It Works &darr;</a>
+          <a href="https://tap.freedom24.com/to/chat/ai?text=play&utm_source=ai_game_site&utm_medium=web&utm_campaign=portfolio_battle_s1&utm_content=hero" target="_blank" rel="noopener" class="btn btn-primary" data-i18n-ru="hero-cta-join">Join the Battle</a>
+          <a href="#how-it-works" class="btn btn-secondary" data-i18n-ru="hero-cta-howitworks">How It Works</a>
         </div>
 
         <p class="hero-note" data-i18n-ru="hero-note-new">No deposit required. No fees. The earlier you join, the more time you have to climb the leaderboard.</p>
@@ -255,8 +255,8 @@
         <p class="hero-description" data-i18n-ru="hero-desc-live">The leaderboard updates every 3 hours. Check your rank, adjust your strategy, climb to the top. Only 5 spots get rewarded &mdash; and the clock is ticking.</p>
 
         <div class="hero-ctas">
-          <a href="https://tap.freedom24.com/to/chat/ai?text=play&utm_source=ai_game_site&utm_medium=web&utm_campaign=portfolio_battle_s1&utm_content=hero_live" target="_blank" rel="noopener" class="btn btn-primary" data-i18n-ru="hero-cta-play">Play Now &rarr;</a>
-          <a href="#how-it-works" class="btn btn-secondary" data-i18n-ru="hero-cta-howitworks">How It Works &darr;</a>
+          <a href="https://tap.freedom24.com/to/chat/ai?text=play&utm_source=ai_game_site&utm_medium=web&utm_campaign=portfolio_battle_s1&utm_content=hero_live" target="_blank" rel="noopener" class="btn btn-primary" data-i18n-ru="hero-cta-play">Play Now</a>
+          <a href="#how-it-works" class="btn btn-secondary" data-i18n-ru="hero-cta-howitworks">How It Works</a>
         </div>
       </div>
 
@@ -308,7 +308,7 @@
         </table>
         <div class="lb-meta">
           <span>Updated 3h ago</span>
-          <a href="https://tap.freedom24.com/to/chat/ai?text=/leaderboard&utm_source=ai_game_site&utm_medium=web&utm_campaign=portfolio_battle_s1&utm_content=hero_leaderboard" target="_blank" rel="noopener" style="color:var(--primary); font-weight:500; text-decoration:none;">Full ranking &rarr;</a>
+          <a href="https://tap.freedom24.com/to/chat/ai?text=/leaderboard&utm_source=ai_game_site&utm_medium=web&utm_campaign=portfolio_battle_s1&utm_content=hero_leaderboard" target="_blank" rel="noopener" style="color:var(--primary); font-weight:500; text-decoration:none;">Full ranking</a>
         </div>
       </div>
     </div>
@@ -362,7 +362,7 @@
       </div>
 
       <div class="hero-ctas" style="justify-content:center;">
-        <a href="https://tap.freedom24.com/to/chat/ai?text=play&utm_source=ai_game_site&utm_medium=web&utm_campaign=portfolio_battle_s2&utm_content=hero_closed" target="_blank" rel="noopener" class="btn btn-primary">Pre-register for Season 2 &rarr;</a>
+        <a href="https://tap.freedom24.com/to/chat/ai?text=play&utm_source=ai_game_site&utm_medium=web&utm_campaign=portfolio_battle_s2&utm_content=hero_closed" target="_blank" rel="noopener" class="btn btn-primary">Pre-register for Season 2</a>
       </div>
     </div>
 
@@ -391,7 +391,7 @@
 <!-- ==================== LIVE TICKERS STRIP ==================== -->
 <div class="tickers-strip notranslate" translate="no">
   <div class="tickers-track" id="tickersTrack"></div>
-  <div class="tickers-disclaimer" data-i18n-ru="ticker-disclaimer-text">Live market data via Tradernet. For informational purposes only. Does not constitute investment advice. &nbsp;<a href="javascript:void(0)" onclick="openTickersModal()" style="color:var(--primary); font-weight:600; font-style:normal; text-decoration:underline; cursor:pointer;" data-i18n-ru="ticker-disclaimer-link">View all 1,000 available stocks &rarr;</a></div>
+  <div class="tickers-disclaimer" data-i18n-ru="ticker-disclaimer-text">Live market data via Tradernet. For informational purposes only. Does not constitute investment advice. &nbsp;<a href="javascript:void(0)" onclick="openTickersModal()" style="color:var(--primary); font-weight:600; font-style:normal; text-decoration:underline; cursor:pointer;" data-i18n-ru="ticker-disclaimer-link">View all 1,000 available stocks</a></div>
 </div>
 
 <!-- ==================== BENEFITS ==================== -->
@@ -595,19 +595,16 @@
         <div class="coupon-icon"><img src="img/icon-trophy.svg" alt="" width="48" height="48"></div>
         <div class="coupon-title" data-i18n-ru="reward-step-1">You finish in Top 5</div>
         <div class="coupon-text" data-i18n-ru="reward-step-1-sub">Final leaderboard is locked</div>
-        <span class="coupon-arrow">&rarr;</span>
       </div>
       <div class="coupon-step glass animate-in">
         <div class="coupon-icon"><img src="img/icon-coupon.svg" alt="" width="48" height="48"></div>
         <div class="coupon-title" data-i18n-ru="reward-step-2">Coupons hit your account</div>
         <div class="coupon-text" data-i18n-ru="reward-step-2-sub">Credited to your Freedom Finance account</div>
-        <span class="coupon-arrow">&rarr;</span>
       </div>
       <div class="coupon-step glass animate-in">
         <div class="coupon-icon"><img src="img/icon-gift.svg" alt="" width="48" height="48"></div>
         <div class="coupon-title" data-i18n-ru="reward-step-3">You open each coupon</div>
         <div class="coupon-text" data-i18n-ru="reward-step-3-sub">A randomly selected gift stock is credited</div>
-        <span class="coupon-arrow">&rarr;</span>
       </div>
       <div class="coupon-step glass animate-in">
         <div class="coupon-icon"><img src="img/icon-chart-trend.svg" alt="" width="48" height="48"></div>
@@ -730,7 +727,7 @@
       </table>
       <div class="lb-meta">
         <span>Last updated: 3 hours ago &middot; 4,823 players competing</span>
-        <a href="https://tap.freedom24.com/to/chat/ai?text=/leaderboard&utm_source=ai_game_site&utm_medium=web&utm_campaign=portfolio_battle_s1&utm_content=leaderboard_full" target="_blank" rel="noopener" style="color:var(--primary); font-weight:500; text-decoration:none;">Full ranking &rarr;</a>
+        <a href="https://tap.freedom24.com/to/chat/ai?text=/leaderboard&utm_source=ai_game_site&utm_medium=web&utm_campaign=portfolio_battle_s1&utm_content=leaderboard_full" target="_blank" rel="noopener" style="color:var(--primary); font-weight:500; text-decoration:none;">Full ranking</a>
       </div>
       <div style="text-align:center; padding:0.25rem 1rem 0.75rem; font-size:0.6875rem; color:var(--muted-fg);">
         Showing Top 5 + last place. Your individual rank is visible within the AI Bot.
@@ -751,7 +748,7 @@
       <div class="qr-content">
         <h3>Scan. Play. Win.</h3>
         <p>One scan opens the AI chat and launches the game instantly.</p>
-        <a href="https://tap.freedom24.com/to/chat/ai?text=play&utm_source=ai_game_site&utm_medium=web&utm_campaign=portfolio_battle_s1&utm_content=qr_block" target="_blank" rel="noopener">Or tap here on mobile &rarr;</a>
+        <a href="https://tap.freedom24.com/to/chat/ai?text=play&utm_source=ai_game_site&utm_medium=web&utm_campaign=portfolio_battle_s1&utm_content=qr_block" target="_blank" rel="noopener">Or tap here on mobile</a>
       </div>
       <div class="qr-code" style="background:white; padding:8px; border-radius:var(--radius);">
         <img src="qr-code (1).svg" alt="QR code — scan to play" width="144" height="144" style="display:block;" />
@@ -764,7 +761,7 @@
         <span class="cp-label">creative placeholder</span>
         <span class="cp-desc">App download / game launch banner</span>
       </div>
-      <a href="https://tap.freedom24.com/to/chat/ai?text=play&utm_source=ai_game_site&utm_medium=web&utm_campaign=portfolio_battle_s1&utm_content=mobile_play" target="_blank" rel="noopener" class="btn btn-primary" style="margin-top:1.25rem;">Play &rarr;</a>
+      <a href="https://tap.freedom24.com/to/chat/ai?text=play&utm_source=ai_game_site&utm_medium=web&utm_campaign=portfolio_battle_s1&utm_content=mobile_play" target="_blank" rel="noopener" class="btn btn-primary" style="margin-top:1.25rem;">Play</a>
     </div>
   </div>
 </section>
@@ -773,7 +770,7 @@
 <div class="fomo-banner">
   <div class="container">
     <p class="fomo-text">&#128293; <strong>95 real stocks</strong> for just <strong>5 traders</strong>. Thousands are competing. The 1st place alone takes home 40 stocks. Every day you sit out, someone else climbs closer to your prize.</p>
-    <a href="https://tap.freedom24.com/to/chat/ai?text=play&utm_source=ai_game_site&utm_medium=web&utm_campaign=portfolio_battle_s1&utm_content=fomo" target="_blank" rel="noopener" class="btn btn-primary">Play &rarr;</a>
+    <a href="https://tap.freedom24.com/to/chat/ai?text=play&utm_source=ai_game_site&utm_medium=web&utm_campaign=portfolio_battle_s1&utm_content=fomo" target="_blank" rel="noopener" class="btn btn-primary">Play</a>
   </div>
 </div>
 
@@ -869,7 +866,7 @@
     <div class="animate-in">
       <h2 class="section-title" data-i18n-ru="final-cta-title">95 Stocks. 5 Winners. You?</h2>
       <p class="final-cta-desc" data-i18n-ru="final-cta-subtitle">While you're reading this, someone in Warsaw just went long on Tesla and someone in Athens just shorted a meme stock. 40 real stocks go to the #1 player. The market doesn't wait. Neither should you.</p>
-      <a href="https://tap.freedom24.com/to/chat/ai?text=play&utm_source=ai_game_site&utm_medium=web&utm_campaign=portfolio_battle_s1&utm_content=final_cta" target="_blank" rel="noopener" class="btn btn-primary" data-i18n-ru="final-cta-play">Play &rarr;</a>
+      <a href="https://tap.freedom24.com/to/chat/ai?text=play&utm_source=ai_game_site&utm_medium=web&utm_campaign=portfolio_battle_s1&utm_content=final_cta" target="_blank" rel="noopener" class="btn btn-primary" data-i18n-ru="final-cta-play">Play</a>
       <p class="final-cta-subtext" data-i18n-ru="final-cta-subtext">Free &middot; No deposit &middot; 95 real stocks at stake &middot; Takes 60 seconds</p>
     </div>
   </div>
@@ -970,7 +967,7 @@
 
 <!-- ==================== MOBILE STICKY CTA ==================== -->
 <div class="sticky-cta" id="stickyCta">
-  <a href="https://tap.freedom24.com/to/chat/ai?text=play&utm_source=ai_game_site&utm_medium=web&utm_campaign=portfolio_battle_s1&utm_content=sticky" target="_blank" rel="noopener" class="btn btn-primary" style="width:100%">Play &rarr;</a>
+  <a href="https://tap.freedom24.com/to/chat/ai?text=play&utm_source=ai_game_site&utm_medium=web&utm_campaign=portfolio_battle_s1&utm_content=sticky" target="_blank" rel="noopener" class="btn btn-primary" style="width:100%">Play</a>
 </div>
 
 <!-- ==================== TERMS MODAL ==================== -->
@@ -1153,7 +1150,7 @@
 <!-- Google Translate -->
 <div id="google_translate_element"></div>
 <!-- Translation overrides MUST load before Google Translate -->
-<script src="features/translation-overrides/translation-overrides.js"></script>
+<script src="features/translation-overrides/translation-overrides.js?v=2"></script>
 <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" async></script>
 </body>
 </html>

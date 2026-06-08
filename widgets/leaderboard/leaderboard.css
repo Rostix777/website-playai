@@ -21,7 +21,7 @@
 }
 .leaderboard-table tr:last-child td { border-bottom: none; }
 .lb-rank {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'CoFoSans', monospace;
   font-weight: 600;
   font-size: 0.875rem;
   display: inline-flex;
@@ -30,13 +30,13 @@
 }
 
 .lb-return {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'CoFoSans', monospace;
   font-weight: 600;
 }
 .lb-return.positive { color: var(--positive); }
 .lb-return.negative { color: var(--negative); }
 .lb-change {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'CoFoSans', monospace;
   font-weight: 600;
   font-size: 0.8125rem;
   white-space: nowrap;
@@ -45,7 +45,7 @@
 .lb-change.down { color: var(--negative); }
 .lb-change.same { color: var(--muted-fg); }
 .lb-value {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'CoFoSans', monospace;
   font-size: 0.875rem;
   color: var(--muted-fg);
 }

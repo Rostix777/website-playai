@@ -207,7 +207,7 @@ function filterTickers() {
   list.innerHTML = filtered.map(function(t) {
     return '<div class="ticker-row">' +
       '<div class="ticker-info"><strong>' + t.t + '</strong> <span>' + t.n + '</span></div>' +
-      '<a href="https://tap.freedom24.com/to/chat/ai?text=/buy ' + t.t + ' 10&utm_source=ai_game_site&utm_medium=web&utm_campaign=portfolio_battle_s1&utm_content=tickers_modal" target="_blank" rel="noopener" class="ticker-buy">Buy 10 &rarr;</a>' +
+      '<a href="https://tap.freedom24.com/to/chat/ai?text=/buy ' + t.t + ' 10&utm_source=ai_game_site&utm_medium=web&utm_campaign=portfolio_battle_s1&utm_content=tickers_modal" target="_blank" rel="noopener" class="ticker-buy">Buy 10</a>' +
     '</div>';
   }).join('');
 }

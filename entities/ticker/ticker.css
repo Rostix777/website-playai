@@ -20,7 +20,7 @@
   flex-shrink: 0;
 }
 .ticker-symbol { font-weight: 600; color: var(--fg); }
-.ticker-price { font-family: 'JetBrains Mono', monospace; font-size: 0.8125rem; }
-.ticker-change { font-family: 'JetBrains Mono', monospace; font-size: 0.8125rem; font-weight: 500; }
+.ticker-price { font-family: 'CoFoSans', monospace; font-size: 0.8125rem; font-variant-numeric: tabular-nums; }
+.ticker-change { font-family: 'CoFoSans', monospace; font-size: 0.8125rem; font-weight: 500; font-variant-numeric: tabular-nums; }
 .ticker-change.up { color: var(--positive); }
 .ticker-change.down { color: var(--negative); }

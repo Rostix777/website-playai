@@ -7,10 +7,12 @@
 <meta name="robots" content="noindex, nofollow">
 <meta name="theme-color" content="#06d6a0">
 <link rel="icon" type="image/png" href="freedom_ai_transparent_320.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Outfit:wght@500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
+  @font-face { font-family: 'CoFoSans'; src: url('fonts/CoFoSans-Regular-Trial.otf') format('opentype'); font-weight: 400; font-style: normal; font-display: swap; }
+  @font-face { font-family: 'CoFoSans'; src: url('fonts/CoFoSans-Medium-Trial.otf') format('opentype'); font-weight: 500; font-style: normal; font-display: swap; }
+  @font-face { font-family: 'CoFoSans'; src: url('fonts/CoFoSans-Bold-Trial.otf') format('opentype'); font-weight: 700; font-style: normal; font-display: swap; }
+  @font-face { font-family: 'CoFoSans'; src: url('fonts/CoFoSans-Black-Trial.otf') format('opentype'); font-weight: 900; font-style: normal; font-display: swap; }
+
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
   :root {
@@ -23,7 +25,7 @@
   }
 
   body {
-    font-family: 'Inter', system-ui, sans-serif;
+    font-family: 'CoFoSans', system-ui, sans-serif;
     background: var(--bg);
     color: var(--fg);
     min-height: 100vh;
@@ -57,7 +59,7 @@
 
   /* Glitch-style 404 number */
   .error-code {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'CoFoSans', monospace;
     font-size: clamp(6rem, 20vw, 10rem);
     font-weight: 900;
     line-height: 1;
@@ -93,7 +95,7 @@
 
   /* Terminal-style label */
   .error-label {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'CoFoSans', monospace;
     font-size: 0.75rem;
     font-weight: 500;
     color: var(--primary);
@@ -108,7 +110,7 @@
   }
 
   .error-title {
-    font-family: 'Outfit', 'Inter', system-ui, sans-serif;
+    font-family: 'CoFoSans', system-ui, sans-serif;
     font-size: clamp(1.5rem, 4vw, 2rem);
     font-weight: 800;
     line-height: 1.2;
@@ -213,7 +215,7 @@
   <h1 class="error-title">This trade didn't go through.</h1>
   <p class="error-text">The page you're looking for has been delisted. But the market is still open&nbsp;&mdash; get back in the game.</p>
   <div class="ctas">
-    <a href="/website-playai/" class="btn btn-primary" id="homeLink">Back to Game &rarr;</a>
+    <a href="/website-playai/" class="btn btn-primary" id="homeLink">Back to Game</a>
     <a href="https://tap.freedom24.com/to/chat/ai?text=play&utm_source=ai_game_site&utm_medium=web&utm_campaign=portfolio_battle_s1&utm_content=404" target="_blank" rel="noopener" class="btn btn-secondary">Play Now</a>
   </div>
 </div>
